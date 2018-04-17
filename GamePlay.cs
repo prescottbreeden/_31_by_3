@@ -7,7 +7,7 @@ namespace _31_by_3
     public class GamePlay
     {
         public int TotalPlayers = 4;
-        public int SizeOfHand =3;
+        public int SizeOfHand = 3;
 
         public Deck BuildAndShuffle()
         {

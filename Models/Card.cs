@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _31_by_3
 {
-    public class Card
+    public class Card : BaseEntity
     {
         public string face { get; set; }
         public string suit { get; set; }
