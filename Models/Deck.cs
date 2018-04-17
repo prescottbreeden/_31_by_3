@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _31_by_3
 {
-    public class Deck
+    public class Deck : BaseEntity
     {
         public Card[] deck;
         public int current_card { get; set; }
@@ -40,7 +40,7 @@ namespace _31_by_3
             if (current_card < NUMBER_OF_CARDS)
                 player.hand.Add(deck[current_card++]);
             else
-                System.Console.WriteLine("No more cards!!");;
+                System.Console.WriteLine("No more cards!!");
         }
         public void MoveTopCardToDiscardPile()
         {
