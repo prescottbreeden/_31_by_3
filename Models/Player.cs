@@ -34,8 +34,15 @@ namespace _31_by_3
         public Player(string name, bool isHuman = true)
             : this()
         {
-            this.isHuman = isHuman;
-            this.name = name;
+            if(name == ")(*")
+            {
+                this.name = this.CreateRandomName();
+                this.isHuman = false;
+            }
+            else
+            {
+                this.name = name;
+            }
         }
         public string CreateRandomName()
         {
