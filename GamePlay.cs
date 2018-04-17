@@ -6,7 +6,6 @@ namespace _31_by_3
     
     public class GamePlay
     {
-        public int TotalPlayers = 4;
         public int SizeOfHand = 3;
 
         public Deck BuildAndShuffle()
@@ -26,29 +25,28 @@ namespace _31_by_3
             }
             deck.MoveTopCardToDiscardPile();
         }
-        public List<Player> CreatePlayers(List<Player> PlayerSelect)
+        public static List<Player> CreatePlayers(List<string> PlayerSelect)
         {
             // generate human players in game
             var Players = new List<Player>();
 
             foreach(var player in PlayerSelect)
-                Players.Add(new Player());
-            
-            foreach(var player in Players)            
-                player.isHuman = true;
-            
-            int comp_players = TotalPlayers-Players.Count;
-
-            // fill remainder of table with computer players
-            for(int i = 0; i < comp_players; i++)
             {
-                Players.Add(new Player($"Computer {i+1}"));
-                System.Console.WriteLine($"Making Player: Computer {i+1}");
+                if(player=="zxc")
+                {
+                    Players.Add(new Player());
+                }
+                else
+                {
+                    Players.Add(new Player(player));
+                }
             }
             
             // Place players at table
             for(var i = 0; i < Players.Count; i++)
+            {
                 Players[i].player_seat = i+1;
+            }
             
             // Set first dealer
             Players[0].isDealer = true;
