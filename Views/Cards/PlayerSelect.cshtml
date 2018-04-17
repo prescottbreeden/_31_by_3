@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- inser head -->
+    @await Html.PartialAsync("Head.cshtml")
+    <!-- end insert head -->
+    <body class="">
+        <div class="header">
+            <h2 class="tac">Welcome to 31 by 3!</h2>
+            <a href="/" class="tal"></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mx-auto w-50 p-5 bubble-border">
+                        <form class="" action="players" method="post">
+                            <div class="form-group">
+                                <p>Player 1 Name:</p>
+                                <input type="text" class="form-control ml-2" name="player1" id="player1" value=" " placeholder="..">
+                            </div>
+                            <div class="form-group">
+                                <p>Player 2 Name:</p>
+                                <input type="text" class="form-control ml-2" name="player2" id="player2" value=" " placeholder="..">
+                            </div>
+                            <div class="form-group">
+                                <p>Player 3 Name:</p>
+                                <input type="text" class="form-control ml-2" name="player3" id="player3" value=" " placeholder="..">
+                            </div>
+                            <div class="form-group">
+                                <p>Player 4 Name:</p>
+                                <input type="text" class="form-control ml-2" name="player4" id="player4" value=" " placeholder="..">
+                            </div>
+                            <button class="button ml-2">Start Game!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

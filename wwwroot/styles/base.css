@@ -1,0 +1,228 @@
+.green-bg {
+  background-color: green; }
+
+.gray-bg {
+  background-color: #F4F7D9; }
+
+.blue-bg {
+  background-color: #04518C; }
+
+.red-bg {
+  background-color: red; }
+
+.yellow-bg {
+  background-color: yellow; }
+
+.orange-bg {
+  background-color: orange; }
+
+.black-bg {
+  background-color: black; }
+
+.purple-bg {
+  background-color: purple; }
+
+.dilb {
+  display: inline-block; }
+
+.hidden {
+  display: none; }
+
+.invisible {
+  visibility: hidden; }
+
+.tac {
+  text-align: center; }
+
+.tal {
+  text-align: left; }
+
+.tar {
+  text-align: right; }
+
+.tl-arrow {
+  position: absolute;
+  top: -2px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #051c37;
+  transform: rotate(-45deg); }
+
+.tr-arrow {
+  position: absolute;
+  top: -2px;
+  right: -7px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #051c37;
+  transform: rotate(45deg); }
+
+.bl-arrow {
+  position: absolute;
+  bottom: -2px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #051c37;
+  transform: rotate(-135deg); }
+
+.br-arrow {
+  position: absolute;
+  bottom: -3px;
+  right: -7px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #051c37;
+  transform: rotate(135deg); }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
+.clearfix {
+  clear: both; }
+
+img {
+  width: 100%;
+  height: 100%; }
+
+.mt20 {
+  margin-top: 20px; }
+
+.ml20 {
+  margin-left: 20px; }
+
+.m20 {
+  margin: 20px; }
+
+.m0a {
+  margin: 0 auto; }
+
+button, .button {
+  background-color: #051c37;
+  color: white;
+  padding: 7px 25px;
+  border: silver 2px solid;
+  margin: 1px 1px 1px 1px;
+  cursor: pointer;
+  max-width: 100%; }
+  button:hover, .button:hover {
+    background-color: rgba(5, 28, 55, 0.8);
+    padding: 8px 26px;
+    margin: 0; }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .large, .medium {
+    display: none; } }
+@media only screen and (min-device-width: 481px) and (max-device-width: 1023px) {
+  .small, .large {
+    display: none; } }
+@media only screen and (min-device-width: 1024px) {
+  .small, .medium {
+    display: none; } }
+body {
+  background-color: #657a64;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); }
+
+.header {
+  width: 100%;
+  height: 90px;
+  background-color: #051c37;
+  color: white;
+  margin: 0 0 20px 0;
+  padding: 20px 0 0 0;
+  line-height: 50px; }
+  .header h2 {
+    font-size: 2.5em;
+    margin: 0; }
+
+.container {
+  padding: 0 20px 20px 20px;
+  color: white; }
+  .container h1 {
+    margin-bottom: 20px; }
+  .container h2 {
+    margin: 15px 0 20px 0px; }
+  .container .bubble-border {
+    background-color: #F4F7D9;
+    border: 11px solid #051c37;
+    color: #051c37; }
+  .container .rules {
+    min-height: 300px;
+    margin: 30px 0px;
+    padding: 20px; }
+  .container .sidebar .sidebar-buffer {
+    min-height: 600px;
+    margin: 0 0 30px 0;
+    padding: 0 20px; }
+    .container .sidebar .sidebar-buffer h2 {
+      border-bottom: 1px solid #051c37;
+      margin-bottom: 20px;
+      padding-bottom: 10px; }
+    .container .sidebar .sidebar-buffer ul {
+      padding-left: 18px; }
+  .container .sidebar .deck-area .b-wrap {
+    text-align: center;
+    width: 171px;
+    margin: 0 auto; }
+  .container .sidebar .deck-area .b-wide {
+    width: 191px; }
+  .container .sidebar .deck-area .deck-pusher {
+    margin: 20px 0 20px 0; }
+  .container .sidebar .deck-area .draw-deck {
+    max-width: 70%;
+    margin: 0 auto; }
+    .container .sidebar .deck-area .draw-deck img {
+      width: 100%;
+      height: auto; }
+  .container .game-area {
+    padding: 0 15px; }
+    .container .game-area .hand-container {
+      margin-top: 20px; }
+      .container .game-area .hand-container .hand {
+        padding: 10px;
+        border: 1px solid #051c37;
+        margin-bottom: 25px;
+        background-image: url("/img/bg-tile-tan.png");
+        min-height: 200px;
+        position: relative; }
+        .container .game-area .hand-container .hand .hand-labels h3 {
+          font-size: 1.3em; }
+        .container .game-area .hand-container .hand .hand-buttons .turn-indicator {
+          font-size: 1.5em;
+          min-height: 40px; }
+          .container .game-area .hand-container .hand .hand-buttons .turn-indicator i {
+            width: 100%; }
+        .container .game-area .hand-container .hand .hand-buttons .discard-btn {
+          padding: 7px 20px; }
+          .container .game-area .hand-container .hand .hand-buttons .discard-btn:hover {
+            padding: 8px 21px; }
+        .container .game-area .hand-container .hand .hand-buttons button {
+          width: 100%;
+          text-align: center; }
+        .container .game-area .hand-container .hand .player-card {
+          padding: 10px 0 0 0; }
+          .container .game-area .hand-container .hand .player-card .w100 {
+            width: 71px; }
+          .container .game-area .hand-container .hand .player-card .check {
+            margin-left: 30px; }
+          .container .game-area .hand-container .hand .player-card .card-anchor {
+            margin: 0 auto; }
+            .container .game-area .hand-container .hand .player-card .card-anchor img {
+              max-height: 100px;
+              height: auto;
+              width: auto;
+              margin: 0 auto; }
+
+/*# sourceMappingURL=base.css.map */
