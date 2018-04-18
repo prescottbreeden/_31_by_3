@@ -105,8 +105,6 @@ $(document).ready(function(){
                                 </div>
                             </div>`)
                             $('.fucking-work-please' + player + i).setAttribute("src", "http://localhost:8000/img/c" + i)
-                            Prescott sucks at git
-                            actually lawyer sucks
                         }
                         
                 }
