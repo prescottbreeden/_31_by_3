@@ -53,6 +53,7 @@ namespace _31_by_3.Controllers
         [Route("main")]
         public IActionResult Main()
         {
+            ViewBag.please = "~";
             return View();
         }
     }

@@ -34,7 +34,7 @@ namespace _31_by_3
         public Player(string name, bool isHuman = true)
             : this()
         {
-            if(name == ")(*")
+            if(name == "zxc")
             {
                 this.name = this.CreateRandomName();
                 this.isHuman = false;
@@ -42,6 +42,7 @@ namespace _31_by_3
             else
             {
                 this.name = name;
+                this.isHuman = true;
             }
         }
         public string CreateRandomName()
