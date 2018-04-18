@@ -4,18 +4,18 @@ using System.Linq;
 namespace _31_by_3
 {
     
-    public class GamePlay
+    public static class GamePlay
     {
-        public int SizeOfHand = 3;
+        public static int SizeOfHand = 3;
 
-        public Deck BuildAndShuffle()
+        public static Deck BuildAndShuffle()
         {
-            Deck current_deck = new Deck();
-            current_deck.Shuffle();
-            return current_deck;
+            Deck CurrentDeck = new Deck();
+            CurrentDeck.deck = CurrentDeck.Shuffle(CurrentDeck.deck);
+            return CurrentDeck;
         }
             
-        public void Deal(List<Player> players, Deck deck)
+        public static void Deal(List<Player> players, Deck deck)
         {
             //Deal 3 cards to each player
             for(var i = 0; i < SizeOfHand; i++)
@@ -34,11 +34,11 @@ namespace _31_by_3
             {
                 if(player=="zxc")
                 {
-                    Players.Add(new Player());
+                    Players.Add(new Player(name: player, isHuman: false));
                 }
                 else
                 {
-                    Players.Add(new Player(player));
+                    Players.Add(new Player(name: player));
                 }
             }
             
@@ -54,7 +54,7 @@ namespace _31_by_3
             return Players;
         }
 
-        public void CalculateHandValue(Player player)
+        public static void CalculateHandValue(Player player)
         {
             //dump out old hand values
             player.hearts_value = 0;

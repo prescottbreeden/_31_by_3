@@ -22,8 +22,11 @@ namespace _31_by_3.Controllers
             string player3 = HttpContext.Session.GetString("player3");
             string player4 = HttpContext.Session.GetString("player4");
             List<string> PlayerSelect = new List<string>{player1, player2, player3, player4};
-            
-            return Json("Hello");
+            List<Player> Players = GamePlay.CreatePlayers(PlayerSelect);
+            Deck CurrentDeck = GamePlay.BuildAndShuffle();
+            GamePlay.Deal(Players, CurrentDeck);
+            var GameMaster = new { Players = Players, Deck = CurrentDeck };
+            return Json(GameMaster);
         }
     }
 }

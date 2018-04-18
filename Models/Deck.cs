@@ -5,63 +5,65 @@ namespace _31_by_3
 {
     public class Deck : BaseEntity
     {
-        public Card[] deck;
-        public int current_card { get; set; }
-        public const int NUMBER_OF_CARDS = 52;
-        public List<Card> discard_pile = new List<Card>();
-        public Random ranNum;
+        public const int DeckSize = 52;
+        public List<Card> deck = new List<Card>();
+        public List<Card> DiscardPile = new List<Card>();
 
         public Deck()
         {
-            string[] faces = {"Two", "Three", "Four", "Five", "Six", "Seven",
-                            "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
-            string[] suits = {"Hearts", "Clubs", "Spades", "Diamonds"};
+            string[] faces = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "1"};
+            string[] suits = {"hearts", "clubs", "spades", "diamonds"};
             int[] values = {2,3,4,5,6,7,8,9,10,10,10,10,11};
-            deck = new Card[NUMBER_OF_CARDS];
-            current_card = 0;
-            ranNum = new Random();
-            for(int count = 0; count < deck.Length; count++)
-                deck[count] = new Card(faces[count % 13], suits[count / 13], values[count % 13]);
-
-        }
-        public void Shuffle()
-        {
-            current_card = 0;
-            for (int first = 0; first < deck.Length; first++)
+            for(int cardNum = 0; cardNum < DeckSize; cardNum++)
             {
-                int second = ranNum.Next(NUMBER_OF_CARDS);
+                deck.Add(new Card(faces[cardNum % 13], suits[cardNum / 13], values[cardNum % 13]));
+            }
+        }
+        public List<Card> Shuffle(List<Card> deck)
+        {
+            for (int first = 0; first < deck.Count; first++)
+            {
+                Random ranNum = new Random();
+                int second = ranNum.Next(deck.Count);
                 Card temp = deck[first];
                 deck[first] = deck[second];
                 deck[second] = temp;
             }
+            return deck;
         }
         public void DrawFromDeck(Player player)
         {
-            if (current_card < NUMBER_OF_CARDS)
-                player.hand.Add(deck[current_card++]);
+            if (deck.Count > 0)
+            {
+                player.hand.Add(deck[0]);
+                deck.RemoveAt(0);
+            }
             else
+            {
                 System.Console.WriteLine("No more cards!!");
+                // put dicard pile into "deck" and shuffle
+                deck = Shuffle(DiscardPile);
+                DiscardPile.Clear();
+                MoveTopCardToDiscardPile();
+            }
         }
         public void MoveTopCardToDiscardPile()
         {
-            if(current_card < NUMBER_OF_CARDS)
-                discard_pile.Insert(0, deck[current_card++]);
+            if(deck.Count > 0)
+            {
+                DiscardPile.Add(deck[0]);
+                deck.RemoveAt(0);
+            }
+            else 
+            {
+                System.Console.WriteLine("Something just went terribly wrong...");
+            }
         }
         
         public void DrawFromDiscard(Player player)
         {
-            player.hand.Add(discard_pile[0]);
-            discard_pile.RemoveAt(0);
-        }
-        public void ShowDiscardPile()
-        {
-            if(discard_pile.Count == 0)
-                System.Console.WriteLine("Error... Discard pile is empty");
-            else
-            {   
-                System.Console.WriteLine("Top card in discard pile stack:");
-                System.Console.WriteLine(discard_pile[0]);
-            }
+            player.hand.Add(DiscardPile[0]);
+            DiscardPile.RemoveAt(0);
         }
     }
 }
