@@ -90,16 +90,14 @@ $(document).ready(function(){
                 for(var i = 0; i < 4; i ++)
                     {
                         console.log("for loop inner")
-                        // let hand_target = document.getElementsByClassName("HandTarget" + player)
                         console.log("IN THE SECOND LOOP")
-                        img.setAttribute("src", "http://localhost:8000/img/c" + i)
                         $(".HandTarget" + player).append(
                             `<div class="player-card col-12 col-md-6 col-lg-3">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card-anchor">
                                             <div class="m0a w100">
-                                                <img src="http://localhost:8000/img/c${i+1}" alt="WHY" class="fucking-work-please${player}${i}">
+                                                <img alt="WHY" class="fucking-work-please${player}${i}">
                                             </div>
                                             <!-- a card should go here -->
                                         </div>
@@ -107,6 +105,8 @@ $(document).ready(function(){
                                 </div>
                             </div>`)
                             $('.fucking-work-please' + player + i).setAttribute("src", "http://localhost:8000/img/c" + i)
+                            Prescott sucks at git
+                            actually lawyer sucks
                         }
                         
                 }
