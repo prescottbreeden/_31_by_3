@@ -9,15 +9,9 @@ $(document).ready(function(){
     $("#PlayGame").click(function(){
         $.get("/start",function(res){
             GameMaster = res;
-            console.log(GameMaster);
             var player_hands = document.getElementById("player_hands");
             var img = document.createElement("img")
-
-            
             ShowDiscardPile()
-
-
-
             for(let player = 0; player < GameMaster.players.length; player ++)
             {
                 player_hands.innerHTML += (`
@@ -86,7 +80,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             </div>
-            <!-- END OF HAND  --><!-- START OF ONE HAND -->               
+            <!-- END OF HAND  -->              
                 
                 
                 `)
@@ -109,7 +103,20 @@ $(document).ready(function(){
                                         </div>
                                     </div>
                                 </div>
-                            </div>`)
+                            </div>
+                            <div class="player-card col-12 col-md-6 col-lg-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-anchor">
+                                            <div class="m0a w100">
+                                                 <img id="draw_card${player}"></img>
+                                            </div>
+                                            <!-- a card should go here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `)
                             document.getElementById("fucking-work-please" + player + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[player].hand[card]["suit"][0] + GameMaster.players[player].hand[card]["face"] )
                         }
                         
@@ -118,23 +125,19 @@ $(document).ready(function(){
             $("#PlayGame").remove()
         })
 
-        $("#DrawCard").click(function(){
-            console.log(GameMaster)
-            var test = JSON.stringify(GameMaster)
-            console.log(test)
-            
+        $("#DrawCard").on("click", function(){
             $.ajax({
                 type: "POST",
                 data: {"GM" :JSON.stringify(GameMaster)},
                 url: "/DrawDeck",
                 dataType: "json",
-                success: function(req, res){
+                success: function(res){
                     console.log(res);
-                    // GameMaster = res;
-                    console.log(GameMaster);
+                    GameMaster = res;
                 },
             });
-            
+            document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[0]["suit"][0] + GameMaster.players[0].hand[0]["face"] )
+            // document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[GameMaster.players[0].hand.length-1]["suit"][0] + GameMaster.players[0].hand[GameMaster.players[0].hand.length-1]["face"] )
         })
 
 }) // document ready

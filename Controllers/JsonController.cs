@@ -40,7 +40,11 @@ namespace _31_by_3.Controllers
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             System.Console.WriteLine(GameMaster.deck.deck[0]);
-            return Json(GM);
+            System.Console.WriteLine(GameMaster.deck.DiscardPile[0]);
+            GameMaster.players[GameMaster.Turn].hand.Add(GameMaster.deck.deck[0]);
+            GameMaster.deck.deck.RemoveAt(0);
+            
+            return Json(GameMaster);
         }
     }
 }

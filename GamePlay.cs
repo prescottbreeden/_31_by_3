@@ -41,6 +41,7 @@ namespace _31_by_3
                     Players.Add(new Player(name: player));
                 }
             }
+            Players[3].name = Player.CreateRandomFunnyName();
             
             // Place players at table
             for(var i = 0; i < Players.Count; i++)
