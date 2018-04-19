@@ -37,7 +37,7 @@ namespace _31_by_3
         }
         public string CreateRandomName()
         {
-            string[] ListOfNames = {"Eleonora","Lola","Jenifer","Ollie","Denna","Iesha","Estrella","Kera","Zachery","Lonnie","Louis","Josef","Debra","Valentine","Del","Gaston","Valentin","Lashell","Tamar","Ayako","Dierdre","Ethelyn","Ilda","In","Margaret","Vania","Harris","Candance","Sherell","Fausto","Devora","Wilford","Estell","Dorinda","Otilia","Margit","Kaci","Isaac","Anna","Casimira","Bea","Margie","Hana","Tona","David","Wilber","Junie","Silas","Stefan","Moshe","Gilberte","Aleen","Bernice","Eliseo","Kenneth","Derrick","Yevette","Ezekiel","Sandy","Reid","Sanda","Tyesha","Trudy","Ilene","Laurence","Leigha","William","Royal","Moises","Long","Berenice","Debby","Marlon","Rex","Tammy","Edythe","Leticia","Leonie","Logan","Katherin","Mirian","Margorie","Robby","Ivan","Harriet","Micki","Everette","Lavona","Sylvie","Tawny","Rita","Eldora","Princess","Leann","Amos","Yadira","Raul","Buck","Emory","Nora", "Lawyer", "Prescott", "Justin"};
+            string[] ListOfNames = {"Lawyer", "Prescott", "Justin","Tiannia","Francisco","Ashely","Chris","Mark","Syntax Error","Buggy Code","404","Bad Gateway","Noelle","Graham","Alan","Donovan","Emily","Stephen","Tim","Dustin","Joyce","Alexandra","Javier","Sun","Chanthy","Nick","Dmitri","Admiral","LocalHost:5000","LocalHost:8000"};
             Random rand = new Random();
             var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
             return RandomName;
@@ -49,3 +49,5 @@ namespace _31_by_3
         }   
     }
 }
+
+// Eleonora","Lola","Jenifer","Ollie","Denna","Iesha","Estrella","Kera","Zachery","Lonnie","Louis","Josef","Debra","Valentine","Del","Gaston","Valentin","Lashell","Tamar","Ayako","Dierdre","Ethelyn","Ilda","In","Margaret","Vania","Harris","Candance","Sherell","Fausto","Devora","Wilford","Estell","Dorinda","Otilia","Margit","Kaci","Isaac","Anna","Casimira","Bea","Margie","Hana","Tona","David","Wilber","Junie","Silas","Stefan","Moshe","Gilberte","Aleen","Bernice","Eliseo","Kenneth","Derrick","Yevette","Ezekiel","Sandy","Reid","Sanda","Tyesha","Trudy","Ilene","Laurence","Leigha","William","Royal","Moises","Long","Berenice","Debby","Marlon","Rex","Tammy","Edythe","Leticia","Leonie","Logan","Katherin","Mirian","Margorie","Robby","Ivan","Harriet","Micki","Everette","Lavona","Sylvie","Tawny","Rita","Eldora","Princess","Leann","Amos","Yadira","Raul","Buck","Emory","Nora", 
