@@ -33,15 +33,13 @@
                                         <!-- placement of Draw Deck Styling -->
                                     </div>
                                     <div class="col-12">
-                                        <form action="/drawtohand" method="post">
-                                            <div class="row">
-                                                <div class="col-12 m0a">
-                                                    <div class="b-wrap">
-                                                        <input type="submit" class="button" value="Draw from Deck">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-12 m0a">
+                                                <div class="b-wrap">
+                                                    <button type="submit" class="button" id="DrawCard">Draw from Deck</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -49,20 +47,18 @@
                                 <div class="row discard">
                                     <div class="col-12">
                                         <div class="draw-deck">
-                                            <img src="~/img/cardback.png" alt="">
+                                            <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
                                             <!-- placement of Discard Deck Styling -->
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <form action="/discardtohand" method="post">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="b-wrap b-wide">
-                                                        <input type="submit" class="button" value="Draw from Discard">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="b-wrap b-wide">
+                                                    <button class="button" id="DiscardCard">Draw from Discard</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -7,23 +7,13 @@ namespace _31_by_3
     public class Player : BaseEntity
     {
         public string name { get; set; }
+        public bool isDealer { get; set; }
         public bool isHuman { get; set; }
         public int tokens { get; set; }
-        public List<Card> hand = new List<Card>();
-        public List<Card> hearts = new List<Card>();
-        public List<Card> diamonds = new List<Card>();
-        public List<Card> spades = new List<Card>();
-        public List<Card> clubs = new List<Card>();
-        public int[] num_suits = new int[4];
-        public bool isDealer { get; set; }
-        public int player_seat { get; set; }
-        public int hand_value { get; set; }
-        public int hearts_value { get; set; }
-        public int clubs_value  {get; set; }
-        public int spades_value { get; set; }
-        public int diamonds_value { get; set; }
-        public int[] suit_values = new int[4];
         public bool knocked { get; set; }
+        public int player_seat { get; set; }
+        public List<Card> hand = new List<Card>();
+        public int hand_value { get; set; }
 
         public Player()
         {
