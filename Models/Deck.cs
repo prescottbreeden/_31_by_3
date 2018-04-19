@@ -6,11 +6,17 @@ namespace _31_by_3
     public class Deck : BaseEntity
     {
         public const int DeckSize = 52;
-        public List<Card> deck = new List<Card>();
+        public List<Card> deck;
         public List<Card> DiscardPile = new List<Card>();
 
         public Deck()
         {
+
+        }
+
+        public List<Card> NewDeck()
+        {
+            deck = new List<Card>();
             string[] faces = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "1"};
             string[] suits = {"hearts", "clubs", "spades", "diamonds"};
             int[] values = {2,3,4,5,6,7,8,9,10,10,10,10,11};
@@ -18,6 +24,7 @@ namespace _31_by_3
             {
                 deck.Add(new Card(faces[cardNum % 13], suits[cardNum / 13], values[cardNum % 13]));
             }
+            return deck;
         }
         public List<Card> Shuffle(List<Card> deck)
         {

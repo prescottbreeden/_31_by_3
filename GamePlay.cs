@@ -11,6 +11,7 @@ namespace _31_by_3
         public static Deck BuildAndShuffle()
         {
             Deck CurrentDeck = new Deck();
+            CurrentDeck.deck = CurrentDeck.NewDeck();
             CurrentDeck.deck = CurrentDeck.Shuffle(CurrentDeck.deck);
             return CurrentDeck;
         }

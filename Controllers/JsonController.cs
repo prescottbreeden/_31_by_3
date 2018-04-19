@@ -34,16 +34,17 @@ namespace _31_by_3.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(valueCountLimit: 10000)]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
         [Route("DrawDeck")]
         public JsonResult DrawDeck(string GM)
         {
+            // GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
-            System.Console.WriteLine(GameMaster.deck.deck[0]);
-            System.Console.WriteLine(GameMaster.deck.DiscardPile[0]);
-            GameMaster.players[GameMaster.Turn].hand.Add(GameMaster.deck.deck[0]);
+            GameMaster.players[GameMaster.turn].hand.Add(GameMaster.deck.deck[0]);
             GameMaster.deck.deck.RemoveAt(0);
             
+            // string json = JsonConvert.SerializeObject(GameMaster, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+
             return Json(GameMaster);
         }
     }
