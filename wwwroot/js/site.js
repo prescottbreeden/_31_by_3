@@ -1,15 +1,25 @@
 ﻿
 $(document).ready(function(){
     var GameMaster;
+
+    function ShowDiscardPile(){
+        document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
+    }
+
     $("#PlayGame").click(function(){
         $.get("/start",function(res){
             GameMaster = res;
             console.log(GameMaster);
             var player_hands = document.getElementById("player_hands");
             var img = document.createElement("img")
+
+            
+            ShowDiscardPile()
+
+
+
             for(let player = 0; player < GameMaster.players.length; player ++)
             {
-                console.log("IN THE FIRST LOOP");
                 player_hands.innerHTML += (`
                 
                 <!-- START OF ONE HAND -->
@@ -25,10 +35,10 @@ $(document).ready(function(){
                             <div class="col-12">
                                 <div class="row hand-labels">
                                     <div class="col-12 col-md-6">
-                                        <h3 class="player_name">player.name</h3>
+                                        <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <h3 class="player_tokens">player.tokens</h3>
+                                        <h3 class="player_tokens">Tokens: ${GameMaster.players[player].tokens}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -85,30 +95,46 @@ $(document).ready(function(){
             
             for(let player = 0; player < 4; player ++)
             {
-                console.log("for loop outer")
-                // for(card in GameMaster.players[player].hand)
-                for(var i = 0; i < 4; i ++)
+                for(card in GameMaster.players[player].hand)
                     {
-                        console.log("for loop inner")
-                        console.log("IN THE SECOND LOOP")
                         $(".HandTarget" + player).append(
                             `<div class="player-card col-12 col-md-6 col-lg-3">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card-anchor">
                                             <div class="m0a w100">
-                                                <img alt="WHY" class="fucking-work-please${player}${i}">
+                                                <img alt="WHY" id="fucking-work-please${player}${card}">
                                             </div>
                                             <!-- a card should go here -->
                                         </div>
                                     </div>
                                 </div>
                             </div>`)
-                            $('.fucking-work-please' + player + i).setAttribute("src", "http://localhost:8000/img/c" + i)
+                            document.getElementById("fucking-work-please" + player + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[player].hand[card]["suit"][0] + GameMaster.players[player].hand[card]["face"] )
                         }
                         
                 }
+            });
+            $("#PlayGame").remove()
         })
-    })
 
-})
+        $("#DrawCard").click(function(){
+            console.log(GameMaster)
+            var test = JSON.stringify(GameMaster)
+            console.log(test)
+            
+            $.ajax({
+                type: "POST",
+                data: {"GM" :JSON.stringify(GameMaster)},
+                url: "/DrawDeck",
+                dataType: "json",
+                success: function(req, res){
+                    console.log(res);
+                    // GameMaster = res;
+                    console.log(GameMaster);
+                },
+            });
+            
+        })
+
+}) // document ready

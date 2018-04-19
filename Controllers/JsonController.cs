@@ -25,8 +25,22 @@ namespace _31_by_3.Controllers
             List<Player> Players = GamePlay.CreatePlayers(PlayerSelect);
             Deck CurrentDeck = GamePlay.BuildAndShuffle();
             GamePlay.Deal(Players, CurrentDeck);
-            var GameMaster = new { Players = Players, Deck = CurrentDeck };
+            for(var i = 0; i < Players.Count; i++)
+            {
+                Players[i].hand_value = HandValue.Calculate(Players[i]);
+            }
+            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0};
             return Json(GameMaster);
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 10000)]
+        [Route("DrawDeck")]
+        public JsonResult DrawDeck(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            System.Console.WriteLine(GameMaster.deck.deck[0]);
+            return Json(GM);
         }
     }
 }
