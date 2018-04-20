@@ -11,10 +11,9 @@
         display: none;
     }
 }
-.fucking-work-please {
-    background-image: url('https://mdn.mozillademos.org/files/7693/catfront.png')
-}
-.c1 
-{
-    background-image: url("~/img/c1.png")
+.Lawyersucks {
+    border: 2px dashed green;
+    background-color: blueviolet;
+    color: rebeccapurple;
+    width: 9001px;
 }

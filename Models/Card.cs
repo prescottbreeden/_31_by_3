@@ -8,6 +8,7 @@ namespace _31_by_3
         public string face { get; set; }
         public string suit { get; set; }
         public int value { get; set; }
+        public bool selected { get; set; }
         
         public Card()
         {
@@ -19,6 +20,7 @@ namespace _31_by_3
             this.face = face;
             this.suit = suit;
             this.value = value;
+            this.selected = false;
         }
         public override string ToString()
         {

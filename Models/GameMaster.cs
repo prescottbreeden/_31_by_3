@@ -6,7 +6,7 @@ namespace _31_by_3
     {
         public Deck deck { get; set; }
         public List<Player> players { get; set; }
-        public int Turn { get; set; }
+        public int turn { get; set; }
         public GameMaster()
         {
 

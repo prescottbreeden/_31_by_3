@@ -2,13 +2,45 @@
 $(document).ready(function(){
     var GameMaster;
 
+    function replacePlayerHand(player){
+        $(".HandTarget" + player).empty();
+        for(card in GameMaster.players[player].hand)
+            {
+                $(".HandTarget" + player).append(
+                `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-anchor">
+                                    <div class="m0a w100">
+                                        <img alt="WHY" id="player_card${player}${card}" class="clickable">
+                                        <input type="hidden" class="value" value="${card}">
+                                    </div>
+                                    <!-- a card should go here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `)
+                    document.getElementById("player_card" + player + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[player].hand[card]["suit"][0] + GameMaster.players[player].hand[card]["face"] )
+            }       
+    }
+
     function ShowDiscardPile(){
         document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
     }
+    $(document).on("click", ".clickable", function(){
+        if($(this).parents('.HandTarget' + GameMaster.turn).length)
+        {
+            console.log("FOUND THE RIGHT HANDTARGET")
+            $(".hand").find(".player-selected").removeClass("player-selected");
+            $(this).addClass("player-selected");
+        }
+    });
 
     $("#PlayGame").click(function(){
         $.get("/start",function(res){
             GameMaster = res;
+            console.log(GameMaster);
             var player_hands = document.getElementById("player_hands");
             var img = document.createElement("img")
             ShowDiscardPile()
@@ -18,7 +50,7 @@ $(document).ready(function(){
                 
                 <!-- START OF ONE HAND -->
                                 
-                <div class="hand">
+                <div class="hand hand${player}">
                 <div class="tl-arrow"></div>
                 <div class="tr-arrow"></div>
                 <div class="bl-arrow"></div>
@@ -81,35 +113,20 @@ $(document).ready(function(){
                 </div>
             </div>
             <!-- END OF HAND  -->              
-                
-                
-                `)
-                
-            }
-            
+                `)   
+            }    
             for(let player = 0; player < 4; player ++)
             {
                 for(card in GameMaster.players[player].hand)
                     {
                         $(".HandTarget" + player).append(
-                            `<div class="player-card col-12 col-md-6 col-lg-3">
+                        `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card-anchor">
                                             <div class="m0a w100">
-                                                <img alt="WHY" id="fucking-work-please${player}${card}">
-                                            </div>
-                                            <!-- a card should go here -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="player-card col-12 col-md-6 col-lg-3">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card-anchor">
-                                            <div class="m0a w100">
-                                                 <img id="draw_card${player}"></img>
+                                                <img alt="WHY" id="player_card${player}${card}" class="clickable">
+                                                <input type="hidden" class="value" value="${card}">
                                             </div>
                                             <!-- a card should go here -->
                                         </div>
@@ -117,7 +134,7 @@ $(document).ready(function(){
                                 </div>
                             </div>
                             `)
-                            document.getElementById("fucking-work-please" + player + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[player].hand[card]["suit"][0] + GameMaster.players[player].hand[card]["face"] )
+                            document.getElementById("player_card" + player + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[player].hand[card]["suit"][0] + GameMaster.players[player].hand[card]["face"] )
                         }
                         
                 }
@@ -134,10 +151,63 @@ $(document).ready(function(){
                 success: function(res){
                     console.log(res);
                     GameMaster = res;
-                },
+
+                    $(".HandTarget" + GameMaster.turn).append(
+                        `<div class="remove-me player-card cardNumber3 col-12 col-md-6 col-lg-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-anchor">
+                                        <div class="m0a w100">
+                                             <img class="clickable" id="draw_card${GameMaster.turn}"></img>
+                                             <input type="hidden" class="value" value="3">
+                                        </div>
+                                        <!-- a card should go here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `)
+                    document.getElementById("draw_card" + GameMaster.turn).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["suit"][0] + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["face"] )
+                }
             });
-            document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[0]["suit"][0] + GameMaster.players[0].hand[0]["face"] )
-            // document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[GameMaster.players[0].hand.length-1]["suit"][0] + GameMaster.players[0].hand[GameMaster.players[0].hand.length-1]["face"] )
+            // DC.done(function(res){})
+            // document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[2]["suit"][0] + GameMaster.players[0].hand[2]["face"] )
         })
 
-}) // document ready
+        $(document).on("click", ".discard-btn", function(){
+            var player = GameMaster.turn;
+            if($(this).parents('.hand' + GameMaster.turn).length)
+            {
+                if(GameMaster.players[GameMaster.turn].hand.length == 4)
+                {
+
+                    for(let i = 0; i < GameMaster.players[GameMaster.turn].hand.length; i ++)
+                    {
+                        var isSelected = $(".cardNumber" + i).find(".player-selected");
+                        if(isSelected.length){
+                            GameMaster.players[GameMaster.turn].hand[i].selected=true
+                        }
+                    }
+                    $.ajax({
+                        type: "POST",
+                        data: {"GM" :JSON.stringify(GameMaster)},
+                        url: "/DiscardCard",
+                        dataType: "json",
+                        success: function(res){
+                            console.log(res);
+                            GameMaster = res;
+                            ShowDiscardPile();
+                            replacePlayerHand(player);
+                        }
+                    })
+                }
+            }
+        });
+            //flag that card with a selected property
+            
+})
+    
+
+
+
+ // document ready

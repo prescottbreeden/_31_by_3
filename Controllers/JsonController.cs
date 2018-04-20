@@ -34,16 +34,39 @@ namespace _31_by_3.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(valueCountLimit: 10000)]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
         [Route("DrawDeck")]
         public JsonResult DrawDeck(string GM)
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
-            System.Console.WriteLine(GameMaster.deck.deck[0]);
-            System.Console.WriteLine(GameMaster.deck.DiscardPile[0]);
-            GameMaster.players[GameMaster.Turn].hand.Add(GameMaster.deck.deck[0]);
+            GameMaster.players[GameMaster.turn].hand.Add(GameMaster.deck.deck[0]);
             GameMaster.deck.deck.RemoveAt(0);
-            
+
+            return Json(GameMaster);
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("DiscardCard")]
+        public JsonResult DiscardCard(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            for(int i = 0; i < GameMaster.players[GameMaster.turn].hand.Count; i ++)
+            {
+                if(GameMaster.players[GameMaster.turn].hand[i].selected)
+                {  
+                    GameMaster.deck.DiscardPile.Insert(0, GameMaster.players[GameMaster.turn].hand[i]);
+                    GameMaster.players[GameMaster.turn].hand.RemoveAt(i);
+                }
+            }
+            GameMaster.players[GameMaster.turn].hand_value = HandValue.Calculate(GameMaster.players[GameMaster.turn]);
+            GameMaster.turn++;
+            if (GameMaster.turn == 4)
+            {
+                GameMaster.turn = 0;
+            }
+
+
             return Json(GameMaster);
         }
     }

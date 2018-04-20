@@ -45,7 +45,7 @@ namespace _31_by_3
         }
         public static string CreateRandomFunnyName()
         {
-            string[] ListOfNames = {"LocalHost:5000","LocalHost:8000","Missing Semicolon","Infinite Loop","Undefined","Internal Server Error","Ceiling Cat","0011011000111001","Waiting for compile","Missing Return Statement","Syntax Error","Buggy Code","404","Bad Gateway"};
+            string[] ListOfNames = {"LocalHost:5000","Missing Semicolon","Infinite Loop","Undefined","Internal Server Error","Ceiling Cat","0011011000111001","Waiting for compile","Missing Return Statement","Syntax Error","Buggy Code","404","Bad Gateway"};
             Random rand = new Random();
             var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
             return RandomName;
