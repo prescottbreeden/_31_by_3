@@ -1,8 +1,10 @@
 ﻿
-$(document).ready(function(){
+$(document).ready(function()
+{
     var GameMaster;
 
-    function replacePlayerHand(player){
+    function replacePlayerHand(player)
+    {
         $(".HandTarget" + player).empty();
         for(card in GameMaster.players[player].hand)
             {
@@ -25,20 +27,30 @@ $(document).ready(function(){
             }       
     }
 
-    function ShowDiscardPile(){
-        document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
+    function ShowDiscardPile()
+    {
+        if(GameMaster.deck.discardPile.length > 0)
+        {
+            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
+        }
+        else
+        {
+            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/cardback.png")
+        }
     }
-    $(document).on("click", ".clickable", function(){
+    $(document).on("click", ".clickable", function()
+    {
         if($(this).parents('.HandTarget' + GameMaster.turn).length)
         {
-            console.log("FOUND THE RIGHT HANDTARGET")
             $(".hand").find(".player-selected").removeClass("player-selected");
             $(this).addClass("player-selected");
         }
     });
 
-    $("#PlayGame").click(function(){
-        $.get("/start",function(res){
+    $("#PlayGame").click(function()
+    {
+        $.get("/start",function(res)
+        {
             GameMaster = res;
             console.log(GameMaster);
             var player_hands = document.getElementById("player_hands");
@@ -142,50 +154,105 @@ $(document).ready(function(){
             $("#PlayGame").remove()
         })
 
-        $("#DrawCard").on("click", function(){
-            $.ajax({
-                type: "POST",
-                data: {"GM" :JSON.stringify(GameMaster)},
-                url: "/DrawDeck",
-                dataType: "json",
-                success: function(res){
-                    console.log(res);
-                    GameMaster = res;
+        $("#DrawCard").on("click", function()
+        {
+            if(GameMaster.players[GameMaster.turn].hand.length == 3)
+            {    
+                $.ajax({
+                    type: "POST",
+                    data: {"GM" :JSON.stringify(GameMaster)},
+                    url: "/DrawDeck",
+                    dataType: "json",
+                    success: function(res)
+                    {
+                        console.log(res);
+                        GameMaster = res;
 
-                    $(".HandTarget" + GameMaster.turn).append(
-                        `<div class="remove-me player-card cardNumber3 col-12 col-md-6 col-lg-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card-anchor">
-                                        <div class="m0a w100">
-                                             <img class="clickable" id="draw_card${GameMaster.turn}"></img>
-                                             <input type="hidden" class="value" value="3">
+                        $(".HandTarget" + GameMaster.turn).append(
+                            `<div class="remove-me player-card cardNumber3 col-12 col-md-6 col-lg-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-anchor">
+                                            <div class="m0a w100">
+                                                <img class="clickable" id="draw_card${GameMaster.turn}"></img>
+                                                <input type="hidden" class="value" value="3">
+                                            </div>
+                                            <!-- a card should go here -->
                                         </div>
-                                        <!-- a card should go here -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        `)
-                    document.getElementById("draw_card" + GameMaster.turn).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["suit"][0] + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["face"] )
-                }
-            });
-            // DC.done(function(res){})
-            // document.getElementById("draw_card" + "0").setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[0].hand[2]["suit"][0] + GameMaster.players[0].hand[2]["face"] )
-        })
+                            `)
+                        document.getElementById("draw_card" + GameMaster.turn).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["suit"][0] + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["face"] )
+                    }
+                })
+            }
+            else
+            {
+                console.log("You may only draw once per turn")
+            }
+        });
 
-        $(document).on("click", ".discard-btn", function(){
+        $("#DiscardCard").on("click", function(){
+            if(GameMaster.players[GameMaster.turn].hand.length == 3)
+            {
+
+                $.ajax({
+                    type: "POST",
+                    data: {"GM" :JSON.stringify(GameMaster)},
+                    url: "/DrawDiscard",
+                    dataType: "json",
+                    success: function(res){
+                        console.log(res);
+                        GameMaster = res;
+                        ShowDiscardPile();
+                        
+                        $(".HandTarget" + GameMaster.turn).append(
+                            `<div class="remove-me player-card cardNumber3 col-12 col-md-6 col-lg-3">
+                            <div class="row">
+                            <div class="col-12">
+                            <div class="card-anchor">
+                            <div class="m0a w100">
+                            <img class="clickable" id="draw_card${GameMaster.turn}"></img>
+                            <input type="hidden" class="value" value="3">
+                            </div>
+                            <!-- a card should go here -->
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            `)
+                            document.getElementById("draw_card" + GameMaster.turn).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["suit"][0] + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["face"] )
+                        }
+                    })
+            }
+            else
+            {
+                console.log("You may only draw once per turn")
+            }
+        });
+
+        $(document).on("click", ".discard-btn", function()
+        {
             var player = GameMaster.turn;
             if($(this).parents('.hand' + GameMaster.turn).length)
             {
                 if(GameMaster.players[GameMaster.turn].hand.length == 4)
                 {
-
+                    //flag that card with a selected property
                     for(let i = 0; i < GameMaster.players[GameMaster.turn].hand.length; i ++)
                     {
                         var isSelected = $(".cardNumber" + i).find(".player-selected");
-                        if(isSelected.length){
+                        if(isSelected.length)
+                        {
                             GameMaster.players[GameMaster.turn].hand[i].selected=true
+                        }
+                        else
+                        {
+                            // if a player clicks "discard" before selecting a card, this listener completey breaks
+                            // return;  <~~ break doesn't stop the ajax call
+                            // cannot return here because this if check is never falsey? I'm lost here bro.
+                            // most likely needs a different if-statement
                         }
                     }
                     $.ajax({
@@ -201,9 +268,14 @@ $(document).ready(function(){
                         }
                     })
                 }
+                else
+                {
+                    console.log("Please draw a card first")
+                    return;
+                }
             }
+            return;
         });
-            //flag that card with a selected property
             
 })
     
