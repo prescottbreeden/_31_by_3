@@ -38,12 +38,34 @@ namespace _31_by_3.Controllers
         [Route("DrawDeck")]
         public JsonResult DrawDeck(string GM)
         {
-            // GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             GameMaster.players[GameMaster.turn].hand.Add(GameMaster.deck.deck[0]);
             GameMaster.deck.deck.RemoveAt(0);
-            
-            // string json = JsonConvert.SerializeObject(GameMaster, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+
+            return Json(GameMaster);
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("DiscardCard")]
+        public JsonResult DiscardCard(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            for(int i = 0; i < GameMaster.players[GameMaster.turn].hand.Count; i ++)
+            {
+                if(GameMaster.players[GameMaster.turn].hand[i].selected)
+                {  
+                    GameMaster.deck.DiscardPile.Insert(0, GameMaster.players[GameMaster.turn].hand[i]);
+                    GameMaster.players[GameMaster.turn].hand.RemoveAt(i);
+                }
+            }
+            GameMaster.players[GameMaster.turn].hand_value = HandValue.Calculate(GameMaster.players[GameMaster.turn]);
+            GameMaster.turn++;
+            if (GameMaster.turn == 4)
+            {
+                GameMaster.turn = 0;
+            }
+
 
             return Json(GameMaster);
         }
