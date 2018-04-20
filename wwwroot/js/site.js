@@ -265,6 +265,10 @@ $(document).ready(function()
                             GameMaster = res;
                             ShowDiscardPile();
                             replacePlayerHand(player);
+                            if(GameMaster.players[GameMaster.turn].isHuman == false)
+                            {
+                                AI();
+                            }
                         }
                     })
                 }
@@ -276,7 +280,27 @@ $(document).ready(function()
             }
             return;
         });
-            
+  
+    function AI()
+    {
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/ComputerTurn",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                GameMaster = res;
+                // ShowDiscardPile();
+                // replacePlayerHand(player);
+                // if(GameMaster.players[GameMaster.turn].isHuman == false)
+                // {
+                //     AI();
+                // }
+            }
+        })
+    }
+
 })
     
 

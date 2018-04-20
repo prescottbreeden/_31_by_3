@@ -98,9 +98,66 @@ namespace _31_by_3.Controllers
                 {
                     //call evaluate winner
                 }
+                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                {
+                    //call AI?
+                }
             }
+            return Json(GameMaster);
+        }
 
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("ComputerTurn")]
+        public JsonResult ComputerTurn(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
+            if(ComputerTurn.num_suits.Max() == 3)
+            {
+               int MaxSuitIndex = ComputerTurn.num_suits.ToList().IndexOf(3);
+               switch(MaxSuitIndex)
+               {
+                    case 0:
+                        ComputerTurn.max_suit_type = "Hearts";
+                        break;
+                    case 1:
+                        ComputerTurn.max_suit_type = "Diamonds";
+                        break;
+                    case 2:
+                        ComputerTurn.max_suit_type = "Spades";
+                        break;
+                    case 3:
+                        ComputerTurn.max_suit_type = "Clubs";
+                        break;
+               }
+               if(GameMaster.deck.DiscardPile[0].suit == ComputerTurn.max_suit_type)
+                    {
+                        Card min = ComputerTurn.hand[0];
+                        foreach(Card c in ComputerTurn.hand)
+                        {
+                            if(c.value < min.value)
+                                min = c;
+                        }
+                        if (GameMaster.deck.DiscardPile[0].value > min.value)
+                        {
+                            GameMaster.deck.DrawFromDiscard(ComputerTurn);
+                            System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from discard pile");
+                        }
+                    }
+                    else
+                    {
+                        GameMaster.deck.DrawFromDeck(ComputerTurn);
+                    }
+                }
+                else
+                {
+                    GameMaster.deck.DrawFromDeck(ComputerTurn);
+                    System.Console.WriteLine($"{GameMaster.players[GameMaster.turn]} drew from deck");
+                }
 
+                System.Threading.Thread.Sleep(3000);
+            
             return Json(GameMaster);
         }
     }
