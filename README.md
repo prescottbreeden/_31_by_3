@@ -8,3 +8,4 @@ To Do List for Prescott and Lawyer: MVP
 - Animations
 - Rules Button
 - Same-suit indicator
+- sockets (SignalR)
