@@ -85,62 +85,66 @@ namespace _31_by_3.Controllers
             AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
             Card min = ComputerTurn.hand[0];
             
-            if (ComputerTurn.num_suits.Max() == 4)
-            {
-                foreach(Card c in ComputerTurn.hand)
-                {
-                    if(c.value < min.value)
-                        min = c;
-                }
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
-            }
-            else if (ComputerTurn.num_suits.Max() == 3)
-            {
-                for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
-                {
-                    if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
-                    {
-                        if(ComputerTurn.hand[idx].value < min.value)
-                        {
-                            min = ComputerTurn.hand[idx];
-                        }
-                    }
-                }
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {GameMaster.deck.DiscardPile[0]}.");  
-            }
-            else
-            {
-                if(ComputerTurn.worst_value == ComputerTurn.hand_value)
-                {
-                    foreach(Card c in ComputerTurn.hand)
-                        {
-                            if(c.value < min.value)
-                                min = c;
-                        }
-                }
-                else
-                {
-                    for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
-                    {
-                        if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
-                        {
-                            if(ComputerTurn.hand[idx].value < min.value)
-                            {
-                                min = ComputerTurn.hand[idx];
-                            }
-                        }
-                    }
-                } 
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
+            // if (ComputerTurn.num_suits.Max() == 4)
+            // {
+            //     foreach(Card c in ComputerTurn.hand)
+            //     {
+            //         if(c.value < min.value)
+            //             min = c;
+            //     }
+            //     GameMaster.deck.DiscardPile.Insert(0, min);
+            //     ComputerTurn.hand.Remove(min);
+            //     System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
+            // }
+            // else if (ComputerTurn.num_suits.Max() == 3)
+            // {
+            //     for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
+            //     {
+            //         if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
+            //         {
+            //             if(ComputerTurn.hand[idx].value < min.value)
+            //             {
+            //                 min = ComputerTurn.hand[idx];
+            //             }
+            //         }
+            //     }
+            //     GameMaster.deck.DiscardPile.Insert(0, min);
+            //     ComputerTurn.hand.Remove(min);
+            //     System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {GameMaster.deck.DiscardPile[0]}.");  
+            // }
+            // else
+            // {
+            //     if(ComputerTurn.worst_value == ComputerTurn.hand_value)
+            //     {
+            //         foreach(Card c in ComputerTurn.hand)
+            //             {
+            //                 if(c.value < min.value)
+            //                     min = c;
+            //             }
+            //     }
+            //     else
+            //     {
+            //         for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
+            //         {
+            //             if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
+            //             {
+            //                 if(ComputerTurn.hand[idx].value < min.value)
+            //                 {
+            //                     min = ComputerTurn.hand[idx];
+            //                 }
+            //             }
+            //         }
+            //     } 
+            //     GameMaster.deck.DiscardPile.Insert(0, min);
+            //     ComputerTurn.hand.Remove(min);
+            //     System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
 
-                //knock check
-            }
+            //     //knock check
+            // }
+
+            int MaxHandValue;
+            int BadCardIndex;
+            for (int idx = )
             if (ComputerTurn.hand_value > 25)
             {
                 // Knock(ComputerTurn);
