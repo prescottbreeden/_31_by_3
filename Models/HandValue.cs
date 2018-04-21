@@ -23,7 +23,6 @@ namespace _31_by_3
         }
         public static int Calculate(Player player)
         {
-
             hearts_value = 0;
             diamonds_value = 0;
             spades_value = 0;
@@ -62,7 +61,7 @@ namespace _31_by_3
             suit_values[0] = hearts_value;
             suit_values[1] = diamonds_value;
             suit_values[2] = spades_value;
-            suit_values[3] = clubs_value;
+            suit_values[3] = clubs_value; 
             hand_value = suit_values.Max();
 
             // save number of cards for each suit in hand

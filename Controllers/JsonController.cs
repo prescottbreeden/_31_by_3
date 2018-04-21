@@ -98,40 +98,36 @@ namespace _31_by_3.Controllers
                 {
                     //call evaluate winner
                 }
-                if(GameMaster.players[GameMaster.turn].isHuman == false)
-                {
-                    //call AI?
-                }
             }
             return Json(GameMaster);
         }
 
         [HttpPost]
         [RequestSizeLimit(valueCountLimit: 1000000000)]
-        [Route("ComputerTurn")]
-        public JsonResult ComputerTurn(string GM)
+        [Route("ComputerTurnDraw")]
+        public JsonResult ComputerTurnDraw(string GM)
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
             if(ComputerTurn.num_suits.Max() == 3)
             {
-               int MaxSuitIndex = ComputerTurn.num_suits.ToList().IndexOf(3);
-               switch(MaxSuitIndex)
-               {
+                int MaxSuitIndex = ComputerTurn.num_suits.ToList().IndexOf(3);
+                switch(MaxSuitIndex)
+                {
                     case 0:
-                        ComputerTurn.max_suit_type = "Hearts";
+                        ComputerTurn.max_suit_type = "hearts";
                         break;
                     case 1:
-                        ComputerTurn.max_suit_type = "Diamonds";
+                        ComputerTurn.max_suit_type = "diamonds";
                         break;
                     case 2:
-                        ComputerTurn.max_suit_type = "Spades";
+                        ComputerTurn.max_suit_type = "spades";
                         break;
                     case 3:
-                        ComputerTurn.max_suit_type = "Clubs";
+                        ComputerTurn.max_suit_type = "clubs";
                         break;
-               }
-               if(GameMaster.deck.DiscardPile[0].suit == ComputerTurn.max_suit_type)
+                }
+                if(GameMaster.deck.DiscardPile[0].suit == ComputerTurn.max_suit_type)
                     {
                         Card min = ComputerTurn.hand[0];
                         foreach(Card c in ComputerTurn.hand)
@@ -149,15 +145,114 @@ namespace _31_by_3.Controllers
                     {
                         GameMaster.deck.DrawFromDeck(ComputerTurn);
                     }
-                }
-                else
+            }
+                // 2 cards of same suit logic
+                // else
+                // {
+                //     GameMaster.deck.DrawFromDeck(ComputerTurn);
+                //     System.Console.WriteLine($"{GameMaster.players[GameMaster.turn]} drew from deck");
+                // }
+            else
                 {
                     GameMaster.deck.DrawFromDeck(ComputerTurn);
-                    System.Console.WriteLine($"{GameMaster.players[GameMaster.turn]} drew from deck");
+                    System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from deck");
                 }
+            return Json(GameMaster);
+        }
 
-                System.Threading.Thread.Sleep(3000);
+        [HttpPost]
+        [Route("ComputerTurnDiscard")]
+        public JsonResult ComputerTurnDiscard(string GM)
+        {
+            System.Threading.Thread.Sleep(3000);
+
+                //-------------------------//
+                // Hand size is now 4 cards//
+                //-------------------------//
+
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
             
+            if (ComputerTurn.num_suits.Max() == 4)
+            {
+                Card min = ComputerTurn.hand[0];
+                foreach(Card c in ComputerTurn.hand)
+                {
+                    if(c.value < min.value)
+                        min = c;
+                }
+                GameMaster.deck.DiscardPile.Insert(0, min);
+                ComputerTurn.hand.Remove(min);
+                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
+            }
+            else if (ComputerTurn.num_suits.Max() == 3)
+            {
+                int min_Suit_Index = ComputerTurn.num_suits.ToList().IndexOf(1);
+                GameMaster.deck.DiscardPile.Insert(0, ComputerTurn.hand[min_Suit_Index]);
+                ComputerTurn.hand.RemoveAt(min_Suit_Index);
+                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {GameMaster.deck.DiscardPile[0]}.");  
+            }
+            else
+            {
+                Card min = new Card();
+                min = ComputerTurn.hand[0];
+                for(int idx = 0; idx < ComputerTurn.suit_values.Length; idx ++)
+                {
+                    if(ComputerTurn.suit_values[idx] == ComputerTurn.worst_value)
+                    {
+                        // 0 = hearts
+                        // 1 = diamonds
+                        // 2 = spades
+                        // 3 = clubs
+                        switch(idx)
+                        {
+                            case 0:
+                                ComputerTurn.min_suit_type = ComputerTurn.hearts;
+                                break;
+                            case 1:
+                                ComputerTurn.min_suit_type = ComputerTurn.diamonds;
+                                break;
+                            case 2:
+                                ComputerTurn.min_suit_type = ComputerTurn.spades;
+                                break;
+                            case 3:
+                                ComputerTurn.min_suit_type = ComputerTurn.clubs;
+                                break;
+                        }
+                        foreach(Card c in ComputerTurn.min_suit_type)
+                        {
+                            if(c.value < min.value)
+                                min = c;
+                        }
+                    }
+                }
+                GameMaster.deck.DiscardPile.Insert(0, min);
+                ComputerTurn.hand.Remove(min);
+                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
+
+                //knock check
+            }
+            if (ComputerTurn.hand_value > 25)
+            {
+                // Knock(ComputerTurn);
+            }
+        
+            if(GameMaster.players[GameMaster.turn].hand_value == 31)
+            {
+                //call gameover
+            }
+            else
+            {
+                GameMaster.turn++;
+                if (GameMaster.turn == 4)
+                {
+                    GameMaster.turn = 0;
+                }
+                if(GameMaster.players[GameMaster.turn].knocked == true)
+                {
+                    //call evaluate winner
+                }
+            }
             return Json(GameMaster);
         }
     }

@@ -152,6 +152,11 @@ $(document).ready(function()
                 }
             });
             $("#PlayGame").remove()
+                  
+                // if(GameMaster.players[GameMaster.turn].isHuman == false)
+                // {
+                //     CompDraw();
+                // }
         })
 
         $("#DrawCard").on("click", function()
@@ -267,7 +272,7 @@ $(document).ready(function()
                             replacePlayerHand(player);
                             if(GameMaster.players[GameMaster.turn].isHuman == false)
                             {
-                                AI();
+                                CompDraw();
                             }
                         }
                     })
@@ -281,22 +286,40 @@ $(document).ready(function()
             return;
         });
   
-    function AI()
+    function CompDraw()
     {
+        var player = GameMaster.turn;
         $.ajax({
             type: "POST",
             data: {"GM" :JSON.stringify(GameMaster)},
-            url: "/ComputerTurn",
+            url: "/ComputerTurnDraw",
             dataType: "json",
             success: function(res){
                 console.log(res);
                 GameMaster = res;
-                // ShowDiscardPile();
-                // replacePlayerHand(player);
-                // if(GameMaster.players[GameMaster.turn].isHuman == false)
-                // {
-                //     AI();
-                // }
+                ShowDiscardPile();
+                replacePlayerHand(player);
+                CompDiscard();
+            }
+        })
+    }
+    function CompDiscard()
+    {
+        var player = GameMaster.turn;
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/ComputerTurnDiscard",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                GameMaster = res;
+                ShowDiscardPile();
+                replacePlayerHand(player);
+                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                {
+                    CompDraw();
+                }
             }
         })
     }
