@@ -18,6 +18,7 @@ namespace _31_by_3
         public int clubs_value  {get; set; }
         public int spades_value { get; set; }
         public int diamonds_value { get; set; }
+        public string best_suit { get; set; }
         public AI(Player player)
         {
             this.hand = player.hand;
@@ -61,6 +62,7 @@ namespace _31_by_3
             this.suit_values[2] = this.spades_value;
             this.suit_values[3] = this.clubs_value;
             this.hand_value = this.suit_values.Max();
+            
             this.worst_value = this.hand_value;
 
             this.num_suits[0] = this.hearts.Count;
@@ -76,6 +78,24 @@ namespace _31_by_3
                     if(suit_values[i] < this.worst_value)
                     {
                         this.worst_value = suit_values[i];
+                    }
+                    if(suit_values[i] == this.hand_value)
+                    {
+                        switch(i)
+                         {
+                            case 0:
+                                this.best_suit = "hearts";
+                                break;
+                            case 1:
+                                this.best_suit = "diamonds";
+                                break;
+                            case 2:
+                                this.best_suit = "spades";
+                                break;
+                            case 3:
+                                this.best_suit = "clubs";
+                                break;
+                        }
                     }
                 }
             }
