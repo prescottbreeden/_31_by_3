@@ -9,8 +9,10 @@ namespace _31_by_3
         public List<Card> diamonds = new List<Card>();
         public List<Card> spades = new List<Card>();
         public List<Card> clubs = new List<Card>();
+        public List<Card> min_suit_type = new List<Card>();
         public int[] num_suits = new int[4];
         public int[] suit_values = new int[4];
+        public int worst_value { get; set; }
         public string max_suit_type { get; set; }
         public int hearts_value { get; set; }
         public int clubs_value  {get; set; }
@@ -32,22 +34,22 @@ namespace _31_by_3
             // build lists of each suit-type for each players hand - WORKING
             for (var i = 0; i < this.hand.Count; i++)
             {
-                if (this.hand[i].suit == "Hearts")
+                if (this.hand[i].suit == "hearts")
                 {
                     this.hearts.Add(this.hand[i]);
                     this.hearts_value += this.hand[i].value;
                 }
-                else if (this.hand[i].suit == "Diamonds")
+                else if (this.hand[i].suit == "diamonds")
                 {
                     this.diamonds.Add(this.hand[i]);
                     this.diamonds_value += this.hand[i].value;
                 }
-                else if (this.hand[i].suit == "Spades")
+                else if (this.hand[i].suit == "spades")
                 {
                     this.spades.Add(this.hand[i]);
                     this.spades_value += this.hand[i].value;                
                 }
-                else if (this.hand[i].suit == "Clubs")
+                else if (this.hand[i].suit == "clubs")
                 {
                     this.clubs.Add(this.hand[i]);
                     this.clubs_value += this.hand[i].value;                
@@ -59,11 +61,28 @@ namespace _31_by_3
             this.suit_values[2] = this.spades_value;
             this.suit_values[3] = this.clubs_value;
             this.hand_value = this.suit_values.Max();
+            this.worst_value = this.hand_value;
 
             this.num_suits[0] = this.hearts.Count;
             this.num_suits[1] = this.diamonds.Count;
             this.num_suits[2] = this.spades.Count;
             this.num_suits[3] = this.clubs.Count;
+
+
+            for(int i = 0; i < num_suits.Length; i++)
+            {
+                if(num_suits[i] != 0)
+                {
+                    if(suit_values[i] < this.worst_value)
+                    {
+                        this.worst_value = suit_values[i];
+                    }
+                }
+            }
+            //for each thing in num_suits
+            //if num_suits > 0
+            // if num_suits' value < than previous shitty value
+            // worst_value = that shitty value
         }
     
     }

@@ -42,10 +42,6 @@ namespace _31_by_3.Controllers
             HttpContext.Session.SetString("player2", player2);
             HttpContext.Session.SetString("player3", player3);
             HttpContext.Session.SetString("player4", player4);
-            System.Console.WriteLine(player1);
-            System.Console.WriteLine(player2);
-            System.Console.WriteLine(player3);
-            System.Console.WriteLine(player4);
             return RedirectToAction("Main");
         }
 
