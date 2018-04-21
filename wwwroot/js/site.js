@@ -35,7 +35,7 @@ $(document).ready(function()
         }
         else
         {
-            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/cardback.png")
+            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/cardback")
         }
     }
 
