@@ -19,6 +19,7 @@ namespace _31_by_3
         public int spades_value { get; set; }
         public int diamonds_value { get; set; }
         public string best_suit { get; set; }
+        public bool coin_flip { get; set; }
         public AI(Player player)
         {
             this.hand = player.hand;

@@ -6,7 +6,6 @@ namespace _31_by_3
 {
     public class Player : BaseEntity
     {
-        public Player player;
         public string name { get; set; }
         public bool isDealer { get; set; }
         public bool isHuman { get; set; }

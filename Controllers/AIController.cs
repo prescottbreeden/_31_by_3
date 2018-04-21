@@ -48,7 +48,8 @@ namespace _31_by_3.Controllers
                         }
                         if (GameMaster.deck.DiscardPile[0].value > min.value)
                         {
-                            GameMaster.deck.DrawFromDiscard(ComputerTurn);
+                            ComputerTurn.hand.Add(GameMaster.deck.DiscardPile[0]);
+                            GameMaster.deck.DiscardPile.RemoveAt(0);
                             System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from discard pile");
                         }
                     }
@@ -83,64 +84,54 @@ namespace _31_by_3.Controllers
 
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
+            int[,] HandCombinations = new int [4,3] {{0,1,2},{0,1,3},{0,2,3},{1,2,3}};
+            ComputerTurn.coin_flip = false;
             Card min = ComputerTurn.hand[0];
-            
-            if (ComputerTurn.num_suits.Max() == 4)
+            Player TestHand = new Player();
+
+            for(int i = 0; i < 4; i++)
+            {
+                TestHand.hand.Clear();
+                for(int idx = 0; idx < 3; idx++)
+                {
+                    int index = HandCombinations[i,idx];
+                    TestHand.hand.Add(ComputerTurn.hand[index]);
+                }
+                int Temp = HandValue.Calculate(TestHand);
+                if(Temp == ComputerTurn.hand_value)
+                {
+                    min = ComputerTurn.hand[3 - i];
+                    ComputerTurn.coin_flip = true;
+                }
+            }
+            if(ComputerTurn.num_suits.Contains(4))
             {
                 foreach(Card c in ComputerTurn.hand)
                 {
                     if(c.value < min.value)
-                        min = c;
-                }
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
-            }
-            else if (ComputerTurn.num_suits.Max() == 3)
-            {
-                for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
-                {
-                    if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
                     {
-                        if(ComputerTurn.hand[idx].value < min.value)
-                        {
-                            min = ComputerTurn.hand[idx];
-                        }
-                    }
+                        min = c;
+                    }   
                 }
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {GameMaster.deck.DiscardPile[0]}.");  
             }
             else
             {
-                if(ComputerTurn.worst_value == ComputerTurn.hand_value)
+                foreach(Card c in ComputerTurn.hand)
                 {
-                    foreach(Card c in ComputerTurn.hand)
-                        {
-                            if(c.value < min.value)
-                                min = c;
-                        }
-                }
-                else
-                {
-                    for(int idx = 0; idx < ComputerTurn.hand.Count; idx++)
+                    if(c.suit != ComputerTurn.best_suit)
                     {
-                        if(ComputerTurn.hand[idx].suit != ComputerTurn.best_suit)
+                        if(c.value < min.value)
                         {
-                            if(ComputerTurn.hand[idx].value < min.value)
-                            {
-                                min = ComputerTurn.hand[idx];
-                            }
+                            min = c;
                         }
                     }
-                } 
-                GameMaster.deck.DiscardPile.Insert(0, min);
-                ComputerTurn.hand.Remove(min);
-                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} discarded {min}"); 
-
-                //knock check
+                }
             }
+            GameMaster.deck.DiscardPile.Insert(0, min);
+            ComputerTurn.hand.Remove(min);
+            
+                //knock check
+            
             if (ComputerTurn.hand_value > 25)
             {
                 // Knock(ComputerTurn);
