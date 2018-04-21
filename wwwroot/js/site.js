@@ -38,6 +38,46 @@ $(document).ready(function()
             document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/cardback.png")
         }
     }
+
+    function CompDraw()
+    {
+        var player = GameMaster.turn;
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/ComputerTurnDraw",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                GameMaster = res;
+                ShowDiscardPile();
+                replacePlayerHand(player);
+                CompDiscard();
+            }
+        })
+    }
+    
+    function CompDiscard()
+    {
+        var player = GameMaster.turn;
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/ComputerTurnDiscard",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                GameMaster = res;
+                ShowDiscardPile();
+                replacePlayerHand(player);
+                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                {
+                    CompDraw();
+                }
+            }
+        })
+    }
+
     $(document).on("click", ".clickable", function()
     {
         if($(this).parents('.HandTarget' + GameMaster.turn).length)
@@ -252,13 +292,6 @@ $(document).ready(function()
                         {
                             GameMaster.players[GameMaster.turn].hand[i].selected=true
                         }
-                        else
-                        {
-                            // if a player clicks "discard" before selecting a card, this listener completey breaks
-                            // return;  <~~ break doesn't stop the ajax call
-                            // cannot return here because this if check is never falsey? I'm lost here bro.
-                            // most likely needs a different if-statement
-                        }
                     }
                     $.ajax({
                         type: "POST",
@@ -285,44 +318,6 @@ $(document).ready(function()
             }
             return;
         });
-  
-    function CompDraw()
-    {
-        var player = GameMaster.turn;
-        $.ajax({
-            type: "POST",
-            data: {"GM" :JSON.stringify(GameMaster)},
-            url: "/ComputerTurnDraw",
-            dataType: "json",
-            success: function(res){
-                console.log(res);
-                GameMaster = res;
-                ShowDiscardPile();
-                replacePlayerHand(player);
-                CompDiscard();
-            }
-        })
-    }
-    function CompDiscard()
-    {
-        var player = GameMaster.turn;
-        $.ajax({
-            type: "POST",
-            data: {"GM" :JSON.stringify(GameMaster)},
-            url: "/ComputerTurnDiscard",
-            dataType: "json",
-            success: function(res){
-                console.log(res);
-                GameMaster = res;
-                ShowDiscardPile();
-                replacePlayerHand(player);
-                if(GameMaster.players[GameMaster.turn].isHuman == false)
-                {
-                    CompDraw();
-                }
-            }
-        })
-    }
 
 })
     

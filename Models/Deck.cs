@@ -61,12 +61,7 @@ namespace _31_by_3
                 DiscardPile.Add(deck[0]);
                 deck.RemoveAt(0);
             }
-            else 
-            {
-                System.Console.WriteLine("Something just went terribly wrong...");
-            }
         }
-        
         public void DrawFromDiscard(Player player)
         {
             player.hand.Add(DiscardPile[0]);

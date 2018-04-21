@@ -9,7 +9,7 @@ namespace _31_by_3
         public string name { get; set; }
         public bool isDealer { get; set; }
         public bool isHuman { get; set; }
-        public int tokens { get; set; }
+        public int chips { get; set; }
         public bool knocked { get; set; }
         public int player_seat { get; set; }
         public List<Card> hand = new List<Card>();
@@ -17,9 +17,10 @@ namespace _31_by_3
 
         public Player()
         {
-            this.tokens = 3;
+            this.chips = 3;
             this.isDealer = false;
             this.knocked = false;
+            this.hand_value = 0;
         }
         public Player(string name, bool isHuman = true)
             : this()
