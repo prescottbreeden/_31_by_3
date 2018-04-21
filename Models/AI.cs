@@ -19,7 +19,6 @@ namespace _31_by_3
         public int spades_value { get; set; }
         public int diamonds_value { get; set; }
         public string best_suit { get; set; }
-        public bool coin_flip { get; set; }
         public AI(Player player)
         {
             this.hand = player.hand;
@@ -33,7 +32,6 @@ namespace _31_by_3
             this.spades.Clear();
             this.clubs.Clear();
 
-            // build lists of each suit-type for each players hand - WORKING
             for (var i = 0; i < this.hand.Count; i++)
             {
                 if (this.hand[i].suit == "hearts")
@@ -57,7 +55,6 @@ namespace _31_by_3
                     this.clubs_value += this.hand[i].value;                
                 }
             }
-            // find highest value suit - set to hand value of this - WORKING
             this.suit_values[0] = this.hearts_value;
             this.suit_values[1] = this.diamonds_value;
             this.suit_values[2] = this.spades_value;
@@ -100,12 +97,6 @@ namespace _31_by_3
                     }
                 }
             }
-            //for each thing in num_suits
-            //if num_suits > 0
-            // if num_suits' value < than previous shitty value
-            // worst_value = that shitty value
-        }
-    
+        }  
     }
-    
 }

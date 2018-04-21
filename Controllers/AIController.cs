@@ -85,7 +85,6 @@ namespace _31_by_3.Controllers
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             AI ComputerTurn = new AI(GameMaster.players[GameMaster.turn]);
             int[,] HandCombinations = new int [4,3] {{0,1,2},{0,1,3},{0,2,3},{1,2,3}};
-            ComputerTurn.coin_flip = false;
             Card min = ComputerTurn.hand[0];
             Player TestHand = new Player();
 
@@ -101,7 +100,6 @@ namespace _31_by_3.Controllers
                 if(Temp == ComputerTurn.hand_value)
                 {
                     min = ComputerTurn.hand[3 - i];
-                    ComputerTurn.coin_flip = true;
                 }
             }
             if(ComputerTurn.num_suits.Contains(4))
@@ -130,8 +128,7 @@ namespace _31_by_3.Controllers
             GameMaster.deck.DiscardPile.Insert(0, min);
             ComputerTurn.hand.Remove(min);
             
-                //knock check
-            
+            //knock check
             if (ComputerTurn.hand_value > 25)
             {
                 // Knock(ComputerTurn);

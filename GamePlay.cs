@@ -3,10 +3,10 @@ using System.Linq;
 
 namespace _31_by_3
 {
-    
     public static class GamePlay
     {
         public static int SizeOfHand = 3;
+        public static int Pot { get; set; }
 
         public static Deck BuildAndShuffle()
         {
@@ -55,7 +55,9 @@ namespace _31_by_3
 
             return Players;
         }
-
+        public static void AddChipToPot()
+        {
         
+        }        
     }
 }
