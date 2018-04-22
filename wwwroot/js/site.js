@@ -70,7 +70,18 @@ $(document).ready(function()
                 GameMaster = res;
                 ShowDiscardPile();
                 replacePlayerHand(player);
-                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                if(GameMaster.endGame != null)
+                {
+                    if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
+                    {
+                        window.location.replace("localhost:5000")
+                    }
+                    else
+                    {
+                        window.location.replace("localhost:5000")
+                    }
+                }
+                else if(GameMaster.players[GameMaster.turn].isHuman == false)
                 {
                     CompDraw();
                 }
@@ -116,7 +127,7 @@ $(document).ready(function()
                                         <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <h3 class="player_tokens">Tokens: ${GameMaster.players[player].tokens}</h3>
+                                        <h3 class="player_tokens">Tokens: ${GameMaster.players[player].chips}</h3>
                                     </div>
                                 </div>
                             </div>

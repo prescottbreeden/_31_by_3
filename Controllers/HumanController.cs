@@ -29,7 +29,7 @@ namespace _31_by_3.Controllers
             {
                 Players[i].hand_value = HandValue.Calculate(Players[i]);
             }
-            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0};
+            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0 };
             return Json(GameMaster);
         }
 
