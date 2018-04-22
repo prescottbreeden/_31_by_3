@@ -12,8 +12,8 @@ namespace _31_by_3
         public int chips { get; set; }
         public bool knocked { get; set; }
         public int player_seat { get; set; }
-        public List<Card> hand = new List<Card>();
         public int hand_value { get; set; }
+        public List<Card> hand = new List<Card>();
 
         public Player()
         {

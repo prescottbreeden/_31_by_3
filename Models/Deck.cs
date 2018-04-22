@@ -38,6 +38,14 @@ namespace _31_by_3
             }
             return deck;
         }
+        public void MoveTopCardToDiscardPile()
+        {
+            if(deck.Count > 0)
+            {
+                DiscardPile.Add(deck[0]);
+                deck.RemoveAt(0);
+            }
+        }
         public void DrawFromDeck(Player player)
         {
             if (deck.Count > 0)
@@ -52,14 +60,6 @@ namespace _31_by_3
                 deck = Shuffle(DiscardPile);
                 DiscardPile.Clear();
                 MoveTopCardToDiscardPile();
-            }
-        }
-        public void MoveTopCardToDiscardPile()
-        {
-            if(deck.Count > 0)
-            {
-                DiscardPile.Add(deck[0]);
-                deck.RemoveAt(0);
             }
         }
         public void DrawFromDiscard(Player player)

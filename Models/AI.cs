@@ -9,11 +9,11 @@ namespace _31_by_3
         public List<Card> diamonds = new List<Card>();
         public List<Card> spades = new List<Card>();
         public List<Card> clubs = new List<Card>();
-        public List<Card> min_suit_type = new List<Card>();
+        public string max_suit_type { get; set; }
+        public int[,] HandCombinations = new int [4,3] {{0,1,2},{0,1,3},{0,2,3},{1,2,3}};
         public int[] num_suits = new int[4];
         public int[] suit_values = new int[4];
         public int worst_value { get; set; }
-        public string max_suit_type { get; set; }
         public int hearts_value { get; set; }
         public int clubs_value  {get; set; }
         public int spades_value { get; set; }
@@ -98,5 +98,64 @@ namespace _31_by_3
                 }
             }
         }  
+        public Card ChooseDiscard(AI player)
+        {
+            Player TestHand = new Player();
+            Card min = player.hand[0];
+
+            for(int i = 0; i < 4; i++)
+            {
+                TestHand.hand.Clear();
+                for(int idx = 0; idx < 3; idx++)
+                {
+                    int index = HandCombinations[i,idx];
+                    TestHand.hand.Add(player.hand[index]);
+                }
+                int Temp = HandValue.Calculate(TestHand);
+                if(Temp == player.hand_value)
+                {
+                    min = player.hand[3 - i];
+                }
+            }
+            if(player.num_suits.Contains(4))
+            {
+                foreach(Card c in player.hand)
+                {
+                    if(c.value < min.value)
+                    {
+                        min = c;
+                    }   
+                }
+            }
+            else
+            {
+                foreach(Card c in player.hand)
+                {
+                    if(c.suit != player.best_suit)
+                    {
+                        if(c.value < min.value)
+                        {
+                            min = c;
+                        }
+                    }
+                }
+            }
+
+            return min;
+        }
+        public bool EvaluateDiscardCard(AI player, Card DiscardCard)
+        {
+            player.hand.Add(DiscardCard);
+            Card min = ChooseDiscard(player);  
+            player.hand.Remove(DiscardCard);
+            if(min == DiscardCard)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
