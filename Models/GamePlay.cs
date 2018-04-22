@@ -48,7 +48,7 @@ namespace _31_by_3
             // Place players at table
             for(var i = 0; i < Players.Count; i++)
             {
-                Players[i].player_seat = i+1;
+                Players[i].player_seat = i;
             }
             
             // Set first dealer

@@ -38,6 +38,17 @@ namespace _31_by_3
             }
             return deck;
         }
+        public void ReShuffle(Deck deck, List<Card> discard)
+        {
+            foreach(var card in discard)
+                {
+                    deck.deck.Add(card);
+                }
+                discard.Clear();
+                deck.Shuffle(deck.deck);
+                deck.MoveTopCardToDiscardPile();
+        }
+        
         public void MoveTopCardToDiscardPile()
         {
             if(deck.Count > 0)

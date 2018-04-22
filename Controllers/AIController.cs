@@ -20,12 +20,12 @@ namespace _31_by_3.Controllers
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
 
-            if(player.knocked)
-            {
-                GameOver endGame = new GameOver(GameMaster.players);
-                GameMaster.endGame = endGame;
-            }
-            else if(player.hand_value > 27 && GameMaster.knocked == false)
+            // if(player.knocked)
+            // {
+            //     GameOver endGame = new GameOver(GameMaster.players);
+            //     GameMaster.endGame = endGame;
+            // }
+            if(player.hand_value > 27 && GameMaster.knocked == false)
             {
                 player.knocked = true;
                 GameMaster.knocked = true;
@@ -65,7 +65,7 @@ namespace _31_by_3.Controllers
                 player.hand_value = HandValue.Calculate(player);
             }
 
-            if(player.hand_value == 31)
+            if(player.hand_value == 31 || player.hand_value == 32)
             {
                 GameOver endGame = new GameOver(player, GameMaster.players);
                 GameMaster.endGame = endGame;
