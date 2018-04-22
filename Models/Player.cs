@@ -38,14 +38,21 @@ namespace _31_by_3
         }
         public string CreateRandomName()
         {
-            string[] ListOfNames = {"Lawyer", "Prescott", "Justin","Tiannia","Francisco","Ashely","Chris","Mark","Noelle","Graham","Alan","Donovan","Emily","Stephen","Tim","Dustin","Joyce","Alexandra","Javier","Sun","Chanthy","Nick","Dmitri","Admiral"};
+            string[] ListOfNames = {"Admiral","Alexandra","Andy","Ashely","Alan","Chanthy","Chris","Dmitri","Donovan","Dustin","Emily","Francisco","Graham","Ian","Javier","Josiah","Justin","JJ","Joyce","Larry","Lawyer","Mark","Mike","Nick","Noelle","Phil","Prescott","Rose","Sierra","Stephen","Sun","Susie","Tiannia","Tim"};
             Random rand = new Random();
             var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
             return RandomName;
         }
         public static string CreateRandomFunnyName()
         {
-            string[] ListOfNames = {"LocalHost:5000","Missing Semicolon","Infinite Loop","Undefined","Internal Server Error","Ceiling Cat","0011011000111001","Waiting for compile","Missing Return Statement","Syntax Error","Buggy Code","404","Bad Gateway"};
+            string[] ListOfNames = {"LocalHost:5000","Missing Semicolon","Infinite Loop","Undefined","Internal Server Error","Ceiling Cat","0011011000111001","Waiting for compile","Missing Return Statement","Syntax Error","Buggy Code","404","Bad Gateway","Towelie"};
+            Random rand = new Random();
+            var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
+            return RandomName;
+        }
+        public static string CreateRandomEarthName()
+        {
+            string[] ListOfNames = {"Captain Planet","Groot","Smokey da Bear","ManBearPig"};
             Random rand = new Random();
             var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
             return RandomName;

@@ -19,15 +19,28 @@ namespace _31_by_3.Controllers
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
-            AI Computer = new AI(player);
-            
-            if(Computer.EvaluateDiscardCard(Computer, GameMaster.deck.DiscardPile[0]))
+
+            if(player.knocked)
             {
-                GameMaster.deck.DrawFromDiscard(Computer);
+                GameOver endGame = new GameOver(GameMaster.players);
+                GameMaster.endGame = endGame;
+            }
+            else if(player.hand_value > 27 && GameMaster.knocked == false)
+            {
+                player.knocked = true;
+                GameMaster.knocked = true;
             }
             else
             {
-                GameMaster.deck.DrawFromDeck(Computer);
+                AI Computer = new AI(player);
+                if(Computer.EvaluateDiscardCard(Computer, GameMaster.deck.DiscardPile[0]))
+                {
+                    GameMaster.deck.DrawFromDiscard(Computer);
+                }
+                else
+                {
+                    GameMaster.deck.DrawFromDeck(Computer);
+                }
             }
 
             return Json(GameMaster);
@@ -41,13 +54,16 @@ namespace _31_by_3.Controllers
 
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
-            AI Computer = new AI(player);
-            Card min = Computer.ChooseDiscard(Computer);
             
-            GameMaster.deck.DiscardPile.Insert(0, min);
-            player.hand.Remove(min);
-            player.hand_value = HandValue.Calculate(player);
-            //knock check here
+            if(player.hand.Count == 4)
+            {
+                AI Computer = new AI(player);
+                Card min = Computer.ChooseDiscard(Computer);
+                
+                GameMaster.deck.DiscardPile.Insert(0, min);
+                player.hand.Remove(min);
+                player.hand_value = HandValue.Calculate(player);
+            }
 
             if(player.hand_value == 31)
             {
@@ -61,7 +77,7 @@ namespace _31_by_3.Controllers
                 {
                     GameMaster.turn = 0;
                 }
-                if(player.knocked == true)
+                if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
                     GameOver endGame = new GameOver(GameMaster.players);
                     GameMaster.endGame = endGame;

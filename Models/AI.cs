@@ -145,17 +145,45 @@ namespace _31_by_3
         }
         public bool EvaluateDiscardCard(AI player, Card DiscardCard)
         {
-            player.hand.Add(DiscardCard);
-            Card min = ChooseDiscard(player);  
-            player.hand.Remove(DiscardCard);
+            Player TestHand = new Player();
+            foreach(Card c in player.hand)
+            {
+                TestHand.hand.Add(c);
+            }
+            TestHand.hand.Add(DiscardCard);
+            AI Calculate = new AI(TestHand);
+
+            Card min = ChooseDiscard(Calculate);
             if(min == DiscardCard)
             {
                 return false;
             }
             else
             {
-                return true;
+                TestHand.hand.Remove(min);
+                TestHand.hand_value = HandValue.Calculate(TestHand);
+                if(TestHand.hand_value < 11 && TestHand.hand_value > player.hand_value + 5)
+                {
+                    return true;
+                }
+                else if(TestHand.hand_value > 11 && TestHand.hand_value < 20 && TestHand.hand_value > player.hand_value + 3)
+                {
+                    return true;
+                }
+                else if(TestHand.hand_value >= 20 && TestHand.hand_value > player.hand_value)
+                {
+                    return true;
+                }
+                else if(TestHand.hand_value == player.hand_value && DiscardCard.value == 11)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
 }
+

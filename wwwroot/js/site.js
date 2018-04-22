@@ -70,6 +70,10 @@ $(document).ready(function()
                 GameMaster = res;
                 ShowDiscardPile();
                 replacePlayerHand(player);
+                if(GameMaster.players[player].knocked == true)
+                {
+                    alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
+                }
                 if(GameMaster.endGame != null)
                 {
                     if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
