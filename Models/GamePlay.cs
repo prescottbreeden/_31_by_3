@@ -55,9 +55,5 @@ namespace _31_by_3
 
             return Players;
         }
-        public static void AddChipToPot()
-        {
-        
-        }        
     }
 }

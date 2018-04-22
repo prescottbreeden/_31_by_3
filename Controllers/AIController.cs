@@ -39,36 +39,35 @@ namespace _31_by_3.Controllers
                         break;
                 }
                 if(GameMaster.deck.DiscardPile[0].suit == ComputerTurn.max_suit_type)
+                {
+                    Card min = ComputerTurn.hand[0];
+                    foreach(Card c in ComputerTurn.hand)
                     {
-                        Card min = ComputerTurn.hand[0];
-                        foreach(Card c in ComputerTurn.hand)
-                        {
-                            if(c.value < min.value)
-                                min = c;
-                        }
-                        if (GameMaster.deck.DiscardPile[0].value > min.value)
-                        {
-                            ComputerTurn.hand.Add(GameMaster.deck.DiscardPile[0]);
-                            GameMaster.deck.DiscardPile.RemoveAt(0);
-                            System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from discard pile");
-                        }
+                        if(c.value < min.value)
+                            min = c;
+                    }
+                    if (GameMaster.deck.DiscardPile[0].value > min.value)
+                    {
+                        ComputerTurn.hand.Add(GameMaster.deck.DiscardPile[0]);
+                        GameMaster.deck.DiscardPile.RemoveAt(0);
+                        System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from discard pile");
                     }
                     else
                     {
                         GameMaster.deck.DrawFromDeck(ComputerTurn);
                     }
-            }
-                // 2 cards of same suit logic
-                // else
-                // {
-                //     GameMaster.deck.DrawFromDeck(ComputerTurn);
-                //     System.Console.WriteLine($"{GameMaster.players[GameMaster.turn]} drew from deck");
-                // }
-            else
-                {
-                    GameMaster.deck.DrawFromDeck(ComputerTurn);
-                    System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from deck");
                 }
+                else
+                    {
+                        //matrix logic
+                        GameMaster.deck.DrawFromDeck(ComputerTurn);
+                    }
+            }
+            else
+            {
+                GameMaster.deck.DrawFromDeck(ComputerTurn);
+                System.Console.WriteLine($"{GameMaster.players[GameMaster.turn].name} drew from deck");
+            }
             return Json(GameMaster);
         }
 
@@ -129,14 +128,15 @@ namespace _31_by_3.Controllers
             ComputerTurn.hand.Remove(min);
             
             //knock check
-            if (ComputerTurn.hand_value > 25)
-            {
-                // Knock(ComputerTurn);
-            }
-        
+            // if (ComputerTurn.hand_value > 25)
+            // {
+            //     // Knock(ComputerTurn);
+            // }
+            GameMaster.players[GameMaster.turn].hand_value = HandValue.Calculate(GameMaster.players[GameMaster.turn]);
             if(GameMaster.players[GameMaster.turn].hand_value == 31)
             {
-                //call gameover
+                GameOver endGame = new GameOver(GameMaster.players[GameMaster.turn], GameMaster.players);
+                GameMaster.endGame = endGame;
             }
             else
             {
@@ -147,7 +147,8 @@ namespace _31_by_3.Controllers
                 }
                 if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
-                    //call evaluate winner
+                    GameOver endGame = new GameOver(GameMaster.players);
+                    GameMaster.endGame = endGame;
                 }
             }
             return Json(GameMaster);
