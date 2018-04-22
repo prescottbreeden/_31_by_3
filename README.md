@@ -7,3 +7,5 @@ To Do List for Prescott and Lawyer: MVP
 - Rules Button
 - Same-suit indicator
 - sockets (SignalR)
+- chat function
+- trash talking AI
