@@ -2,7 +2,6 @@
 
 To Do List for Prescott and Lawyer: MVP
 - Turn Order (Turn Icon)
-- 31 check
 - Knock system 
 - End Game/Restart
 - Animations
