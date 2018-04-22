@@ -9,6 +9,7 @@ namespace _31_by_3
         public static List<Card> diamonds = new List<Card>();
         public static List<Card> spades = new List<Card>();
         public static List<Card> clubs = new List<Card>();
+        public static List<Card> aces = new List<Card>();
         public static int[] num_suits = new int[4];
         public static int hand_value { get; set; }
         public static int hearts_value { get; set; }
@@ -32,6 +33,7 @@ namespace _31_by_3
             diamonds.Clear();
             spades.Clear();
             clubs.Clear();
+            aces.Clear();
             
             // build lists of each suit-type for each players hand
             for (var i = 0; i < player.hand.Count; i++)
@@ -63,12 +65,29 @@ namespace _31_by_3
             suit_values[2] = spades_value;
             suit_values[3] = clubs_value; 
             hand_value = suit_values.Max();
+            foreach(Card c in player.hand)
+            {
+                if(c.value == 11)
+                {
+                    aces.Add(c);
+                    System.Console.WriteLine("FOUND UNO ACE");
+                }
+            }
+            foreach(Card ca in aces)
+            {
+                System.Console.WriteLine(ca.suit);
+            }
+            if(aces.Count == 3)
+            {
+                System.Console.WriteLine("FOUND 3 ACES!!!!!!");
+                hand_value = 32;
+            }
 
             // save number of cards for each suit in hand
-            num_suits[0] = hearts.Count;
-            num_suits[1] = diamonds.Count;
-            num_suits[2] = spades.Count;
-            num_suits[3] = clubs.Count;
+            // num_suits[0] = hearts.Count;
+            // num_suits[1] = diamonds.Count;
+            // num_suits[2] = spades.Count;
+            // num_suits[3] = clubs.Count;
 
             return hand_value;
         }

@@ -51,8 +51,11 @@ namespace _31_by_3.Controllers
         public JsonResult DrawDiscard(string GM)
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
-            GameMaster.players[GameMaster.turn].hand.Add(GameMaster.deck.DiscardPile[0]);
+            Player player = GameMaster.players[GameMaster.turn];
+            player.hand.Add(GameMaster.deck.DiscardPile[0]);
             GameMaster.deck.DiscardPile.RemoveAt(0);
+
+
 
             return Json(GameMaster);
         }
@@ -63,29 +66,26 @@ namespace _31_by_3.Controllers
         public JsonResult DiscardCard(string GM)
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
-            for(int i = 0; i < GameMaster.players[GameMaster.turn].hand.Count; i ++)
+            Player player = GameMaster.players[GameMaster.turn];
+            for(int i = 0; i < player.hand.Count; i ++)
             {
-                if(GameMaster.players[GameMaster.turn].hand[i].selected)
+                if(player.hand[i].selected)
                 {  
-                    GameMaster.players[GameMaster.turn].hand[i].selected = false; // remove discard attribute
-                    GameMaster.deck.DiscardPile.Insert(0, GameMaster.players[GameMaster.turn].hand[i]);
-                    GameMaster.players[GameMaster.turn].hand.RemoveAt(i);
+                    player.hand[i].selected = false; // remove discard attribute
+                    GameMaster.deck.DiscardPile.Insert(0, player.hand[i]);
+                    player.hand.RemoveAt(i);
                 }
             }
+            player.hand_value = HandValue.Calculate(player);
             if(GameMaster.deck.deck.Count == 0)
             {
-                foreach(var card in GameMaster.deck.DiscardPile)
-                {
-                    GameMaster.deck.deck.Add(card);
-                }
-                GameMaster.deck.DiscardPile.Clear();
-                GameMaster.deck.Shuffle(GameMaster.deck.deck);
-                GameMaster.deck.MoveTopCardToDiscardPile();
+                GameOver endGame = new GameOver(GameMaster.players);
+                GameMaster.endGame = endGame;
             }
-            GameMaster.players[GameMaster.turn].hand_value = HandValue.Calculate(GameMaster.players[GameMaster.turn]);
-            if(GameMaster.players[GameMaster.turn].hand_value == 31)
+            else if(player.hand_value == 31 || player.hand_value == 32)
             {
-                //call gameover
+                GameOver endGame = new GameOver(player, GameMaster.players);
+                GameMaster.endGame = endGame;
             }
             else
             {
@@ -96,7 +96,8 @@ namespace _31_by_3.Controllers
                 }
                 if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
-                    //call evaluate winner
+                    GameOver endGame = new GameOver(GameMaster.players);
+                    GameMaster.endGame = endGame;
                 }
             }
             return Json(GameMaster);

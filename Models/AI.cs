@@ -9,6 +9,7 @@ namespace _31_by_3
         public List<Card> diamonds = new List<Card>();
         public List<Card> spades = new List<Card>();
         public List<Card> clubs = new List<Card>();
+        public List<Card> aces = new List<Card>();
         public string max_suit_type { get; set; }
         public int[,] HandCombinations = new int [4,3] {{0,1,2},{0,1,3},{0,2,3},{1,2,3}};
         public int[] num_suits = new int[4];
@@ -60,6 +61,19 @@ namespace _31_by_3
             this.suit_values[2] = this.spades_value;
             this.suit_values[3] = this.clubs_value;
             this.hand_value = this.suit_values.Max();
+            
+            foreach(Card c in this.hand)
+            {
+                if(c.value == 11)
+                {
+                    this.aces.Add(c);
+                }
+            }
+            if(this.aces.Count == 3)
+            {
+                this.hand_value = 32;
+            }
+            
             
             this.worst_value = this.hand_value;
 
@@ -117,6 +131,17 @@ namespace _31_by_3
                     min = player.hand[3 - i];
                 }
             }
+            if(this.aces.Count == 3)
+            {
+                foreach(Card c in player.hand)
+                {
+                    if(c.value != 11)
+                    {
+                        min = c;
+                    }
+                }    
+            }
+            
             if(player.num_suits.Contains(4))
             {
                 foreach(Card c in player.hand)
@@ -166,11 +191,11 @@ namespace _31_by_3
                 {
                     return true;
                 }
-                else if(Calculate.hand_value < 11 && Calculate.hand_value > player.hand_value + 5)
+                else if(Calculate.hand_value < 11 && Calculate.hand_value >= player.hand_value + 4)
                 {
                     return true;
                 }
-                else if(Calculate.hand_value > 11 && Calculate.hand_value < 20 && Calculate.hand_value > player.hand_value + 3)
+                else if(Calculate.hand_value > 11 && Calculate.hand_value < 20 && Calculate.hand_value >= player.hand_value + 3)
                 {
                     return true;
                 }
