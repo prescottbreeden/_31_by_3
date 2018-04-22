@@ -160,21 +160,25 @@ namespace _31_by_3
             }
             else
             {
-                TestHand.hand.Remove(min);
-                TestHand.hand_value = HandValue.Calculate(TestHand);
-                if(TestHand.hand_value < 11 && TestHand.hand_value > player.hand_value + 5)
+                Calculate.hand.Remove(min);
+                Calculate.hand_value = HandValue.Calculate(Calculate);
+                if(Calculate.best_suit == DiscardCard.suit && DiscardCard.value == 11)
                 {
                     return true;
                 }
-                else if(TestHand.hand_value > 11 && TestHand.hand_value < 20 && TestHand.hand_value > player.hand_value + 3)
+                else if(Calculate.hand_value < 11 && Calculate.hand_value > player.hand_value + 5)
                 {
                     return true;
                 }
-                else if(TestHand.hand_value >= 20 && TestHand.hand_value > player.hand_value)
+                else if(Calculate.hand_value > 11 && Calculate.hand_value < 20 && Calculate.hand_value > player.hand_value + 3)
                 {
                     return true;
                 }
-                else if(TestHand.hand_value == player.hand_value && DiscardCard.value == 11)
+                else if(Calculate.hand_value >= 20 && Calculate.hand_value > player.hand_value)
+                {
+                    return true;
+                }
+                else if(Calculate.hand_value == player.hand_value && DiscardCard.value == 11)
                 {
                     return true;
                 }
