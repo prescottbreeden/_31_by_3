@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                     `)
-                    if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endGame != null || GameMaster.allAI == true)
+                    if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endRound != null || GameMaster.allAI == true)
                     {
                         document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
                     }
@@ -221,10 +221,10 @@
                     new Audio("../Knocking.mp3").play();
                     // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                 }
-                if(GameMaster.endGame != null)
+                if(GameMaster.endRound != null)
                 {
                     replacePlayerHands();
-                    // alert(GameMaster.endGame.winner.name +" won the game with a score of " + GameMaster.endGame.winner.hand_value + "! ... Sorry if you weren't them... ")
+                    // alert(GameMaster.endRound.winner.name +" won the game with a score of " + GameMaster.endRound.winner.hand_value + "! ... Sorry if you weren't them... ")
                     // if(confirm("Would you like to play again?"))
                     {
                         $.ajax({
@@ -238,7 +238,11 @@
                                 GameMaster = res;
                                 createPlayerSlots();
                                 // replacePlayerHands();
-                                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                                if(GameMaster.endGame == true)
+                                {
+                                    alert("Game over, everyone loses because I hate you all")
+                                }
+                                else if(GameMaster.players[GameMaster.turn].isHuman == false)
                                 {
                                     CompDraw();
                                 }
@@ -373,10 +377,10 @@
                                     new Audio("../Knocking.mp3").play();
                                     // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                                 }
-                                if(GameMaster.endGame != null)
+                                if(GameMaster.endRound != null)
                                 {
                                     replacePlayerHands();
-                                    if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
+                                    if(confirm(GameMaster.endRound.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
                                     {
                                         $.ajax({
                                             type: "POST",

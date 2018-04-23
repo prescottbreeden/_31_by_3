@@ -35,7 +35,7 @@ namespace _31_by_3.Controllers
             GameMaster GameMaster = new GameMaster(PreviousGame);
             if(GameMaster.players.Count == 1)
             {
-                GameMaster.GameOver.GameOver.GameOver.GameOver = true;
+                GameMaster.endGame = true;
             }
             return Json(GameMaster);
         }
@@ -53,8 +53,8 @@ namespace _31_by_3.Controllers
             }
             if(GameMaster.players[GameMaster.turn].knocked == true)
             {
-                GameOver endGame = new GameOver(GameMaster);
-                GameMaster.endGame = endGame;
+                GameOver endRound = new GameOver(GameMaster);
+                GameMaster.endRound = endRound;
             }
             return Json(GameMaster);
         }
@@ -104,13 +104,13 @@ namespace _31_by_3.Controllers
             player.hand_value = HandValue.Calculate(player);
             if(GameMaster.deck.deck.Count == 0)
             {
-                GameOver endGame = new GameOver(GameMaster);
-                GameMaster.endGame = endGame;
+                GameOver endRound = new GameOver(GameMaster);
+                GameMaster.endRound = endRound;
             }
             if(player.hand_value == 31 || player.hand_value == 32)
             {
-                GameOver endGame = new GameOver(player, GameMaster);
-                GameMaster.endGame = endGame;
+                GameOver endRound = new GameOver(player, GameMaster);
+                GameMaster.endRound = endRound;
             }
             return Json(GameMaster);
         }

@@ -9,7 +9,8 @@ namespace _31_by_3
         public Deck deck { get; set; }
         public bool knocked { get; set; }
         public List<Player> players { get; set; }
-        public GameOver endGame { get; set; }
+        public GameOver endRound { get; set; }
+        public bool endGame;
         public bool AllAI { get; set;}
         public bool SinglePlayer { get; set; }
         public GameMaster()
