@@ -9,6 +9,9 @@ namespace _31_by_3
         public bool knocked { get; set; }
         public List<Player> players { get; set; }
         public GameOver endGame { get; set; }
+
+        public bool AllAI = true;
+        public bool SinglePlayer = true;
         public GameMaster()
         {
 

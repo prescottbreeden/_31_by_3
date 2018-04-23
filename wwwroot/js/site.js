@@ -25,7 +25,7 @@ $(document).ready(function()
                                 </div>
                             </div>
                     `)
-                    if((GameMaster.players[idx].isHuman && GameMaster.players[idx].player_seat == GameMaster.turn) || GameMaster.endGame != null)
+                    if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endGame != null || GameMaster.allAI == true)
                     {
                         document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
                     }
@@ -36,13 +36,35 @@ $(document).ready(function()
             }
         }       
     }
-    function ShowAllHands()
+
+    function hidePlayerHands()
     {
-        for(var i = 0; i < GameMaster.players.length; i++)
+        for(var idx = 0; idx < GameMaster.players.length; idx++)
         {
-            replacePlayerHand(GameMaster.players[i].player_seat)
-        }
+            $(".HandTarget" + idx).empty();
+            for(card in GameMaster.players[idx].hand)
+            {
+                $(".HandTarget" + idx).append(
+                    `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-anchor">
+                                        <div class="m0a w100">
+                                            <img alt="WHY" id="player_card${idx}${card}" class="clickable">
+                                            <input type="hidden" class="value" value="${card}">
+                                            </div>
+                                        <!-- a card should go here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    `)
+                document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+            }
+        }       
     }
+
+
 
     function ShowDiscardPile()
     {
@@ -87,31 +109,33 @@ $(document).ready(function()
                 GameMaster = res;
                 ShowDiscardPile();
                 replacePlayerHands();
-                setTimeout(function(){
-                    console.log("timeout")
-                    if(GameMaster.players[player].knocked == true)
+                if(GameMaster.players[player].knocked == true)
+                {
+                    alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
+                }
+                if(GameMaster.endGame != null)
+                {
+                    replacePlayerHands();
+                    if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
                     {
-                        alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
+                        window.location.replace("localhost:5000")
                     }
-                    if(GameMaster.endGame != null)
+                    else
                     {
-                        ShowAllHands();
-                        if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
-                        {
-                            window.location.replace("localhost:5000")
-                        }
-                        else
-                        {
-                            window.location.replace("localhost:5000")
-                        }
+                        window.location.replace("localhost:5000")
                     }
-                    else if(GameMaster.players[GameMaster.turn].isHuman == false)
-                    {
-                        CompDraw();
-                    }
-                }, 1500);
+                }
+                else if(GameMaster.players[GameMaster.turn].isHuman == false)
+                {
+                    CompDraw();
+                }
+                else
+                {
+                    alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
+                }
             }
         })
+
     }
 
     $(document).on("click", ".clickable", function()
@@ -132,6 +156,10 @@ $(document).ready(function()
             var player_hands = document.getElementById("player_hands");
             var img = document.createElement("img")
             ShowDiscardPile()
+            // if(GameMaster.players[0].isHuman && !GameMaster.singlePlayer)
+            // {
+            //     alert(GameMaster.players[0].name + " will draw first.")
+            // }
             for(let player = 0; player < GameMaster.players.length; player ++)
             {
                 player_hands.innerHTML += (`
@@ -152,7 +180,7 @@ $(document).ready(function()
                                         <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <h3 class="player_tokens">Tokens: ${GameMaster.players[player].chips}</h3>
+                                        <h3 class="player_tokens">Chips: ${GameMaster.players[player].chips}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -232,13 +260,12 @@ $(document).ready(function()
                         }
                         
                 }
+                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                {
+                    CompDraw();
+                }
             });
             $("#PlayGame").remove()
-                  
-                // if(GameMaster.players[GameMaster.turn].isHuman == false)
-                // {
-                //     CompDraw();
-                // }
         })
 
         $("#DrawCard").on("click", function()
@@ -279,25 +306,8 @@ $(document).ready(function()
                         GameMaster = res;
                         ShowDiscardPile();
                         replacePlayerHands();
-                        
-                        // $(".HandTarget" + GameMaster.turn).append(
-                        //     `<div class="remove-me player-card cardNumber3 col-12 col-md-6 col-lg-3">
-                        //     <div class="row">
-                        //     <div class="col-12">
-                        //     <div class="card-anchor">
-                        //     <div class="m0a w100">
-                        //     <img class="clickable" id="draw_card${GameMaster.turn}"></img>
-                        //     <input type="hidden" class="value" value="3">
-                        //     </div>
-                        //     <!-- a card should go here -->
-                        //     </div>
-                        //     </div>
-                        //     </div>
-                        //     </div>
-                        //     `)
-                        //     document.getElementById("draw_card" + GameMaster.turn).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["suit"][0] + GameMaster.players[GameMaster.turn].hand[GameMaster.players[GameMaster.turn].hand.length-1]["face"] )
-                        }
-                    })
+                    }
+                })
             }
             else
             {
@@ -328,14 +338,14 @@ $(document).ready(function()
                                     console.log(res);
                                     GameMaster = res;
                                     ShowDiscardPile();
-                                    replacePlayerHands();
+                                    hidePlayerHands();
                                     if(GameMaster.players[player].knocked == true)
                                     {
                                         alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                                     }
                                     if(GameMaster.endGame != null)
                                     {
-                                        ShowAllHands();
+                                        replacePlayerHands();
                                         if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
                                         {
                                             window.location.replace("localhost:5000")
@@ -345,14 +355,32 @@ $(document).ready(function()
                                             window.location.replace("localhost:5000")
                                         }
                                     }
-                                    else if(GameMaster.players[GameMaster.turn].isHuman == false)
+                                    else
                                     {
-                                        CompDraw();
+                                        $.ajax({
+                                            type: "POST",
+                                            data: {"GM" :JSON.stringify(GameMaster)},
+                                            url: "/NextTurn",
+                                            dataType: "json",
+                                            success: function(res){
+                                                console.log(res);
+                                                GameMaster = res;
+                                                replacePlayerHands();
+                                                if(GameMaster.players[GameMaster.turn].isHuman)
+                                                {
+                                                    alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
+                                                }
+                                                if(!GameMaster.players[GameMaster.turn].isHuman)
+                                                {
+                                                    CompDraw();
+                                                }
+                                            }
+                                        })    
                                     }
                                 }
                             })
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -370,14 +398,30 @@ $(document).ready(function()
             GameMaster.players[GameMaster.turn].knocked = true;
             GameMaster.knocked = true;
             alert(GameMaster.players[GameMaster.turn].name + " has just knocked... ruh roh!")
-            GameMaster.turn++
-            if(GameMaster.turn == 4)
-            {
-                GameMaster.turn = 0;
-            }
             if(GameMaster.players[GameMaster.turn].isHuman == false)
             {
                 CompDraw();
+            }
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    data: {"GM" :JSON.stringify(GameMaster)},
+                    url: "/NextTurn",
+                    dataType: "json",
+                    success: function(res){
+                        console.log(res);
+                        GameMaster = res;
+                        if(GameMaster.players[GameMaster.turn].isHuman)
+                        {
+                            alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
+                        }
+                        else
+                        {
+                            CompDraw();
+                        }
+                    }
+                })
             }
         }
     })

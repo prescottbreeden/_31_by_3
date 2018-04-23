@@ -17,6 +17,9 @@ namespace _31_by_3.Controllers
         [Route("start")]
         public JsonResult StartGame()
         {
+            bool AllAI = true;
+            List<int> Humans = new List<int>();
+            bool SinglePlayer = false;
             string player1 = HttpContext.Session.GetString("player1");
             string player2 = HttpContext.Session.GetString("player2");
             string player3 = HttpContext.Session.GetString("player3");
@@ -28,10 +31,39 @@ namespace _31_by_3.Controllers
             for(var i = 0; i < Players.Count; i++)
             {
                 Players[i].hand_value = HandValue.Calculate(Players[i]);
+                if(Players[i].isHuman == true)
+                {
+                    AllAI = false;
+                    Humans.Add(i);
+                }
             }
-            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0, knocked = false};
+            if(Humans.Count == 1)
+            {
+                SinglePlayer = true;
+            }
+            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0, knocked = false, AllAI = AllAI, SinglePlayer = SinglePlayer};
             return Json(GameMaster);
         }
+
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("NextTurn")]
+        public JsonResult NextTurn(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            GameMaster.turn++;
+            if (GameMaster.turn == 4)
+            {
+                GameMaster.turn = 0;
+            }
+            if(GameMaster.players[GameMaster.turn].knocked == true)
+            {
+                GameOver endGame = new GameOver(GameMaster.players);
+                GameMaster.endGame = endGame;
+            }
+            return Json(GameMaster);
+        }
+
 
         [HttpPost]
         [RequestSizeLimit(valueCountLimit: 1000000000)]
@@ -54,8 +86,6 @@ namespace _31_by_3.Controllers
             Player player = GameMaster.players[GameMaster.turn];
             player.hand.Add(GameMaster.deck.DiscardPile[0]);
             GameMaster.deck.DiscardPile.RemoveAt(0);
-
-
 
             return Json(GameMaster);
         }
@@ -82,23 +112,10 @@ namespace _31_by_3.Controllers
                 GameOver endGame = new GameOver(GameMaster.players);
                 GameMaster.endGame = endGame;
             }
-            else if(player.hand_value == 31 || player.hand_value == 32)
+            if(player.hand_value == 31 || player.hand_value == 32)
             {
                 GameOver endGame = new GameOver(player, GameMaster.players);
                 GameMaster.endGame = endGame;
-            }
-            else
-            {
-                GameMaster.turn++;
-                if (GameMaster.turn == 4)
-                {
-                    GameMaster.turn = 0;
-                }
-                if(GameMaster.players[GameMaster.turn].knocked == true)
-                {
-                    GameOver endGame = new GameOver(GameMaster.players);
-                    GameMaster.endGame = endGame;
-                }
             }
             return Json(GameMaster);
         }
