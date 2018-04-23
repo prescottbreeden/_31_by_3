@@ -70,7 +70,6 @@ namespace _31_by_3
                 if(c.value == 11)
                 {
                     aces.Add(c);
-                    System.Console.WriteLine("FOUND UNO ACE");
                 }
             }
             foreach(Card ca in aces)
@@ -79,7 +78,6 @@ namespace _31_by_3
             }
             if(aces.Count == 3)
             {
-                System.Console.WriteLine("FOUND 3 ACES!!!!!!");
                 hand_value = 32;
             }
 

@@ -50,9 +50,6 @@ namespace _31_by_3
             {
                 Players[i].player_seat = i;
             }
-            
-            // Set first dealer
-            Players[0].isDealer = true;
 
             return Players;
         }

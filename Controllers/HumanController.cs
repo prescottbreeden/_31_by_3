@@ -16,32 +16,14 @@ namespace _31_by_3.Controllers
         [HttpGet]
         [Route("start")]
         public JsonResult StartGame()
-        {
-            bool AllAI = true;
-            List<int> Humans = new List<int>();
-            bool SinglePlayer = false;
+        {   
             string player1 = HttpContext.Session.GetString("player1");
             string player2 = HttpContext.Session.GetString("player2");
             string player3 = HttpContext.Session.GetString("player3");
             string player4 = HttpContext.Session.GetString("player4");
             List<string> PlayerSelect = new List<string>{player1, player2, player3, player4};
-            List<Player> Players = GamePlay.CreatePlayers(PlayerSelect);
-            Deck CurrentDeck = GamePlay.BuildAndShuffle();
-            GamePlay.Deal(Players, CurrentDeck);
-            for(var i = 0; i < Players.Count; i++)
-            {
-                Players[i].hand_value = HandValue.Calculate(Players[i]);
-                if(Players[i].isHuman == true)
-                {
-                    AllAI = false;
-                    Humans.Add(i);
-                }
-            }
-            if(Humans.Count == 1)
-            {
-                SinglePlayer = true;
-            }
-            var GameMaster = new { Players = Players, Deck = CurrentDeck, Turn = 0, knocked = false, AllAI = AllAI, SinglePlayer = SinglePlayer};
+            GameMaster newGame = new GameMaster(PlayerSelect);
+            var GameMaster = newGame;
             return Json(GameMaster);
         }
 

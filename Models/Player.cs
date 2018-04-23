@@ -7,7 +7,6 @@ namespace _31_by_3
     public class Player : BaseEntity
     {
         public string name { get; set; }
-        public bool isDealer { get; set; }
         public bool isHuman { get; set; }
         public int chips { get; set; }
         public bool knocked { get; set; }
@@ -18,7 +17,6 @@ namespace _31_by_3
         public Player()
         {
             this.chips = 3;
-            this.isDealer = false;
             this.knocked = false;
             this.hand_value = 0;
         }
