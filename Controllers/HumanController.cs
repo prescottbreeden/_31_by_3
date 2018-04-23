@@ -22,8 +22,18 @@ namespace _31_by_3.Controllers
             string player3 = HttpContext.Session.GetString("player3");
             string player4 = HttpContext.Session.GetString("player4");
             List<string> PlayerSelect = new List<string>{player1, player2, player3, player4};
-            GameMaster newGame = new GameMaster(PlayerSelect);
-            var GameMaster = newGame;
+            GameMaster GameMaster = new GameMaster(PlayerSelect);
+            return Json(GameMaster);
+        }
+    
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("NextRound")]
+        public JsonResult NextRound(string GM)
+        {
+            GameMaster PreviousGame = JsonConvert.DeserializeObject<GameMaster>(GM);
+            GameMaster GameMaster = new GameMaster(PreviousGame);
+            
             return Json(GameMaster);
         }
 
@@ -40,7 +50,7 @@ namespace _31_by_3.Controllers
             }
             if(GameMaster.players[GameMaster.turn].knocked == true)
             {
-                GameOver endGame = new GameOver(GameMaster.players);
+                GameOver endGame = new GameOver(GameMaster);
                 GameMaster.endGame = endGame;
             }
             return Json(GameMaster);
@@ -91,12 +101,12 @@ namespace _31_by_3.Controllers
             player.hand_value = HandValue.Calculate(player);
             if(GameMaster.deck.deck.Count == 0)
             {
-                GameOver endGame = new GameOver(GameMaster.players);
+                GameOver endGame = new GameOver(GameMaster);
                 GameMaster.endGame = endGame;
             }
             if(player.hand_value == 31 || player.hand_value == 32)
             {
-                GameOver endGame = new GameOver(player, GameMaster.players);
+                GameOver endGame = new GameOver(player, GameMaster);
                 GameMaster.endGame = endGame;
             }
             return Json(GameMaster);

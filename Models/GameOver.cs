@@ -6,10 +6,10 @@ namespace _31_by_3
 {
     public class GameOver
     {
-        public List<Player> AllPlayers = new List<Player>();
         public Player Winner = new Player();
         public Player Loser = new Player();
         public List<Player> TieScores = new List<Player>();
+        public bool callTieBreaker = false;
         public int HighestRankingCard;
         public int Pot { get; set; }
 
@@ -18,19 +18,18 @@ namespace _31_by_3
             
         }
 
-        public GameOver(List<Player> all_players)
+        public GameOver(GameMaster gameMaster)
         {
-            this.AllPlayers = all_players;
 
             // set highest hand to winner
-            foreach(Player player in AllPlayers)
+            foreach(Player player in gameMaster.players)
             {
                 if(player.hand_value > Winner.hand_value)
                 {
                     this.Winner = player;
                 }
             }
-            foreach(Player player in AllPlayers)
+            foreach(Player player in gameMaster.players)
             {
                 if(player.hand_value == Winner.hand_value)
                 {
@@ -49,43 +48,61 @@ namespace _31_by_3
                         if(face > HighestRankingCard)
                         {
                             HighestRankingCard = face;
-                            Winner = player;
+                            this.Winner = player;
+                        }
+                        if(face == HighestRankingCard)
+                        {
+                            callTieBreaker = true;
                         }
                     }
+                }
+                if(callTieBreaker)
+                {
+                    // foreach(Player player in all_players)
+                    // {
+                    //     player.hand.OrderByDescending(c => c.value);
+                    // }
+                    // for(var card = 0; card < 3; i++)
+                    // {
+                    //     for(var player = 0; player < all_players.Count; player++)
+                    //     {
+                    //         if(all_players[player].hand[card]>)
+                    //     }
+                    // }
                 }
             }
 
             // check if winner is knocker
             if(Winner.knocked == false)
             {
-                foreach(Player player in all_players)
+                foreach(Player player in gameMaster.players)
                 {
                     if(player.knocked)
                     {
                         this.Loser = player;
-                        Loser.chips--;
+                        this.Loser.chips--;
                     }
                 }
             }
             else
             {
-                foreach(Player player in AllPlayers)
+                foreach(Player player in gameMaster.players)
                 {
                 if(player.hand_value < Loser.hand_value)
                     {
                         this.Loser = player;
                     }
                 }
-                Loser.chips--;
+                this.Loser.chips--;
             }
         }
-        public GameOver(Player winner, List<Player> all_players)
+        public GameOver(Player winner, GameMaster gameMaster)
         {
             this.Winner = winner;
 
-            foreach(Player player in all_players)
+            foreach(Player player in gameMaster.players)
             {
-                if(player != winner)
+                if(player != this.Winner)
                 {
                     player.chips--;
                     Pot++;

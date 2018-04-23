@@ -67,7 +67,7 @@ namespace _31_by_3.Controllers
 
             if(player.hand_value == 31 || player.hand_value == 32)
             {
-                GameOver endGame = new GameOver(player, GameMaster.players);
+                GameOver endGame = new GameOver(player, GameMaster);
                 GameMaster.endGame = endGame;
             }
             else
@@ -79,7 +79,7 @@ namespace _31_by_3.Controllers
                 }
                 if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
-                    GameOver endGame = new GameOver(GameMaster.players);
+                    GameOver endGame = new GameOver(GameMaster);
                     GameMaster.endGame = endGame;
                 }
             }
