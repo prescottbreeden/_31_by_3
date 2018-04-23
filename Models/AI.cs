@@ -20,6 +20,7 @@ namespace _31_by_3
         public int spades_value { get; set; }
         public int diamonds_value { get; set; }
         public string best_suit { get; set; }
+        public bool drawDiscard { get; set; }
         public AI(Player player)
         {
             this.hand = player.hand;
@@ -168,7 +169,7 @@ namespace _31_by_3
 
             return min;
         }
-        public bool EvaluateDiscardCard(AI player, Card DiscardCard)
+        public bool EvaluateDiscardCard(AI player, Card DiscardCard, GameMaster gameMaster)
         {
             Player TestHand = new Player();
             foreach(Card c in player.hand)
@@ -179,39 +180,44 @@ namespace _31_by_3
             AI Calculate = new AI(TestHand);
 
             Card min = ChooseDiscard(Calculate);
-            if(min == DiscardCard)
-            {
-                return false;
-            }
-            else
+            drawDiscard = false;
+            if(min != DiscardCard)
             {
                 Calculate.hand.Remove(min);
                 Calculate.hand_value = HandValue.Calculate(Calculate);
-                if(Calculate.best_suit == DiscardCard.suit && DiscardCard.value == 11)
+                
+                if(gameMaster.knocked != true)
                 {
-                    return true;
-                }
-                else if(Calculate.hand_value < 11 && Calculate.hand_value >= player.hand_value + 4)
-                {
-                    return true;
-                }
-                else if(Calculate.hand_value > 11 && Calculate.hand_value < 20 && Calculate.hand_value >= player.hand_value + 3)
-                {
-                    return true;
-                }
-                else if(Calculate.hand_value >= 20 && Calculate.hand_value > player.hand_value)
-                {
-                    return true;
-                }
-                else if(Calculate.hand_value == player.hand_value && DiscardCard.value == 11)
-                {
-                    return true;
+                    if(Calculate.best_suit == DiscardCard.suit && DiscardCard.value == 11)
+                    {
+                        drawDiscard = true;
+                    }
+                    else if(Calculate.hand_value < 11 && Calculate.hand_value >= player.hand_value + 4)
+                    {
+                        drawDiscard = true;
+                    }
+                    else if(Calculate.hand_value > 11 && Calculate.hand_value < 20 && Calculate.hand_value >= player.hand_value + 3)
+                    {
+                        drawDiscard = true;
+                    }
+                    else if(Calculate.hand_value >= 20 && Calculate.hand_value > player.hand_value)
+                    {
+                        drawDiscard = true;
+                    }
+                    else if(Calculate.hand_value == player.hand_value && DiscardCard.value == 11)
+                    {
+                        drawDiscard = true;
+                    }
                 }
                 else
                 {
-                    return false;
+                    if(Calculate.hand_value > player.hand_value)
+                    {
+                        drawDiscard = true;
+                    }
                 }
             }
+            return drawDiscard;
         }
     }
 }

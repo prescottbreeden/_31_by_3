@@ -7,7 +7,6 @@ namespace _31_by_3
     public class GameOver
     {
         public Player Winner = new Player();
-        public Player Loser = new Player();
         public List<Player> TieScores = new List<Player>();
         public bool callTieBreaker = false;
         public int HighestRankingCard;
@@ -79,21 +78,26 @@ namespace _31_by_3
                 {
                     if(player.knocked)
                     {
-                        this.Loser = player;
-                        this.Loser.chips--;
+                        player.chips--;
                     }
                 }
             }
             else
             {
+                Player Loser = gameMaster.players[0];
                 foreach(Player player in gameMaster.players)
                 {
-                if(player.hand_value < Loser.hand_value)
+                if(player.hand_value < Loser.hand_value) // double check with tie logic
                     {
-                        this.Loser = player;
+                        Loser = player;
                     }
                 }
-                this.Loser.chips--;
+                Loser.chips--;
+            }
+            System.Console.WriteLine("NEW CHIP BALANCE ***************************");
+             foreach(Player person in gameMaster.players)
+            {
+                System.Console.WriteLine(person.name + " has chips: " + person.chips);
             }
         }
         public GameOver(Player winner, GameMaster gameMaster)

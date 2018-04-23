@@ -33,7 +33,7 @@ namespace _31_by_3.Controllers
             else
             {
                 AI Computer = new AI(player);
-                if(Computer.EvaluateDiscardCard(Computer, GameMaster.deck.DiscardPile[0]))
+                if(Computer.EvaluateDiscardCard(Computer, GameMaster.deck.DiscardPile[0], GameMaster))
                 {
                     GameMaster.deck.DrawFromDiscard(Computer);
                 }
@@ -79,10 +79,27 @@ namespace _31_by_3.Controllers
                 }
                 if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
+                    foreach(Player person in GameMaster.players)
+                    {
+                        System.Console.WriteLine(person.name + " has chips: " + person.chips);
+                    }
                     GameOver endGame = new GameOver(GameMaster);
                     GameMaster.endGame = endGame;
                 }
             }
+
+            // GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            // GameMaster.turn++;
+            // if (GameMaster.turn == 4)
+            // {
+            //     GameMaster.turn = 0;
+            // }
+            // if(GameMaster.players[GameMaster.turn].knocked == true)
+            // {
+            //     GameOver endGame = new GameOver(GameMaster);
+            //     GameMaster.endGame = endGame;
+            // }
+            // return Json(GameMaster);
             return Json(GameMaster);
         }
     }
