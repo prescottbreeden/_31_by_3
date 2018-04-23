@@ -1,6 +1,6 @@
-﻿
-$(document).ready(function()
+﻿$(document).ready(function()
 {
+    
     var GameMaster;
 
     function replacePlayerHands()
@@ -111,18 +111,37 @@ $(document).ready(function()
                 replacePlayerHands();
                 if(GameMaster.players[player].knocked == true)
                 {
+                    new Audio("../Knocking.mp3").play();
                     alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                 }
                 if(GameMaster.endGame != null)
                 {
+                    // proof of asyncrhonous issue
+                    // var busy = false;
                     replacePlayerHands();
-                    if(confirm(GameMaster.endGame.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
+                    // busy = true;
+                    // if(!busy)
                     {
-                        window.location.replace("localhost:5000")
-                    }
-                    else
-                    {
-                        window.location.replace("localhost:5000")
+                        alert(GameMaster.endGame.winner.name +" won the game with a score of " + GameMaster.endGame.winner.hand_value + "! ... Sorry if you weren't them... ")
+                        if(confirm("Would you like to play again?"))
+                        {
+                            $.ajax({
+                                type: "POST",
+                                data: {"GM" :JSON.stringify(GameMaster)},
+                                url: "/NextRound",
+                                dataType: "json",
+                                success: function(res)
+                                {
+                                    console.log(res);
+                                    GameMaster = res;
+                                    replacePlayerHands();
+                                    if(GameMaster.players[GameMaster.turn].isHuman == false)
+                                    {
+                                        CompDraw();
+                                    }
+                                }
+                            })
+                        }
                     }
                 }
                 else if(GameMaster.players[GameMaster.turn].isHuman == false)
@@ -131,6 +150,7 @@ $(document).ready(function()
                 }
                 else
                 {
+                    if(!GameMaster.singlePlayer)
                     alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
                 }
             }
@@ -151,6 +171,7 @@ $(document).ready(function()
     {
         $.get("/start",function(res)
         {
+            new Audio("../MidnightPianoBar.mp3").play();
             GameMaster = res;
             console.log(GameMaster);
             var player_hands = document.getElementById("player_hands");
@@ -341,6 +362,7 @@ $(document).ready(function()
                                     hidePlayerHands();
                                     if(GameMaster.players[player].knocked == true)
                                     {
+                                        new Audio("../Knocking.mp3").play();
                                         alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                                     }
                                     if(GameMaster.endGame != null)
@@ -366,7 +388,7 @@ $(document).ready(function()
                                                 console.log(res);
                                                 GameMaster = res;
                                                 replacePlayerHands();
-                                                if(GameMaster.players[GameMaster.turn].isHuman)
+                                                if(GameMaster.players[GameMaster.turn].isHuman && !GameMaster.singlePlayer)
                                                 {
                                                     alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
                                                 }
@@ -397,6 +419,7 @@ $(document).ready(function()
         {
             GameMaster.players[GameMaster.turn].knocked = true;
             GameMaster.knocked = true;
+            new Audio("../Knocking.mp3").play();
             alert(GameMaster.players[GameMaster.turn].name + " has just knocked... ruh roh!")
             if(GameMaster.players[GameMaster.turn].isHuman == false)
             {
@@ -412,7 +435,7 @@ $(document).ready(function()
                     success: function(res){
                         console.log(res);
                         GameMaster = res;
-                        if(GameMaster.players[GameMaster.turn].isHuman)
+                        if(GameMaster.players[GameMaster.turn].isHuman && !GameMaster.singlePlayer)
                         {
                             alert(GameMaster.players[GameMaster.turn].name + " will draw next.")
                         }

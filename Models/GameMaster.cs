@@ -27,7 +27,7 @@ namespace _31_by_3
             this.AllAI = true;
             this.knocked = false;
 
-            GamePlay.Deal(Players, this.deck);
+            GamePlay.Deal(this.players, this.deck);
             List<int> Humans = new List<int>();
             for(var i = 0; i < Players.Count; i++)
             {
@@ -66,12 +66,17 @@ namespace _31_by_3
             {
                 this.dealer = 0;
             }
-            this.turn = this.dealer++;
+            this.turn = this.dealer;
             if(this.turn == 4)
             {
                 this.turn = 0;
             }
 
+            GamePlay.Deal(this.players, this.deck);
+            foreach(Player player in players)
+            {
+                player.hand_value = HandValue.Calculate(player);
+            }
 
         }
     }

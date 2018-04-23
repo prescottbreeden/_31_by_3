@@ -16,22 +16,25 @@ namespace _31_by_3
 
         public Player()
         {
-            this.chips = 3;
-            this.knocked = false;
-            this.hand_value = 0;
+            
         }
         public Player(string name, bool isHuman = true)
-            : this()
         {
             if(name == "zxc")
             {
                 this.name = this.CreateRandomName();
                 this.isHuman = false;
+                this.chips = 3;
+                this.knocked = false;
+                this.hand_value = 0;
             }
             else
             {
                 this.name = name;
                 this.isHuman = true;
+                this.chips = 3;
+                this.knocked = false;
+                this.hand_value = 0;
             }
         }
         public string CreateRandomName()
