@@ -72,20 +72,10 @@ namespace _31_by_3
                     aces.Add(c);
                 }
             }
-            foreach(Card ca in aces)
-            {
-                System.Console.WriteLine(ca.suit);
-            }
             if(aces.Count == 3)
             {
                 hand_value = 32;
             }
-
-            // save number of cards for each suit in hand
-            // num_suits[0] = hearts.Count;
-            // num_suits[1] = diamonds.Count;
-            // num_suits[2] = spades.Count;
-            // num_suits[3] = clubs.Count;
 
             return hand_value;
         }

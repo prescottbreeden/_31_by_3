@@ -20,11 +20,6 @@ namespace _31_by_3.Controllers
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
 
-            // if(player.knocked)
-            // {
-            //     GameOver endGame = new GameOver(GameMaster.players);
-            //     GameMaster.endGame = endGame;
-            // }
             if(player.hand_value > 27 && GameMaster.knocked == false)
             {
                 player.knocked = true;
@@ -73,33 +68,16 @@ namespace _31_by_3.Controllers
             else
             {
                 GameMaster.turn++;
-                if (GameMaster.turn == 4)
+                if (GameMaster.turn == GameMaster.players.Count)
                 {
                     GameMaster.turn = 0;
                 }
                 if(GameMaster.players[GameMaster.turn].knocked == true)
                 {
-                    foreach(Player person in GameMaster.players)
-                    {
-                        System.Console.WriteLine(person.name + " has chips: " + person.chips);
-                    }
                     GameOver endGame = new GameOver(GameMaster);
                     GameMaster.endGame = endGame;
                 }
             }
-
-            // GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
-            // GameMaster.turn++;
-            // if (GameMaster.turn == 4)
-            // {
-            //     GameMaster.turn = 0;
-            // }
-            // if(GameMaster.players[GameMaster.turn].knocked == true)
-            // {
-            //     GameOver endGame = new GameOver(GameMaster);
-            //     GameMaster.endGame = endGame;
-            // }
-            // return Json(GameMaster);
             return Json(GameMaster);
         }
     }

@@ -19,7 +19,6 @@ namespace _31_by_3
 
         public GameOver(GameMaster gameMaster)
         {
-
             // set highest hand to winner
             foreach(Player player in gameMaster.players)
             {
@@ -93,11 +92,6 @@ namespace _31_by_3
                     }
                 }
                 Loser.chips--;
-            }
-            System.Console.WriteLine("NEW CHIP BALANCE ***************************");
-             foreach(Player person in gameMaster.players)
-            {
-                System.Console.WriteLine(person.name + " has chips: " + person.chips);
             }
         }
         public GameOver(Player winner, GameMaster gameMaster)

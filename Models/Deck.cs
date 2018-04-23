@@ -66,7 +66,6 @@ namespace _31_by_3
             }
             else
             {
-                System.Console.WriteLine("No more cards!!");
                 // put dicard pile into "deck" and shuffle
                 deck = Shuffle(DiscardPile);
                 DiscardPile.Clear();

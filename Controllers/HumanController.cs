@@ -33,7 +33,10 @@ namespace _31_by_3.Controllers
         {
             GameMaster PreviousGame = JsonConvert.DeserializeObject<GameMaster>(GM);
             GameMaster GameMaster = new GameMaster(PreviousGame);
-            
+            if(GameMaster.players.Count == 1)
+            {
+                GameMaster.GameOver.GameOver.GameOver.GameOver = true;
+            }
             return Json(GameMaster);
         }
 
@@ -44,7 +47,7 @@ namespace _31_by_3.Controllers
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             GameMaster.turn++;
-            if (GameMaster.turn == 4)
+            if (GameMaster.turn == GameMaster.players.Count)
             {
                 GameMaster.turn = 0;
             }
