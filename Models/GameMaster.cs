@@ -17,7 +17,6 @@ namespace _31_by_3
         
         }
         public GameMaster(List<string> PlayerSelect)
-            : this()
         {
             Deck NewDeck = GamePlay.BuildAndShuffle();
             List<Player> Players = GamePlay.CreatePlayers(PlayerSelect);
@@ -28,54 +27,62 @@ namespace _31_by_3
             this.knocked = false;
 
             GamePlay.Deal(this.players, this.deck);
-            List<int> Humans = new List<int>();
-            for(var i = 0; i < Players.Count; i++)
+            int HumanCount = 0;
+            foreach(Player player in players)
             {
-                Players[i].hand_value = HandValue.Calculate(Players[i]);
-                if(Players[i].isHuman == true)
+                player.hand_value = HandValue.Calculate(player);
+                if(player.isHuman)
                 {
                     this.AllAI = false;
-                    Humans.Add(i);
+                    HumanCount++;
                 }
             }
-            if(Humans.Count == 1)
+            if(HumanCount == 1)
             {
                 this.SinglePlayer = true;
             }
         }
 
         public GameMaster(GameMaster PreviousGame)
-            : this() 
         {
             Deck NewDeck = GamePlay.BuildAndShuffle();
-            
             this.deck = NewDeck;
-            this.players = PreviousGame.players;
-            this.AllAI = PreviousGame.AllAI;
-            this.SinglePlayer = PreviousGame.SinglePlayer;
+
+            List<Player> NextGame = new List<Player>();
+            foreach(Player player in PreviousGame.players)
+            {
+                if(player.chips >= 0)
+                {
+                    NextGame.Add(player);
+                    player.hand.Clear();
+                    player.knocked = false;
+                }
+            }
+            this.players = NextGame;
             this.dealer = PreviousGame.dealer;
             this.knocked = false;
-
-            foreach (Player player in players)
-            {
-                player.hand.Clear();
-                player.knocked = false;
-            }
+            this.AllAI = true;
             this.dealer++;
-            if(this.dealer == 4)
+            if(this.dealer >= players.Count)
             {
                 this.dealer = 0;
             }
             this.turn = this.dealer;
-            if(this.turn == 4)
-            {
-                this.turn = 0;
-            }
 
             GamePlay.Deal(this.players, this.deck);
+            int HumanCount = 0;
             foreach(Player player in players)
             {
                 player.hand_value = HandValue.Calculate(player);
+                if(player.isHuman)
+                {
+                    this.AllAI = false;
+                    HumanCount++;
+                }
+            }
+            if(HumanCount == 1)
+            {
+                this.SinglePlayer = true;
             }
 
         }

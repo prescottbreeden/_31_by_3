@@ -18,7 +18,7 @@ namespace _31_by_3
             
         public static void Deal(List<Player> players, Deck deck)
         {
-            //Deal 3 cards to each player
+            //Deal 3 cards to each player (staggered dealing)
             for(var i = 0; i < SizeOfHand; i++)
             {
                 foreach (var player in players)
