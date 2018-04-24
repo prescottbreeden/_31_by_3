@@ -142,5 +142,26 @@ namespace _31_by_3.Controllers
             }
             return Json(GameMaster);
         }
+
+        [HttpPost]
+        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        [Route("AssistPlayer")]
+        public JsonResult AssistPlayer(string GM)
+        {
+            GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            Player player = GameMaster.players[GameMaster.turn];
+            AI cardHelper = new AI(player);
+            Card min = cardHelper.ChooseDiscard(cardHelper);
+
+            for(int i = 0; i < player.hand.Count; i ++)
+            {
+                if(player.hand[i] == min)
+                {  
+                    player.hand[i].selected = true; // add discard selector
+                }
+            }
+
+            return Json(GameMaster);
+        }
     }
 }
