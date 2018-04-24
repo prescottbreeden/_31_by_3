@@ -6,6 +6,7 @@
     position: fixed;
     top: 0px;
     left: 0px;
+    display: none;
 }
 .shadow-content-container{
     position: fixed;
@@ -15,6 +16,7 @@
     width: 25%;
     max-height: 600px;
     margin: 0 auto;
+    display: none;
     .inner-shadow{
         position: relative;
         top: 0;

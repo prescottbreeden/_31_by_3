@@ -132,7 +132,8 @@ button, .button .btn {
   opacity: 0.5;
   position: fixed;
   top: 0px;
-  left: 0px; }
+  left: 0px;
+  display: none; }
 
 .shadow-content-container {
   position: fixed;
@@ -141,7 +142,8 @@ button, .button .btn {
   max-width: 500px;
   width: 25%;
   max-height: 600px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: none; }
   .shadow-content-container .inner-shadow {
     position: relative;
     top: 0;
