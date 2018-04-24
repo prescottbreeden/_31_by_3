@@ -39,7 +39,7 @@ namespace _31_by_3
         }
         public string CreateRandomName()
         {
-            string[] ListOfNames = {"Admiral","Alexandra","Andy","Ashely","Alan","Chanthy","Chris","Dmitri","Donovan","Dustin","Emily","Francisco","Graham","Ian","Javier","Josiah","Justin","JJ","Joyce","Larry","Lawyer","Mark","Mike","Nick","Noelle","Phil","Prescott","Rose","Ciara","Stephen","Sun","Susie","Tiannia","Tim"};
+            string[] ListOfNames = {"Admiral","Andre","Alexandra","Andy","Ashely","Alan","Chanthy","Chris","Dave","Devon","Devin","Dmitri","Donovan","Dustin","Emily","Flor","Francisco","Graham","Ian","Javier","Joseph","Josiah","Justin","JJ","Joyce","Jude","Kevin","Larry","Lawyer","Mags","Mark","Michael","Mike","Nick","Noelle","Phil","Prescott","Quon","Richard","Rob","Rose","Ciara","Stephen","Sun","Susie","Ted","Tiannia","Tim"};
             Random rand = new Random();
             var RandomName = ListOfNames[rand.Next(0,ListOfNames.Length)];
             return RandomName;
