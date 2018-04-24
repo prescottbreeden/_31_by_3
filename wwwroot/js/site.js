@@ -3,6 +3,9 @@
     // Game Master Data
     var GameMaster;
 
+    var TrashTalk = [];
+    var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "I'll turn you into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Quit or I'll taunt you a second time!"];
+
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
     // ----------------------- //

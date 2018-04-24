@@ -45,10 +45,12 @@ namespace _31_by_3.Controllers
         [Route("ComputerTurnDiscard")]
         public JsonResult ComputerTurnDiscard(string GM)
         {
-            Random random = new Random();
-            System.Threading.Thread.Sleep(random.Next(1300, 3300));
 
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+
+            Random random = new Random();
+            System.Threading.Thread.Sleep((random.Next(750, 1650) * GameMaster.GameSpeed));
+
             Player player = GameMaster.players[GameMaster.turn];
             
             if(player.hand.Count == 4)
