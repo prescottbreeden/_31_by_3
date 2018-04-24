@@ -19,39 +19,31 @@ namespace _31_by_3.Controllers
         {   
             List<string> PlayerSelect = new List<string>();
             int? PlayerCount = HttpContext.Session.GetInt32("PlayerCount");
-            System.Console.WriteLine(PlayerCount + " ***************");
             for(int idx = 1; idx <= (int)PlayerCount; idx++)
             {
-                System.Console.WriteLine("IM LOOPING BRO*********");
                 switch(idx)
                 {
                     case 1:
-                        System.Console.WriteLine("Creating a player ****");
                         string player1 = HttpContext.Session.GetString("player1");
                         PlayerSelect.Add(player1);
                         break;
                     case 2:
-                        System.Console.WriteLine("Creating a player ****");
                         string player2 = HttpContext.Session.GetString("player2");
                         PlayerSelect.Add(player2);
                         break;
                     case 3:
-                        System.Console.WriteLine("Creating a player ****");
                         string player3 = HttpContext.Session.GetString("player3");
                         PlayerSelect.Add(player3);
                         break;
                     case 4:
-                        System.Console.WriteLine("Creating a player ****");
                         string player4 = HttpContext.Session.GetString("player4");
                         PlayerSelect.Add(player4);
                         break;
                     case 5:
-                        System.Console.WriteLine("Creating a player ****");
                         string player5 = HttpContext.Session.GetString("player5");
                         PlayerSelect.Add(player5);
                         break;
                     case 6:
-                        System.Console.WriteLine("Creating a player ****");
                         string player6 = HttpContext.Session.GetString("player6");
                         PlayerSelect.Add(player6);
                         break;

@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <!-- Show Hide Hand button -->
-                                <button id="reveal_hand">Show</button>
+                                <button class="assist-btn">Help</button>
                             </div>
                         </div>
                     </div>
