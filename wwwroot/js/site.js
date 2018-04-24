@@ -298,6 +298,41 @@
         }
     });
 
+    // Help Player
+    $(document).on("click", ".assist-btn", function()
+    {
+        var player = GameMaster.turn;
+        $(".hand").find(".player-selected").removeClass("player-selected");
+        if(GameMaster.players[player].hand.length ==4)
+        {
+            $.ajax({
+                type: "POST",
+                data: {"GM" :JSON.stringify(GameMaster)},
+                url: "/AssistPlayer",
+                dataType: "json",
+                success: function(res)
+                {
+                    console.log(res);
+                    GameMaster = res;
+                    
+                    for(var i = 0; i < GameMaster.players[player].hand.length; i++)
+                    {
+                        if(GameMaster.players[player].hand[i].selected == true)
+                        {
+                            $("#player_card"+player+i).addClass("player-selected")
+                        }
+                    }
+                }
+            })
+        }
+        else
+        {
+            console.log("First tip: Draw a Card you dingus...")
+        }
+        
+        
+    })
+
     // Human Draw Deck
     $("#DrawCard").on("click", function()
     {
