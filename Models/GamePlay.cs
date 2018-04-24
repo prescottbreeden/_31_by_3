@@ -42,8 +42,11 @@ namespace _31_by_3
                     Players.Add(new Player(name: player));
                 }
             }
-            Players[2].name = Player.CreateRandomEarthName();
-            Players[3].name = Player.CreateRandomFunnyName();
+            if(Players.Count > 3)
+            {
+                Players[Players.Count - 2].name = Player.CreateRandomEarthName();
+                Players[Players.Count - 1].name = Player.CreateRandomFunnyName();
+            }
             
             // Place players at table
             for(var i = 0; i < Players.Count; i++)
