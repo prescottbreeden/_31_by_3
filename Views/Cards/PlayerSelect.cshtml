@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script src="~/js/PlayerSelect.js"></script>
     <!-- inser head -->
     @await Html.PartialAsync("Head.cshtml")
     <!-- end insert head -->
@@ -12,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mx-auto w-50 p-5 bubble-border">
-                        <form class="" action="players" method="post">
+                        <form class="" action="players" method="post" id="PlayerForm">
                             <div class="form-group">
                                 <p>Player 1 Name:</p>
                                 <input type="text" class="form-control ml-2" name="player1" id="player1" placeholder="..">
@@ -21,19 +22,10 @@
                                 <p>Player 2 Name:</p>
                                 <input type="text" class="form-control ml-2" name="player2" id="player2" placeholder="..">
                             </div>
-                            <div class="form-group">
-                                <p>Player 3 Name:</p>
-                                <input type="text" class="form-control ml-2" name="player3" id="player3" placeholder="..">
-                            </div>
-                            <div class="form-group">
-                                <p>Player 4 Name:</p>
-                                <input type="text" class="form-control ml-2" name="player4" id="player4" placeholder="..">
-                            </div>
-                            <div>
-                                <button class="button ml-2">Add Player</button><button class="button ml-2">Remove Player</button>
-                            </div>
                             <button class="button ml-2">Start Game!</button>
                         </form>
+                            <button class="button ml-2 d-block" id="AddPlayer">Add Player</button>
+                            <button class="button ml-2" id="RemovePlayer">Remove Player</button>
                     </div>
                 </div>
             </div>

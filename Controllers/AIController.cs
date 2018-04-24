@@ -45,7 +45,8 @@ namespace _31_by_3.Controllers
         [Route("ComputerTurnDiscard")]
         public JsonResult ComputerTurnDiscard(string GM)
         {
-            System.Threading.Thread.Sleep(3000);
+            Random random = new Random();
+            System.Threading.Thread.Sleep(random.Next(1300, 3300));
 
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
