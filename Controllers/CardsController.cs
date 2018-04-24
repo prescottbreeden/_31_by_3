@@ -20,28 +20,59 @@ namespace _31_by_3.Controllers
 
         [HttpPost]
         [Route("players")]
-        public IActionResult Players(string player1, string player2, string player3, string player4)
+        public IActionResult Players(string player1, string player2, string player3, string player4, string player5, string player6, int PlayerCounter)
         {
-            if(player1 == null)
+            HttpContext.Session.SetInt32("PlayerCount", PlayerCounter);
+            for(int idx = 1; idx <= PlayerCounter; idx++)
             {
-                player1 = "zxc";
+                switch(idx)
+                {
+                    case 1:
+                        if(player1 == null)
+                        {
+                            player1 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player1", player1);
+                        break;
+                    case 2:
+                        if(player2 == null)
+                        {
+                            player2 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player2", player2);
+                        break;
+                    case 3:
+                        if(player3 == null)
+                        {
+                            player3 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player3", player3);
+                        break;
+                    case 4:
+                        if(player4 == null)
+                        {
+                            player4 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player4", player4);
+                        break;
+                    case 5:
+                        if(player5 == null)
+                        {
+                            player5 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player5", player5);
+                        break;
+                    case 6:
+                        if(player6 == null)
+                        {
+                            player6 = "zxc";
+                        }
+                        HttpContext.Session.SetString("player6", player6);
+                        break;
+                        
+
+                }
             }
-            if(player2 == null)
-            {
-                player2 = "zxc";
-            }
-            if(player3 == null)
-            {
-                player3 = "zxc";
-            }
-            if(player4 == null)
-            {
-                player4 = "zxc";
-            }
-            HttpContext.Session.SetString("player1", player1);
-            HttpContext.Session.SetString("player2", player2);
-            HttpContext.Session.SetString("player3", player3);
-            HttpContext.Session.SetString("player4", player4);
             return RedirectToAction("Main");
         }
 
