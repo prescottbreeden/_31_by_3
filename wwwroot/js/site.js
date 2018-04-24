@@ -13,9 +13,9 @@
         for(let player = 0; player < GameMaster.players.length; player ++)
             {
                 player_hands.innerHTML += (`
-                
+
                 <!-- START OF ONE HAND -->
-                                
+
                 <div class="hand hand${player}">
                 <div class="tl-arrow"></div>
                 <div class="tr-arrow"></div>
@@ -77,9 +77,9 @@
                     </div>
                 </div>
             </div>
-            <!-- END OF HAND  -->              
-                `)   
-            }    
+            <!-- END OF HAND  -->
+                `)
+            }
             for(let i = 0; i < GameMaster.players.length; i ++)
             {
                 for(card in GameMaster.players[i].hand)
@@ -108,7 +108,7 @@
                                 document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/cardback" )
                             }
                         }
-                        
+
                 }
     }
 
@@ -143,7 +143,7 @@
                         document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
                     }
             }
-        }       
+        }
     }
 
     function hidePlayerHands()
@@ -170,7 +170,7 @@
                     `)
                 document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
             }
-        }       
+        }
     }
 
     function ShowDiscardPile()
@@ -202,7 +202,7 @@
             }
         })
     }
-    
+
     function CompDiscard()
     {
         var player = GameMaster.turn;
@@ -249,7 +249,7 @@
                             }
                         })
                     }
-                    
+
                 }
                 else if(GameMaster.players[GameMaster.turn].isHuman == false)
                 {
@@ -265,7 +265,7 @@
         })
 
     }
- 
+
     // ------------------------ //
     // ------ AJAX STUFF ------ //
     // ------------------------ //
@@ -284,9 +284,9 @@
                 {
                     CompDraw();
                 }
-            });
-            $("#PlayGame").remove()
-        })
+        });
+        $("#PlayGame").remove()
+    })
 
     // Select a Card
     $(document).on("click", ".clickable", function()
@@ -303,7 +303,7 @@
     {
         var player = GameMaster.turn
         if(GameMaster.players[player].hand.length == 3)
-        {    
+        {
             $.ajax({
                 type: "POST",
                 data: {"GM" :JSON.stringify(GameMaster)},
@@ -424,12 +424,12 @@
                                                 CompDraw();
                                             }
                                         }
-                                    })    
+                                    })
                                 }
                             }
                         })
                     }
-                } 
+                }
             }
             else
             {

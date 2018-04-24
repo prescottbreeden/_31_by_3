@@ -3,6 +3,7 @@
 
 // import helpers
 @import "helpers/buttons";
+@import "helpers/shadowbox";
 @import "helpers/mixins";
 
 // import responsive sheets
@@ -64,8 +65,6 @@ body{
             }
         }
         .deck-area{
-            //box for
-            // border: 1px solid green;
             .b-wrap{
                 text-align: center;
                 width: 171px;
@@ -75,7 +74,6 @@ body{
                 width: 191px;
             }
             .draw{
-                // border: 1px solid saddlebrown;
 
             }
             .deck-pusher{
@@ -84,6 +82,7 @@ body{
             .draw-deck{
                 max-width: 70%;
                 margin: 0 auto;
+                transform: rotate(90deg);
                 img{
                     width: 100%;
                     height: auto;
@@ -92,6 +91,7 @@ body{
             }
             .discard{
                 // border: 1px solid orangered;
+
 
             }
         }

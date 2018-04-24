@@ -1,136 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-    <!-- inser head -->
-    @await Html.PartialAsync("Head.cshtml")
-    <!-- end insert head -->
-    <body class="">
-        <div class="header">
-            <h2 class="tac">Welcome to 31 by 3!</h2>
+<!-- insert head -->
+@await Html.PartialAsync("Head.cshtml")
+<!-- end insert head -->
+<div class="header">
+    <h2 class="tac">Welcome to 31 by 3!</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="mx-auto">
+            <button class="button gbg-button" id="PlayGame">Play</button>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="mx-auto">
-                    <button class="btn btn-lg btn-success" id="PlayGame">Play</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-3 sidebar">
+            <div class="sidebar-buffer bubble-border">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="tac">It is PlayerName's turn!</h3>
+                    </div>
+                </div>
+                <div class="row deck-area">
+                    <div class="col-12">
+                        <div class="row draw">
+                            <div class="col-12">
+                                <div class="draw-deck">
+                                    <img src="~/img/cardback.png" alt="">
+                                </div>
+                                <!-- placement of Draw Deck Styling -->
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 m0a">
+                                        <div class="b-wrap">
+                                            <button type="submit" class="button" id="DrawCard">Draw from Deck</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 deck-pusher">
+                        <div class="row discard">
+                            <div class="col-12">
+                                <div class="draw-deck">
+                                    <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
+                                    <!-- placement of Discard Deck Styling -->
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="b-wrap b-wide">
+                                            <button class="button" id="DiscardCard">Draw from Discard</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-3 sidebar">
-                    <div class="sidebar-buffer bubble-border">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="tac">Choose One per turn:</h2>
-                            </div>
-                        </div>
-                        <div class="row deck-area">
-                            <div class="col-12">
-                                <div class="row draw">
-                                    <div class="col-12">
-                                        <div class="draw-deck">
-                                            <img src="~/img/cardback.png" alt="">
-                                        </div>
-                                        <!-- placement of Draw Deck Styling -->
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12 m0a">
-                                                <div class="b-wrap">
-                                                    <button type="submit" class="button" id="DrawCard">Draw from Deck</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 deck-pusher">
-                                <div class="row discard">
-                                    <div class="col-12">
-                                        <div class="draw-deck">
-                                            <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
-                                            <!-- placement of Discard Deck Styling -->
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="b-wrap b-wide">
-                                                    <button class="button" id="DiscardCard">Draw from Discard</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-9">
-                    <div class="game-area bubble-border">
-                        <div class="row hand-container">
-                            <div class="col-12" id="player_hands">
-                                <!-- START OF ONE HAND -->
-                                <!-- END OF HAND  --><!-- START OF ONE HAND -->
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                        <div class="row">
-                <div class="col-12">
-                    <div class="rules bubble-border">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2>Objective:</h2>
-                                <p>The goal is to obtain a hand that totals 31 in cards of one suit; or to have a hand at the showdown whose count in one suit is higher than that of any other player.</p>
-                                <h2>Card Values/Scoring</h2>
-                                <p>An Ace counts 11 points, face cards count 10 points, and all other cards count their face value</p>
-                                <h2>The Play:</h2>
-                                <p>All players begin with 3 chips. On each turn, players take one card from either the top of the deck or from the widow (aka the discard pile). A turn ends by discarding a card from their hand.</p>
-                                <p>Players take turns, until one player is satisfied that the card values he holds will likely beat all other players and "knocks" on the table. Once a knock has been made, all other players get one more turn to exchange cards before the showdown where all players reveal their hands and compare values.</p>
-                                <h2>Scoring:</h2>
-                                <p>If the player who knocked does not have the highest scoring hand at the showdown, they lose a chip to the pot.  However, if they do have the highest scoring hand, the player with the lowest hand loses a chip to the pot instead.</p>
-                                <p>If there is a tie for the highest score, the player with the highest-ranking card wins. Example: K, Q, 6 (total 26) would beat Q, 9, 7 (also total 26). If there is a tie in the highest cards, the next highest cards are compared, and so on.</p>
-                                <p>If at any point a player holds exactly 31 points during the game, or obtains three aces, the game immediately ends and all other players lose a chip to the pot.</p>
-                                <p>After the pot has been won, all the players put in chips for the next hand.</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="sidebar-rules">
-                                    <h2>31 TLDR Rules:</h2>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <ul>
-                                                <li>Try to total 31 points</li>
-                                                <li>Aces are worth 11 points</li>
-                                                <li>10-K are worth 10 points</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-6">
-                                            <ul>
-                                                <li>Choose Cards in the same suit</li>
-                                                <li>Knock when you think you can beat everyone's hand value</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 clearfix">
-                                <div class="float-right">
-                            <!-- add transition here -->
-                                    <button>Got it! Let's Play!</button>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-12 col-md-9">
+            <div class="game-area bubble-border">
+                <div class="row hand-container">
+                    <div class="col-12" id="player_hands">
+                        <!-- START OF ONE HAND -->
+                        <!-- END OF HAND  --><!-- START OF ONE HAND -->
 
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="rules bubble-border">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Objective:</h2>
+                        <p>The goal is to obtain a hand that totals 31 in cards of one suit; or to have a hand at the showdown whose count in one suit is higher than that of any other player.</p>
+                        <h2>Card Values/Scoring</h2>
+                        <p>An Ace counts 11 points, face cards count 10 points, and all other cards count their face value</p>
+                        <h2>The Play:</h2>
+                        <p>All players begin with 3 chips. On each turn, players take one card from either the top of the deck or from the widow (aka the discard pile). A turn ends by discarding a card from their hand.</p>
+                        <p>Players take turns, until one player is satisfied that the card values he holds will likely beat all other players and "knocks" on the table. Once a knock has been made, all other players get one more turn to exchange cards before the showdown where all players reveal their hands and compare values.</p>
+                        <h2>Scoring:</h2>
+                        <p>If the player who knocked does not have the highest scoring hand at the showdown, they lose a chip to the pot.  However, if they do have the highest scoring hand, the player with the lowest hand loses a chip to the pot instead.</p>
+                        <p>If there is a tie for the highest score, the player with the highest-ranking card wins. Example: K, Q, 6 (total 26) would beat Q, 9, 7 (also total 26). If there is a tie in the highest cards, the next highest cards are compared, and so on.</p>
+                        <p>If at any point a player holds exactly 31 points during the game, or obtains three aces, the game immediately ends and all other players lose a chip to the pot.</p>
+                        <p>After the pot has been won, all the players put in chips for the next hand.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="sidebar-rules">
+                            <h2>31 TLDR Rules:</h2>
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul>
+                                        <li>Try to total 31 points</li>
+                                        <li>Aces are worth 11 points</li>
+                                        <li>10-K are worth 10 points</li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <ul>
+                                        <li>Choose Cards in the same suit</li>
+                                        <li>Knock when you think you can beat everyone's hand value</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 clearfix">
+                        <div class="float-right">
+                    <!-- add transition here -->
+                            <button>Got it! Let's Play!</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="shadowbox hide">
+</div>
+<div class="shadow-content-container hide">
+    <div class="inner-shadow">
+        <div class="bubble-border">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="tac">For each shadowbox you want to build:</h2>
+                    <ul>
+                        <li>class "shadowbox" default is hidden, you'll need to show it as part of your call.</li>
+                        <li>dupe all of the dom structure inside and including "shadow-content-container"</li>
+                        <li>profit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

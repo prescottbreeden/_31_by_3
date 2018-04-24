@@ -1,5 +1,5 @@
 // styles for buttons
-button, .button{
+button, .button .btn{
     background-color: $b-blue;
     color: white;
     padding: 7px 25px;
@@ -13,4 +13,7 @@ button, .button{
         padding: 8px 26px;
         margin: 0;
     }
+}
+.gbg-button{
+    border: $t-green;
 }
