@@ -210,6 +210,79 @@
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
     }
+    function EndRoundResults()
+    {
+        var htmlResults = ""
+        for(var idx = 0; idx < GameMaster.players.length; idx++)
+        {
+            htmlResults += `<li>${GameMaster.players[idx].name}: ${GameMaster.players[idx].hand_value} points</li>`
+        }
+
+        document.getElementById("change_turn").innerHTML = "";
+        $("#change_turn").append(`
+        <div class="inner-shadow">
+            <div class="bubble-border">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
+                        <ul>
+                            ${htmlResults} 
+                        </ul>
+                        <button id="shadowbox_end_round">See Hands</button>
+                    </div>
+                </div>
+            </div>
+        </div>`)
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
+    }
+    function CallNextRound()
+    {
+        if(GameMaster.endGame != null)
+        {
+            $.ajax({
+                type: "POST",
+                data: {"GM" :JSON.stringify(GameMaster)},
+                url: "/NextRound",
+                dataType: "json",
+                success: function(res)
+                {
+                    console.log(res);
+                    GameMaster = res;
+                    ShowDiscardPile()
+                    createPlayerSlots();
+                    if(!GameMaster.players[GameMaster.turn].isHuman)
+                    {
+                        CompDraw();
+                    }
+                }
+            })
+        }
+    }
+
+    function NextTurn()
+    {
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/NextTurn",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                GameMaster = res;
+                replacePlayerHands();
+                if(GameMaster.endRound != null)
+                {
+                    replacePlayerHands();
+                    EndRoundResults();                                
+                }
+                else if(!GameMaster.players[GameMaster.turn].isHuman)
+                {
+                    CompDraw();
+                }
+            }
+        })
+    }
 
     function CompDraw()
     {
@@ -255,31 +328,7 @@
                 if(GameMaster.endRound != null)
                 {
                     replacePlayerHands();
-                    alert(GameMaster.endRound.winner.name +" won the game with a score of " + GameMaster.endRound.winner.hand_value + "! ... Sorry if you weren't them... ")
-                    if(confirm("Would you like to play again?"))
-                    {
-                        $.ajax({
-                            type: "POST",
-                            data: {"GM" :JSON.stringify(GameMaster)},
-                            url: "/NextRound",
-                            dataType: "json",
-                            success: function(res)
-                            {
-                                console.log(res);
-                                GameMaster = res;
-                                createPlayerSlots();
-                                // replacePlayerHands();
-                                if(GameMaster.endGame == true)
-                                {
-                                    alert("Game over, everyone loses because I hate you all")
-                                }
-                                else if(!GameMaster.players[GameMaster.turn].isHuman)
-                                {
-                                    CompDraw();
-                                }
-                            }
-                        })
-                    }
+                    EndRoundResults();
                 }
                 else if((GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
                 {
@@ -287,54 +336,10 @@
                 }
                 else
                 {
-                    $.ajax({
-                        type: "POST",
-                        data: {"GM" :JSON.stringify(GameMaster)},
-                        url: "/NextTurn",
-                        dataType: "json",
-                        success: function(res){
-                            console.log(res);
-                            GameMaster = res;
-                            replacePlayerHands();
-                            if(GameMaster.endRound != null)
-                            {
-                                replacePlayerHands();
-                                alert(GameMaster.endRound.winner.name +" won the game with a score of " + GameMaster.endRound.winner.hand_value + "! ... Sorry if you weren't them... ")
-                                if(confirm("Would you like to play again?"))
-                                {
-                                    $.ajax({
-                                        type: "POST",
-                                        data: {"GM" :JSON.stringify(GameMaster)},
-                                        url: "/NextRound",
-                                        dataType: "json",
-                                        success: function(res)
-                                        {
-                                            console.log(res);
-                                            GameMaster = res;
-                                            createPlayerSlots();
-                                            // replacePlayerHands();
-                                            if(GameMaster.endGame == true)
-                                            {
-                                                alert("Game over, everyone loses because I hate you all")
-                                            }
-                                            else if(!GameMaster.players[GameMaster.turn].isHuman)
-                                            {
-                                                CompDraw();
-                                            }
-                                        }
-                                    })
-                                }
-                            }
-                            else if(!GameMaster.players[GameMaster.turn].isHuman)
-                            {
-                                CompDraw();
-                            }
-                        }
-                    })
+                    NextTurn();
                 }
             }
         })
-
     }
 
     // ------------------------ //
@@ -351,13 +356,25 @@
             console.log(GameMaster);
             ShowDiscardPile()
             createPlayerSlots();
-                if(GameMaster.players[GameMaster.turn].isHuman == false)
+                if(!GameMaster.players[GameMaster.turn].isHuman)
                 {
                     CompDraw();
                 }
         });
-        $("#PlayGame").remove()
+        // $("#PlayGame").remove()
     })
+
+    $(document).on("click", "#shadowbox_end_round", function(){
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
+    })
+
+    // Next Round
+    $("#NextRound").click(function()
+    {
+        CallNextRound(GameMaster);
+    })
+    
 
     // Select a Card
     $(document).on("click", ".clickable", function()
@@ -407,33 +424,40 @@
     // Human Draw Deck
     $("#DrawCard").on("click", function()
     {
-        var player = GameMaster.turn
-        if(GameMaster.players[player].hand.length == 3)
+        if(GameMaster.endGame == null)
         {
-            $.ajax({
-                type: "POST",
-                data: {"GM" :JSON.stringify(GameMaster)},
-                url: "/DrawDeck",
-                dataType: "json",
-                success: function(res)
-                {
-                    console.log(res);
-                    GameMaster = res;
-                    replacePlayerHands();
-                }
-            })
+
+            var player = GameMaster.turn
+            if(GameMaster.players[player].hand.length == 3)
+            {
+                $.ajax({
+                    type: "POST",
+                    data: {"GM" :JSON.stringify(GameMaster)},
+                    url: "/DrawDeck",
+                    dataType: "json",
+                    success: function(res)
+                    {
+                        console.log(res);
+                        GameMaster = res;
+                        replacePlayerHands();
+                    }
+                })
+            }
+            else
+            {
+                console.log("You may only draw once per turn");
+            }
         }
         else
         {
-            console.log("You may only draw once per turn")
+            console.log("Please select 'Next Round' to start the next round.");
         }
     });
 
-    // Human Draw Discard
+    // Human Draw From Discard
     $("#DiscardCard").on("click", function(){
         if(GameMaster.players[GameMaster.turn].hand.length == 3)
         {
-
             $.ajax({
                 type: "POST",
                 data: {"GM" :JSON.stringify(GameMaster)},
@@ -453,7 +477,7 @@
         }
     });
 
-    // Human Discard
+    // Human Discard a Card
     $(document).on("click", ".discard-btn", function()
     {
         var player = GameMaster.turn;
@@ -472,7 +496,7 @@
                     var isSelected = $(".cardNumber" + i).find(".player-selected");
                     if(isSelected.length)
                     {
-                        GameMaster.players[player].hand[i].selected=true
+                        GameMaster.players[player].hand[i].selected = true
                         $.ajax({
                             type: "POST",
                             data: {"GM" :JSON.stringify(GameMaster)},
@@ -483,60 +507,18 @@
                                 GameMaster = res;
                                 ShowDiscardPile();
                                 hidePlayerHands();
-                                if(GameMaster.players[player].knocked == true)
+                                if(GameMaster.players[player].knocked)
                                 {
                                     new Audio("../Knocking.mp3").play();
                                     // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
-                                }
-                               
-                                if(GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked && !GameMaster.singlePlayer)
+                                }                  
+                                if((GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
                                 {
                                     HumanTurnChange(GameMaster.players[nextplayer].name);
                                 }
                                 else
                                 {
-                                    $.ajax({
-                                        type: "POST",
-                                        data: {"GM" :JSON.stringify(GameMaster)},
-                                        url: "/NextTurn",
-                                        dataType: "json",
-                                        success: function(res){
-                                            console.log(res);
-                                            GameMaster = res;
-                                            replacePlayerHands();
-                                            if(GameMaster.endRound != null)
-                                            {
-                                                // replacePlayerHands();
-                                                if(confirm(GameMaster.endRound.winner.name +" won the game! ... Sorry if you weren't them... : would you like to play again?"))
-                                                {
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        data: {"GM" :JSON.stringify(GameMaster)},
-                                                        url: "/NextRound",
-                                                        dataType: "json",
-                                                        success: function(res)
-                                                        {
-                                                            console.log(res);
-                                                            GameMaster = res;
-                                                            createPlayerSlots();
-                                                            if(GameMaster.players[GameMaster.turn].isHuman == false)
-                                                            {
-                                                                CompDraw();
-                                                            }
-                                                        }
-                                                    })
-                                                }
-                                                else
-                                                {
-                                                    // route back to home page
-                                                }
-                                            }
-                                            if(!GameMaster.players[GameMaster.turn].isHuman)
-                                            {
-                                                CompDraw();
-                                            }
-                                        }
-                                    })
+                                    NextTurn();
                                 }
                             }
                         }) // end of discard ajax
@@ -556,17 +538,7 @@
     {
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
-        $.ajax({
-            type: "POST",
-            data: {"GM" :JSON.stringify(GameMaster)},
-            url: "/NextTurn",
-            dataType: "json",
-            success: function(res){
-                console.log(res);
-                GameMaster = res;
-                replacePlayerHands();
-            }
-        })
+        NextTurn();
     })
 
     // Human Knock
@@ -578,7 +550,7 @@
         {
             nextplayer = 0;
         }
-        if(GameMaster.players[player].hand.length == 3 && GameMaster.knocked == false)
+        if(GameMaster.players[player].hand.length == 3 && !GameMaster.knocked)
         {
             // change gamemaster and current player status to knocked
             GameMaster.players[player].knocked = true;
@@ -589,17 +561,7 @@
             //---------------------------------//
             if(!GameMaster.players[nextplayer].isHuman)
             {
-                $.ajax({
-                    type: "POST",
-                    data: {"GM" :JSON.stringify(GameMaster)},
-                    url: "/NextTurn",
-                    dataType: "json",
-                    success: function(res){
-                        console.log(res);
-                        GameMaster = res;
-                        CompDraw();
-                    }
-                })
+                NextTurn();
             }
             else
             {
@@ -609,23 +571,12 @@
                 {
                     HumanTurnChange(GameMaster.players[nextplayer].name);
                 }
-                else if((GameMaster.players[nextplayer].isHuman && GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
-                {
-                    $.ajax({
-                        type: "POST",
-                        data: {"GM" :JSON.stringify(GameMaster)},
-                        url: "/NextTurn",
-                        dataType: "json",
-                        success: function(res){
-                            console.log(res);
-                            GameMaster = res;
-                        }
-                    })
-                }
+                // else if((GameMaster.players[nextplayer].isHuman && GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
+                // {
+                //     NextTurn();
+                // }
             }
         }
     })
-
-
 
 }) // document ready
