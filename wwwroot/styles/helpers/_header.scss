@@ -42,9 +42,9 @@
         left: -110px;
         width: 0;
         height: 0;
-        border-left: 63px solid transparent;
-        border-right: 63px solid transparent;
-        border-bottom: 63px solid $b-blue;
+        border-left: 65px solid transparent;
+        border-right: 65px solid transparent;
+        border-bottom: 65px solid $b-blue;
         transform: rotate(135deg);
     }
     .har2{
@@ -86,8 +86,8 @@
     //     left: -109px;
     //     width: 0;
     //     height: 0;
-    //     border-left: 83px solid #0000;
-    //     border-right: 18px solid #0000;
+    //     border-left: 83px solid #000;
+    //     border-right: 18px solid #000;
     //     border-bottom: 43px solid #051c37;
     //     transform: rotate(24deg);
     // }
@@ -97,8 +97,8 @@
         left: -89px;
         width: 0;
         height: 0;
-        border-left: 0px solid #0000;
-        border-right: 69px solid #0000;
+        border-left: 0px solid transparent;
+        border-right: 69px solid transparent;
         border-bottom: 24px solid $white;
         transform: rotate(180deg);
     }
@@ -108,8 +108,8 @@
         right: -89px;
         width: 0;
         height: 0;
-        border-right: 0px solid #0000;
-        border-left: 69px solid #0000;
+        border-right: 0px solid transparent;
+        border-left: 69px solid transparent;
         border-bottom: 24px solid $white;
         transform: rotate(-180deg);
     }
