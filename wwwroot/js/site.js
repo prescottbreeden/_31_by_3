@@ -213,7 +213,7 @@
         }
         else
         {
-            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/cardback")
+            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/transparent1")
         }
     }
     function HumanTurnChange(nextplayer)
@@ -252,7 +252,7 @@
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
                         <ul>
-                            ${htmlResults} 
+                            ${htmlResults}
                         </ul>
                         <button id="shadowbox_end_round">See Hands</button>
                     </div>
@@ -300,7 +300,7 @@
                 if(GameMaster.endRound != null)
                 {
                     replacePlayerHands();
-                    EndRoundResults();                                
+                    EndRoundResults();
                 }
                 else if(!GameMaster.players[GameMaster.turn].isHuman)
                 {
@@ -371,12 +371,12 @@
 
     function PlayMusic()
     {
-        new Audio("../MidnightPianoBar.mp3").play(); 
+        new Audio("../MidnightPianoBar.mp3").play();
     }
 
     function PauseMusic()
     {
-        new Audio("../MidnightPianoBar.mp3").pause();  
+        new Audio("../MidnightPianoBar.mp3").pause();
     }
 
     // ------------------------ //
@@ -385,7 +385,7 @@
 
     // Initialize Game
     $("#PlayGame").click(function()
-    {   
+    {
         PlayMusic()
         $.get("/start",function(res)
         {
@@ -412,7 +412,7 @@
     {
         CallNextRound();
     })
-    
+
 
     // Select a Card
     $(document).on("click", ".clickable", function()
@@ -443,11 +443,12 @@
                     url: "/AssistPlayer",
                     dataType: "json",
                     success: function(res)
+
                     {
                         console.log(res);
                         GameMaster = res;
                         replacePlayerHands();
-                        
+
                         for(var i = 0; i < GameMaster.players[player].hand.length; i++)
                         {
                             if(GameMaster.players[player].hand[i].selected == true)
@@ -463,8 +464,8 @@
         {
             console.log("First tip: Draw a Card you dingus...")
         }
-        
-        
+
+
     })
 
     // Human Draw Deck
@@ -557,7 +558,7 @@
                                 {
                                     new Audio("../Knocking.mp3").play();
                                     // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
-                                }                  
+                                }
                                 if((GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
                                 {
                                     HumanTurnChange(GameMaster.players[nextplayer].name);

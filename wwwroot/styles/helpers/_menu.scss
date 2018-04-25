@@ -1,14 +1,15 @@
 nav.menu{
     border-bottom: 1px solid $white;
-    margin-left: 260px;
+    margin-left: 190px;
     position: relative;
     a{
         color: white;
-        padding: 10px 15px 16px 15px;
+        padding: 10px 15px 17px 15px;
         text-decoration: none;
         margin-right: 5px;
         line-height: 1em;
         display: inline-block;
+        font-size: 1em;
         &:hover{
             color: $b-blue-8;
             background-color: white;
@@ -16,17 +17,53 @@ nav.menu{
             // text-shadow: 0 0 3px black;
         }
     }
-    ul.submenu{
+    .submenu{
         position: absolute;
-        top: 0px;
+        top: 50px;
         left: 0px;
         display: inline-block;
-        width: 0px;
-        height: 0px;
+        height: 35px;
         margin: 0;
         padding: 0;
-        li{
-            display: none;
+        .sub-item{
+            // display: none;
+            text-align: center;
+            line-height: 35px;
+            background: $white;
+            margin: 0;
+            color: $b-blue;
+            vertical-align: top;
+            border-right: 1px solid $b-blue;
+            padding: 0 20px;
+            list-style: inside;
+            float: left;
+            display: inline-block;
+            transition: background-color 0.5s ease;
+            cursor: pointer;
+            &:hover{
+                background-color: #999 0.8;
+                transition: background-color 0.5s ease;
+            }
         }
+        li:last-of-type{
+            border: none;
+        }
+    }
+    // &:hover{
+    //     .sub-item{
+    //         border-top: 1px solid $b-blue;
+    //     }
+    // }
+    .music{
+        left: 101px;
+        display: none;
+    }
+    div.game-speed{
+        left: 146px;
+        display: none;
+    }
+    div.taunt{
+        left: 169px;
+        // display: none;
     }
 }
