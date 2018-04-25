@@ -122,17 +122,19 @@
 
     function ComputerTaunt()
     {
-        if(Math.floor(Math.random() * 1) + 1 == 1)
+        if(Math.floor(Math.random() * 4) + 1 == 4)
         {
-            $(".taunt-bubble").fadeIn(500)
-            console.log("TRASH TALKIN")
+            $("#taunt-text").empty();
+            $("#taunt-text").append(MontyPython[Math.floor(Math.random() * MontyPython.length)]);
+
+            $(".taunt-bubble").fadeIn(500);
             $(".taunt-bubble").position({
-                my: "center",
-                at: "center",
+                my: "left",
+                at: "right+28",
                 of: ".hand" + GameMaster.turn
             });
             setTimeout(function(){
-                $(".taunt-bubble").fadeOut(500)
+                $(".taunt-bubble").fadeOut(800)
             }, 3000);
 
         }
