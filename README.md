@@ -3,7 +3,6 @@
 To Do List for Prescott and Lawyer: MVP
 - Turn Order (Turn Icon)
 - End Game/Restart
-  - Reset Round button
   - Reset Game button
 - Animations
 - Rules Button
