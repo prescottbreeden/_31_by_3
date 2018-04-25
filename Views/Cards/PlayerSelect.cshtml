@@ -1,6 +1,6 @@
 @await Html.PartialAsync("Head.cshtml")
 <!-- end insert head -->
-<div class="container">
+<div class="container player-select">
     <div class="header">
         <div class="bar1"></div>
         <div class="bar2"></div>
@@ -31,10 +31,24 @@
                             <input type="text" class="form-control ml-2" name="player2" placeholder="...">
                         </div>
                     </div>
-                    <button class="button ml-2" id="StartGame">Start Game!</button>
                 </form>
-                <button class="button ml-2 d-block" id="AddPlayer">Add Player</button>
-                <button class="button ml-2" id="RemovePlayer">Remove Player</button>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="player-change add" id="AddPlayer">+ Add A Player</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="player-change remove" id="RemovePlayer"> - Remove Player</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="specific-spacer">
+                            <button class="button" id="StartGame">Start Game!</button>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
             </div>
         </div>
     </div>
