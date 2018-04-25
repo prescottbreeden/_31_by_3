@@ -68,19 +68,7 @@ namespace _31_by_3.Controllers
                 GameOver endRound = new GameOver(player, GameMaster);
                 GameMaster.endRound = endRound;
             }
-            else
-            {
-                GameMaster.turn++;
-                if (GameMaster.turn == GameMaster.players.Count)
-                {
-                    GameMaster.turn = 0;
-                }
-                if(GameMaster.players[GameMaster.turn].knocked == true)
-                {
-                    GameOver endRound = new GameOver(GameMaster);
-                    GameMaster.endRound = endRound;
-                }
-            }
+
             return Json(GameMaster);
         }
     }
