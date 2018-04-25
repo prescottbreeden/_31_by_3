@@ -22,8 +22,15 @@ namespace _31_by_3
             //Deal 3 cards to each player (staggered dealing)
             for(var i = 0; i < SizeOfHand; i++)
             {
-                foreach (var player in players)
+                foreach(Player player in players)
+                {
                     deck.DrawFromDeck(player);
+                }
+            }
+            foreach(Player bobos in players)
+            {
+                System.Console.WriteLine("bobo ************************");
+                HandValue.SortHand(bobos);
             }
             deck.MoveTopCardToDiscardPile();
         }

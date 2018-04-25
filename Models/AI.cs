@@ -23,6 +23,7 @@ namespace _31_by_3
         public bool drawDiscard { get; set; }
         public AI(Player player)
         {
+
             this.hand = player.hand;
             this.hearts_value = 0;
             this.diamonds_value = 0;
