@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("Hookup is working!")
     var playerNumber = 2;
     $("#PlayerForm").append('<input type="hidden" id="PlayerCounter" name="PlayerCounter" value="' + playerNumber +'">');
 

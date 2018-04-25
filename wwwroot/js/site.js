@@ -3,10 +3,12 @@
     // Game Master Data
     var GameMaster;
 
-    // var TrashTalk = [];
-    var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!"];
+    var TrashTalk = [];
+    var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!", "Thou art a slothful commoner!"];
 
     var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "I'll turn you into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Quit or I'll taunt you a second time!"];
+
+    $(".taunt-bubble").hide()
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
@@ -119,6 +121,25 @@
                         }
 
                 }
+    }
+
+    function ComputerTaunt()
+    {
+        if(Math.floor(Math.random() * 1) + 1 == 1)
+        {
+            $(".taunt-bubble").fadeIn(500)
+            console.log("TRASH TALKIN")
+            $(".taunt-bubble").position({
+                my: "center",
+                at: "center",
+                of: ".hand" + GameMaster.turn
+            });
+            setTimeout(function(){
+                $(".taunt-bubble").fadeOut(500)
+            }, 3000);
+
+        }
+        // $(".taunt-bubble")
     }
 
     function replacePlayerHands()
@@ -323,6 +344,7 @@
                 GameMaster = res;
                 ShowDiscardPile();
                 replacePlayerHands();
+                ComputerTaunt()
                 if(GameMaster.players[player].knocked)
                 {
                     new Audio("../Knocking2.mp3").play();
