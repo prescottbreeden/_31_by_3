@@ -21,106 +21,104 @@
         var player_hands = document.getElementById("player_hands");
         player_hands.innerHTML = "";
         for(let player = 0; player < GameMaster.players.length; player ++)
-            {
-                player_hands.innerHTML += (`
+        {
+            player_hands.innerHTML += (`
 
-                <!-- START OF ONE HAND -->
+            <!-- START OF ONE HAND -->
 
-                <div class="hand hand${player}">
-                <div class="tl-arrow"></div>
-                <div class="tr-arrow"></div>
-                <div class="bl-arrow"></div>
-                <div class="br-arrow"></div>
-                <div class="row">
-                    <div class="col-10">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row hand-labels">
-                                    <div class="col-12 col-md-6">
-                                        <h3 class="player_name">${GameMaster.players[player].name}</h3>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <h3 class="player_tokens">Chips: ${GameMaster.players[player].chips}</h3>
-                                    </div>
+            <div class="hand hand${player}">
+            <div class="tl-arrow"></div>
+            <div class="tr-arrow"></div>
+            <div class="bl-arrow"></div>
+            <div class="br-arrow"></div>
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row hand-labels">
+                                <div class="col-12 col-md-6">
+                                    <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12" class="">
-                                <div class="row HandTarget${player}">
-                                <!-- HERE IS WHERE THE HAND GOES -->
+                                <div class="col-12 col-md-6">
+                                    <h3 class="player_tokens">Chips: ${GameMaster.players[player].chips}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 hand-buttons">
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-4">
-                                <div class="turn-indicator">
-                                    <i class="fas fa-child"></i>
-                                </div>
-                            </div>
-                            <div class="col-4"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <!-- feel free to put these inside forms if easier/required. Make sure the form is instantiated inside of the col-12 -->
-                                <!-- discard card button -->
-                                <button class="discard-btn">Discard</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <!-- laydown button -->
-                                <button class ="knock-btn">Knock</button>
-                                <!-- knock button -->
-                                <!-- <button class="hide">Lay Down!</button> -->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <!-- Show Hide Hand button -->
-                                <button class="assist-btn">Help</button>
+                    <div class="row">
+                        <div class="col-12" class="">
+                            <div class="row HandTarget${player}">
+                            <!-- HERE IS WHERE THE HAND GOES -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- END OF HAND  -->
-                `)
-            }
-            for(let i = 0; i < GameMaster.players.length; i ++)
-            {
-                for(card in GameMaster.players[i].hand)
-                    {
-                        $(".HandTarget" + i).append(
-                        `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card-anchor">
-                                            <div class="m0a w100">
-                                                <img alt="WHY" id="player_card${i}${card}" class="clickable">
-                                                <input type="hidden" class="value" value="${card}">
-                                            </div>
-                                            <!-- a card should go here -->
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-2 hand-buttons">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <div class="turn-indicator">
+                                <i class="fas fa-child"></i>
                             </div>
-                            `)
-                            if(GameMaster.players[i].isHuman && GameMaster.players[i].player_seat == GameMaster.turn)
-                            {
-                                document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[i].hand[card]["suit"][0] + GameMaster.players[i].hand[card]["face"] )
-                            }
-                            else
-                            {
-                                document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/cardback" )
-                            }
-                        }
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- feel free to put these inside forms if easier/required. Make sure the form is instantiated inside of the col-12 -->
+                            <!-- discard card button -->
+                            <button class="discard-btn">Discard</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- laydown button -->
+                            <button class ="knock-btn">Knock</button>
+                            <!-- knock button -->
+                            <!-- <button class="hide">Lay Down!</button> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Show Hide Hand button -->
+                            <button class="assist-btn">Help</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- END OF HAND  -->
+            `)
+        }
+        for(let i = 0; i < GameMaster.players.length; i ++)
+        {
+            for(card in GameMaster.players[i].hand)
+            {
+                $(".HandTarget" + i).append(
+                `<div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card-anchor">
+                                <div class="m0a w100">
+                                    <img alt="WHY" id="player_card${i}${card}" class="clickable">
+                                    <input type="hidden" class="value" value="${card}">
+                                </div>
+                                <!-- a card should go here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>`)
+                if(GameMaster.players[i].isHuman && GameMaster.players[i].player_seat == GameMaster.turn)
+                {
+                    document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[i].hand[card]["suit"][0] + GameMaster.players[i].hand[card]["face"] )
                 }
+                else
+                {
+                    document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+                }
+            }
+        }
     }
 
     function ComputerTaunt()
@@ -386,7 +384,8 @@
     // Initialize Game
     $("#PlayGame").click(function()
     {
-        PlayMusic()
+        $("#game_rules").toggle();
+        $("#game_rules_shadow_box").toggle();
         $.get("/start",function(res)
         {
             GameMaster = res;
@@ -398,7 +397,6 @@
                 CompDraw();
             }
         });
-        // $("#PlayGame").remove()
     })
 
     // Toggle shadowbox off
@@ -464,8 +462,6 @@
         {
             console.log("First tip: Draw a Card you dingus...")
         }
-
-
     })
 
     // Human Draw Deck
