@@ -151,6 +151,7 @@ namespace _31_by_3.Controllers
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
             Player player = GameMaster.players[GameMaster.turn];
+            HandValue.SortHand(player);
             AI cardHelper = new AI(player);
             Card min = cardHelper.ChooseDiscard(cardHelper);
 

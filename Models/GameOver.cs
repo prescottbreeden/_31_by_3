@@ -35,39 +35,46 @@ namespace _31_by_3
                 }
             }
             if(TieScores.Count > 1)
-            {
-                string HighestRankingFace = TieScores[0].hand[0].face;
-                HighestRankingCard = Int32.Parse(HighestRankingFace);
+            {   
+                HighestRankingCard = 0;
+                Dictionary<string, int> suitRanking = new Dictionary<string, int>();
+                suitRanking.Add("spades", 3);
+                suitRanking.Add("hearts", 2);
+                suitRanking.Add("clubs", 1);
+                suitRanking.Add("diamonds", 0);
+                
+                string HighestRankingSuit = "";
                 foreach(Player player in TieScores)
                 {
-                    foreach(Card c in player.hand)
+                    AI TieBreaker = new AI(player);
+                    foreach(Card c in TieBreaker.hand)
                     {
-                        int face = Int32.Parse(c.face);
-                        if(face > HighestRankingCard)
+                        if(c.suit == TieBreaker.best_suit)
                         {
-                            HighestRankingCard = face;
-                            this.Winner = player;
-                        }
-                        if(face == HighestRankingCard)
-                        {
-                            callTieBreaker = true;
+                            int sum = 0;
+                            int face = Int32.Parse(c.face);
+                            if(face == 1)
+                            {
+                                face = 14;
+                            }
+                            sum += face;
+                            if(sum > HighestRankingCard)
+                            {
+                                HighestRankingSuit = TieBreaker.best_suit;
+                                HighestRankingCard = sum;
+                                this.Winner = player;
+                            }
+                            else if(sum == HighestRankingCard)
+                            {
+                                if(suitRanking[HighestRankingSuit] < suitRanking[TieBreaker.best_suit])
+                                {
+                                    this.Winner = player;
+                                }
+                            }
                         }
                     }
-                }
-                if(callTieBreaker)
-                {
-                    // foreach(Player player in all_players)
-                    // {
-                    //     player.hand.OrderByDescending(c => c.value);
-                    // }
-                    // for(var card = 0; card < 3; i++)
-                    // {
-                    //     for(var player = 0; player < all_players.Count; player++)
-                    //     {
-                    //         if(all_players[player].hand[card]>)
-                    //     }
-                    // }
-                }
+                } 
+                
             }
 
             // check if winner is knocker
