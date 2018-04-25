@@ -1,54 +1,69 @@
 <!-- insert head -->
 @await Html.PartialAsync("Head.cshtml")
 <!-- end insert head -->
-<div class="header">
-    <h2 class="tac">Welcome to 31 by 3!</h2>
-</div>
 <div class="container">
+    <div class="header">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="har1"></div>
+        <div class="har-low-1"></div>
+        <div class="har2"></div>
+        <div class="har-low-2"></div>
+        <div class="war1"></div>
+        <div class="war2"></div>
+        <div class="base-bar"></div>
+        <div class="row">
+            <div class="col-4">
+                <h1 class="title">Casino 31</h1>
+            </div>
+            <div class="col-8">
+                <nav class="menu">
+                    <a href="">Show Rules</a>
+                    <a href="">Music</a>
+                    <ul class="submenu music">
+                        <li>On</li>
+                        <li>Off</li>
+                    </ul>
+                    <a href="">Game Speed</a>
+                    <ul class="submenu game-speed">
+                        <li>Slow</li>
+                        <li>Normal</li>
+                        <li>Fast</li>
+                    </ul>
+                    <a href="">New Game</a>
+                </nav>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="mx-auto">
             <button class="button gbg-button" id="PlayGame">Play</button><button class="button gbg-button" id="NextRound">NextRound</button>
         </div>
     </div>
-</div>
-<div class="container">
     <div class="row">
         <div class="col-12 col-md-3 sidebar">
             <div class="sidebar-buffer bubble-border">
                 <div class="row deck-area">
                     <div class="col-12">
-                        <div class="row draw">
+                        <div class="row">
                             <div class="col-12">
-                                <div class="draw-deck">
-                                    <img src="~/img/cardback.png" alt="">
-                                </div>
-                                <!-- placement of Draw Deck Styling -->
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12 m0a">
-                                        <div class="b-wrap">
-                                            <button type="submit" class="button" id="DrawCard">Draw from Deck</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h4>Draw from:</h4>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 deck-pusher">
-                        <div class="row discard">
-                            <div class="col-12">
-                                <div class="draw-deck">
-                                    <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
-                                    <!-- placement of Discard Deck Styling -->
-                                </div>
-                            </div>
+                        <div class="row draw">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="b-wrap b-wide">
-                                            <button class="button" id="DiscardCard">Draw from Discard</button>
+                                    <div class="col-6">
+                                        <div class="draw-deck" id="DrawCard">
+                                            <img src="~/img/cardback.png" alt="">
                                         </div>
+                                        <h5 class="tac">Deck</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="draw-deck" id="DiscardCard">
+                                            <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
+                                        </div>
+                                        <h5 class="tac">Discard</h5>
                                     </div>
                                 </div>
                             </div>

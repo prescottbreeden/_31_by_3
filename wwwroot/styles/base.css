@@ -140,7 +140,7 @@ button, .button .btn {
   top: 25%;
   left: 50%;
   max-width: 500px;
-  width: 25%;
+  width: 50%;
   max-height: 600px;
   margin: 0 auto;
   display: none; }
@@ -209,24 +209,146 @@ button, .button .btn {
   .small, .medium {
     display: none; } }
 body {
-  background-color: #657a64;
-  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); }
+  background-image: url("../img/grain1.jpeg");
+  padding-top: 20px; }
 
 .header {
+  position: relative;
   width: 100%;
   height: 90px;
   background-color: #051c37;
   color: white;
   margin: 0 0 20px 0;
-  padding: 20px 0 0 0;
+  padding: 5px 0 0 0;
   line-height: 50px; }
-  .header h2 {
+  .header h1.title {
+    z-index: 300;
     font-size: 2.5em;
-    margin: 0; }
+    margin: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    border-bottom: white;
+    margin-left: 40px;
+    line-height: 50px; }
+  .header .bar1 {
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    width: 30px;
+    height: 90px;
+    background-color: #051c37;
+    z-index: 205; }
+  .header .bar2 {
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    width: 30px;
+    height: 90px;
+    background-color: #051c37;
+    z-index: 205; }
+  .header .har1 {
+    position: absolute;
+    top: 36px;
+    left: -110px;
+    width: 0;
+    height: 0;
+    border-left: 63px solid transparent;
+    border-right: 63px solid transparent;
+    border-bottom: 63px solid #051c37;
+    transform: rotate(135deg); }
+  .header .har2 {
+    position: absolute;
+    top: 2px;
+    right: -80px;
+    width: 0;
+    height: 0;
+    border-bottom: 65px solid transparent;
+    border-top: 65px solid transparent;
+    border-left: 65px solid #051c37;
+    transform: rotate(135deg); }
+  .header .har-low-1 {
+    position: absolute;
+    top: 80px;
+    left: -110px;
+    width: 0;
+    height: 0;
+    border-left: 63px solid transparent;
+    border-right: 63px solid transparent;
+    border-bottom: 63px solid #051c37;
+    transform: rotate(45deg); }
+  .header .har-low-2 {
+    position: absolute;
+    top: 48px;
+    right: -80px;
+    width: 0;
+    height: 0;
+    border-bottom: 65px solid transparent;
+    border-top: 65px solid transparent;
+    border-left: 65px solid #051c37;
+    transform: rotate(-135deg); }
+  .header .war1 {
+    position: absolute;
+    top: 90px;
+    left: -89px;
+    width: 0;
+    height: 0;
+    border-left: 0px solid #0000;
+    border-right: 69px solid #0000;
+    border-bottom: 24px solid white;
+    transform: rotate(180deg); }
+  .header .war2 {
+    position: absolute;
+    top: 90px;
+    right: -89px;
+    width: 0;
+    height: 0;
+    border-right: 0px solid #0000;
+    border-left: 69px solid #0000;
+    border-bottom: 24px solid white;
+    transform: rotate(-180deg); }
+  .header .base-bar {
+    position: absolute;
+    bottom: -4px;
+    left: -50px;
+    background-color: white;
+    height: 4px;
+    width: 110%; }
+
+nav.menu {
+  border-bottom: 1px solid white;
+  margin-left: 260px;
+  position: relative; }
+  nav.menu a {
+    color: white;
+    padding: 10px 15px 16px 15px;
+    text-decoration: none;
+    margin-right: 5px;
+    line-height: 1em;
+    display: inline-block; }
+    nav.menu a:hover {
+      color: rgba(5, 28, 55, 0.8);
+      background-color: white;
+      text-decoration: none; }
+  nav.menu ul.submenu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    margin: 0;
+    padding: 0; }
+    nav.menu ul.submenu li {
+      display: none; }
 
 .container {
+  background-color: #657a64;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
   padding: 0 20px 20px 20px;
-  color: white; }
+  color: white;
+  border: 5px solid #051c37;
+  border-top: none; }
   .container h1 {
     margin-bottom: 20px; }
   .container h2 {
@@ -240,9 +362,9 @@ body {
     margin: 30px 0px;
     padding: 20px; }
   .container .sidebar .sidebar-buffer {
-    min-height: 600px;
+    min-height: 200px;
     margin: 0 0 30px 0;
-    padding: 0 20px; }
+    padding: 10px 20px 0 20px; }
     .container .sidebar .sidebar-buffer h2 {
       border-bottom: 1px solid #051c37;
       margin-bottom: 20px;
@@ -258,9 +380,9 @@ body {
   .container .sidebar .deck-area .deck-pusher {
     margin: 20px 0 20px 0; }
   .container .sidebar .deck-area .draw-deck {
-    max-width: 70%;
+    max-width: 80%;
     margin: 0 auto;
-    transform: rotate(90deg); }
+    cursor: pointer; }
     .container .sidebar .deck-area .draw-deck img {
       width: 100%;
       height: auto; }
