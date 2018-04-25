@@ -34,7 +34,16 @@
     }
 }
 .game-rules{
-    max-width: 800px;
+    max-width: 1130px;
     width: 75%;
-    top: 225px;
+    top: 94px;
+    .inner-shadow{
+
+        .bubble-border{
+            overflow: scroll;
+            max-height: 500px;
+            padding: 25px;
+            overflow-x: hidden;
+        }
+    }
 }

@@ -131,7 +131,7 @@
 <!-- Change of Turn Indication for human players -->
 <div class="shadowbox" id="game_rules_shadow_box">
 </div>
-<div class="shadow-content-container game_rules" id="game_rules">
+<div class="shadow-content-container game-rules" id="game_rules">
     <div class="inner-shadow">
         <div class="row">
             <div class="col-12">
@@ -140,19 +140,20 @@
                         <div class="col-12">
                             <h2>Objective:</h2>
                             <p>The goal is to obtain a hand that totals 31 in cards of one suit; or to have a hand at the showdown whose count in one suit is higher than that of any other player.</p>
-                            <h2>Card Values/Scoring</h2>
-                            <p>An Ace counts 11 points, face cards count 10 points, and all other cards count their face value</p>
-                            <h2>The Play:</h2>
+                            <h2>Play:</h2>
                             <p>All players begin with 3 chips. On each turn, players take one card from either the top of the deck or from the widow (aka the discard pile). A turn ends by discarding a card from their hand.</p>
                             <p>Players take turns, until one player is satisfied that the card values he holds will likely beat all other players and "knocks" on the table. Once a knock has been made, all other players get one more turn to exchange cards before the showdown where all players reveal their hands and compare values.</p>
+                            <h2>Card Values:</h2>
+                            <p>An Ace counts 11 points, face cards count 10 points, and all other cards count their face value</p>
                             <h2>Scoring:</h2>
                             <p>If the player who knocked does not have the highest scoring hand at the showdown, they lose a chip to the pot.  However, if they do have the highest scoring hand, the player with the lowest hand loses a chip to the pot instead.</p>
-                            <p>If there is a tie for the highest score, the player with the highest-ranking card wins. Example: K, Q, 6 (total 26) would beat Q, 9, 7 (also total 26). If there is a tie in the highest cards, the next highest cards are compared, and so on.</p>
+                            <p>If there is a tie for the highest score, the player with the highest-ranking card wins.</p>
+                            <p>Example: K, Q, 6 (total 26) would beat Q, 9, 7 (also total 26). If there is a tie in the highest cards, the next highest cards are compared, and so on.</p>
                             <p>If at any point a player holds exactly 31 points during the game, or obtains three aces, the game immediately ends and all other players lose a chip to the pot.</p>
                             <p>After the pot has been won, all the players put in chips for the next hand.</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12">
                             <div class="sidebar-rules">
                                 <h2>31 TLDR Rules:</h2>
@@ -173,12 +174,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-12 clearfix">
                             <div class="float-right">
-                        <!-- add transition here -->
-                        <button class="button gbg-button btn-sm" id="PlayGame">Got it, let's play!</button>
+                                <button class="button" id="PlayGame">Got it, let's play!</button>
                             </div>
                         </div>
                     </div>
@@ -187,16 +187,8 @@
         </div>
     </div>
 </div>
-<!-- Change of Turn Indication for human players -->
-<div class="shadowbox" id="change_turn_shadow_box">
-</div>
-<div class="shadow-content-container" id="change_turn">
-</div>
-<!--
-I've positioned the first one relative to the first hand.
-we'll have to use jquery positioning to build one of these and set it to be the proper position when it is added to the page.
-most likely it will be positioning with a left of +40ish from where it calls it.
- -->
+<div class="shadowbox" id="change_turn_shadow_box"></div>
+<div class="shadow-content-container" id="change_turn"></div>
 <div class="taunt-bubble">
     <div class="bdr-arrow"></div>
     <div class="bubble-arrow"></div>

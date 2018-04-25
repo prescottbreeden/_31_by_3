@@ -159,9 +159,14 @@ button, .button .btn {
       color: #051c37; }
 
 .game-rules {
-  max-width: 800px;
+  max-width: 1130px;
   width: 75%;
-  top: 225px; }
+  top: 94px; }
+  .game-rules .inner-shadow .bubble-border {
+    overflow: scroll;
+    max-height: 500px;
+    padding: 25px;
+    overflow-x: hidden; }
 
 .taunt-bubble {
   position: absolute;
