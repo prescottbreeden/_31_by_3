@@ -60,7 +60,56 @@ body{
             }
         }
         .deck-area{
-
+            position: relative;
+            h5.deck-label{
+                margin: 30px 0 10px 0;
+            }
+            .discard-bg{
+                position: absolute;
+                top: 3px;
+                left: 25px;
+                height: 82px;
+                width: 58px;
+                border: 2px dotted $b-blue;
+                z-index: 50;
+            }
+            .discard-x{
+                position: absolute;
+                top: 23px;
+                left: 52px;
+                width: 0;
+                height: 45px;
+                border: 2px dotted $b-blue;
+                transform: rotate(-135deg);
+            }
+            .discard-y{
+                position: absolute;
+                top: 23px;
+                left: 52px;
+                width: 0;
+                height: 45px;
+                border: 2px dotted $b-blue;
+                transform: rotate(-225deg);
+            }
+            .core{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 55;
+                transform: rotate(-5deg)
+            }
+            .shift1{
+                position: absolute;
+                top: 0px;
+                left: 11px;
+                z-index: 50;
+            }
+            .shift2{
+                position: absolute;
+                top: 0px;
+                left: 5px;
+                z-index: 51;
+            }
             .b-wrap{
                 text-align: center;
                 width: 171px;
@@ -76,10 +125,12 @@ body{
                 max-width: 80%;
                 margin: 0 auto;
                 cursor: pointer;
+                z-index: 51;
+                position: relative;
                 img{
+                    max-width: 100%;;
                     width: 100%;
                     height: auto;
-
                 }
             }
         }
@@ -137,7 +188,7 @@ body{
                             margin: 0 auto;
                         }
                         .player-selected {
-                            border: 2px dashed green;
+                            border: 2px dotted green;
                         }
                     }
                 }

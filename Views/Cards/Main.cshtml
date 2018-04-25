@@ -20,16 +20,22 @@
                 <nav class="menu">
                     <a href="">Show Rules</a>
                     <a href="">Music</a>
-                    <ul class="submenu music">
-                        <li>On</li>
-                        <li>Off</li>
-                    </ul>
+                    <div class="submenu clearfix music">
+                        <div class="sub-item">On</div>
+                        <div class="sub-item">Off</div>
+                    </div>
                     <a href="">Game Speed</a>
-                    <ul class="submenu game-speed">
-                        <li>Slow</li>
-                        <li>Normal</li>
-                        <li>Fast</li>
-                    </ul>
+                    <div class="submenu clearfix game-speed">
+                        <div class="sub-item">Slow</div>
+                        <div class="sub-item">Normal</div>
+                        <div class="sub-item">Fast</div>
+                    </div>
+                    <a href="">Chat</a>
+                    <div class="submenu clearfix taunt">
+                        <div class="sub-item">None</div>
+                        <div class="sub-item">Shakespear</div>
+                        <div class="sub-item">Monty Python</div>
+                    </div>
                     <a href="">New Game</a>
                 </nav>
             </div>
@@ -55,15 +61,26 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="draw-deck" id="DrawCard">
-                                            <img src="~/img/cardback.png" alt="">
+                                            <img class="core" src="~/img/cardback.png" alt="">
+                                            <img class="shift1" src="~/img/cardback.png" alt="">
+                                            <img class="shift2" src="~/img/cardback.png" alt="">
                                         </div>
-                                        <h5 class="tac">Deck</h5>
                                     </div>
                                     <div class="col-6">
+                                        <div class="discard-bg"></div>
+                                        <div class="discard-x"></div>
+                                        <div class="discard-y"></div>
                                         <div class="draw-deck" id="DiscardCard">
-                                            <img src="~/img/cardback.png" alt="discard" id="discard_pile_top_card">
+                                            <img src="~/img/transparent1.png" alt="discard" class="discard-img" id="discard_pile_top_card">
                                         </div>
-                                        <h5 class="tac">Discard</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5 class="tac deck-label">Deck</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <h5 class="tac deck-label">Discard</h5>
                                     </div>
                                 </div>
                             </div>

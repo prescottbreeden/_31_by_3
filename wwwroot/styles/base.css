@@ -170,7 +170,8 @@ button, .button .btn {
   z-index: 201;
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
   color: #051c37;
-  font-size: 0.8em; }
+  font-size: 0.8em;
+  display: none; }
   .taunt-bubble .bubble-arrow {
     position: relative;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -322,30 +323,55 @@ body {
 
 nav.menu {
   border-bottom: 1px solid white;
-  margin-left: 260px;
+  margin-left: 190px;
   position: relative; }
   nav.menu a {
     color: white;
-    padding: 10px 15px 16px 15px;
+    padding: 10px 15px 17px 15px;
     text-decoration: none;
     margin-right: 5px;
     line-height: 1em;
-    display: inline-block; }
+    display: inline-block;
+    font-size: 1em; }
     nav.menu a:hover {
       color: rgba(5, 28, 55, 0.8);
       background-color: white;
       text-decoration: none; }
-  nav.menu ul.submenu {
+  nav.menu .submenu {
     position: absolute;
-    top: 0px;
+    top: 50px;
     left: 0px;
     display: inline-block;
-    width: 0px;
-    height: 0px;
+    height: 35px;
     margin: 0;
     padding: 0; }
-    nav.menu ul.submenu li {
-      display: none; }
+    nav.menu .submenu .sub-item {
+      text-align: center;
+      line-height: 35px;
+      background: white;
+      margin: 0;
+      color: #051c37;
+      vertical-align: top;
+      border-right: 1px solid #051c37;
+      padding: 0 20px;
+      list-style: inside;
+      float: left;
+      display: inline-block;
+      transition: background-color 0.5s ease;
+      cursor: pointer; }
+      nav.menu .submenu .sub-item:hover {
+        background-color: #999 0.8;
+        transition: background-color 0.5s ease; }
+    nav.menu .submenu li:last-of-type {
+      border: none; }
+  nav.menu .music {
+    left: 101px;
+    display: none; }
+  nav.menu div.game-speed {
+    left: 146px;
+    display: none; }
+  nav.menu div.taunt {
+    left: 169px; }
 
 .container {
   background-color: #657a64;
@@ -376,21 +402,68 @@ nav.menu {
       padding-bottom: 10px; }
     .container .sidebar .sidebar-buffer ul {
       padding-left: 18px; }
-  .container .sidebar .deck-area .b-wrap {
-    text-align: center;
-    width: 171px;
-    margin: 0 auto; }
-  .container .sidebar .deck-area .b-wide {
-    width: 191px; }
-  .container .sidebar .deck-area .deck-pusher {
-    margin: 20px 0 20px 0; }
-  .container .sidebar .deck-area .draw-deck {
-    max-width: 80%;
-    margin: 0 auto;
-    cursor: pointer; }
-    .container .sidebar .deck-area .draw-deck img {
-      width: 100%;
-      height: auto; }
+  .container .sidebar .deck-area {
+    position: relative; }
+    .container .sidebar .deck-area h5.deck-label {
+      margin: 30px 0 10px 0; }
+    .container .sidebar .deck-area .discard-bg {
+      position: absolute;
+      top: 3px;
+      left: 25px;
+      height: 82px;
+      width: 58px;
+      border: 2px dotted #051c37;
+      z-index: 50; }
+    .container .sidebar .deck-area .discard-x {
+      position: absolute;
+      top: 23px;
+      left: 52px;
+      width: 0;
+      height: 45px;
+      border: 2px dotted #051c37;
+      transform: rotate(-135deg); }
+    .container .sidebar .deck-area .discard-y {
+      position: absolute;
+      top: 23px;
+      left: 52px;
+      width: 0;
+      height: 45px;
+      border: 2px dotted #051c37;
+      transform: rotate(-225deg); }
+    .container .sidebar .deck-area .core {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 55;
+      transform: rotate(-5deg); }
+    .container .sidebar .deck-area .shift1 {
+      position: absolute;
+      top: 0px;
+      left: 11px;
+      z-index: 50; }
+    .container .sidebar .deck-area .shift2 {
+      position: absolute;
+      top: 0px;
+      left: 5px;
+      z-index: 51; }
+    .container .sidebar .deck-area .b-wrap {
+      text-align: center;
+      width: 171px;
+      margin: 0 auto; }
+    .container .sidebar .deck-area .b-wide {
+      width: 191px; }
+    .container .sidebar .deck-area .deck-pusher {
+      margin: 20px 0 20px 0; }
+    .container .sidebar .deck-area .draw-deck {
+      max-width: 80%;
+      margin: 0 auto;
+      cursor: pointer;
+      z-index: 51;
+      position: relative; }
+      .container .sidebar .deck-area .draw-deck img {
+        max-width: 100%;
+        width: 100%;
+        height: auto; }
   .container .game-area {
     padding: 0 15px; }
     .container .game-area .hand-container {
@@ -430,6 +503,6 @@ nav.menu {
               width: auto;
               margin: 0 auto; }
             .container .game-area .hand-container .hand .player-card .card-anchor .player-selected {
-              border: 2px dashed green; }
+              border: 2px dotted green; }
 
 /*# sourceMappingURL=base.css.map */
