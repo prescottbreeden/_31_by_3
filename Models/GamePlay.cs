@@ -13,6 +13,7 @@ namespace _31_by_3
             Deck CurrentDeck = new Deck();
             CurrentDeck.deck = CurrentDeck.NewDeck();
             CurrentDeck.deck = CurrentDeck.Shuffle(CurrentDeck.deck);
+            CurrentDeck.DiscardPile.Clear();
             return CurrentDeck;
         }
             

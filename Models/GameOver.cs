@@ -71,7 +71,7 @@ namespace _31_by_3
             }
 
             // check if winner is knocker
-            if(Winner.knocked == false)
+            if(!Winner.knocked)
             {
                 foreach(Player player in gameMaster.players)
                 {
@@ -92,7 +92,9 @@ namespace _31_by_3
                     }
                 }
                 Loser.chips--;
+            System.Console.WriteLine(Loser);
             }
+            System.Console.WriteLine(Winner);
         }
         public GameOver(Player winner, GameMaster gameMaster)
         {
