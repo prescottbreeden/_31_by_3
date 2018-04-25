@@ -1,0 +1,32 @@
+nav.menu{
+    border-bottom: 1px solid $white;
+    margin-left: 260px;
+    position: relative;
+    a{
+        color: white;
+        padding: 10px 15px 16px 15px;
+        text-decoration: none;
+        margin-right: 5px;
+        line-height: 1em;
+        display: inline-block;
+        &:hover{
+            color: $b-blue-8;
+            background-color: white;
+            text-decoration: none;
+            // text-shadow: 0 0 3px black;
+        }
+    }
+    ul.submenu{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: inline-block;
+        width: 0px;
+        height: 0px;
+        margin: 0;
+        padding: 0;
+        li{
+            display: none;
+        }
+    }
+}

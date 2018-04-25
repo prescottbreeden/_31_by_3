@@ -13,26 +13,20 @@
 @import "responsive/3desktop";
 
 body{
-    background-color: #657a64;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("../img/grain1.jpeg");
+    padding-top: 20px;
 }
 
-.header{
-    width: 100%;
-    height: 90px;
-    background-color: $b-blue;
-    color: white;
-    margin: 0 0 20px 0;
-    padding: 20px 0 0 0;
-    line-height: 50px;
-    h2{
-        font-size: 2.5em;
-        margin: 0;
-    }
-}
+@import "helpers/header";
+@import "helpers/menu";
+
 .container{
+    background-color: $t-green;
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     padding: 0 20px 20px 20px;
     color: $white;
+    border: 5px solid $b-blue;
+    border-top: none;
     h1{
         margin-bottom: 20px;
     }
@@ -53,9 +47,9 @@ body{
     .sidebar{
         // padding-right: 0px;
        .sidebar-buffer{
-            min-height: 600px;
+            min-height: 200px;
             margin: 0 0 30px 0;
-            padding: 0 20px;
+            padding: 10px 20px 0 20px;
             h2{
                 border-bottom: 1px solid $b-blue;
                 margin-bottom: 20px;
@@ -66,6 +60,7 @@ body{
             }
         }
         .deck-area{
+
             .b-wrap{
                 text-align: center;
                 width: 171px;
@@ -74,26 +69,18 @@ body{
             .b-wide{
                 width: 191px;
             }
-            .draw{
-
-            }
             .deck-pusher{
                 margin: 20px 0 20px 0;
             }
             .draw-deck{
-                max-width: 70%;
+                max-width: 80%;
                 margin: 0 auto;
-                transform: rotate(90deg);
+                cursor: pointer;
                 img{
                     width: 100%;
                     height: auto;
 
                 }
-            }
-            .discard{
-                // border: 1px solid orangered;
-
-
             }
         }
     }

@@ -74,6 +74,7 @@ namespace _31_by_3.Controllers
         public JsonResult NextTurn(string GM)
         {
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
+            HandValue.SortHand(GameMaster.players[GameMaster.turn]);
             GameMaster.turn++;
             if (GameMaster.turn == GameMaster.players.Count)
             {
