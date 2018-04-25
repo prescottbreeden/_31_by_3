@@ -133,7 +133,8 @@ button, .button .btn {
   position: fixed;
   top: 0px;
   left: 0px;
-  display: none; }
+  display: none;
+  z-index: 1000; }
 
 .shadow-content-container {
   position: fixed;
@@ -143,7 +144,8 @@ button, .button .btn {
   width: 50%;
   max-height: 600px;
   margin: 0 auto;
-  display: none; }
+  display: none;
+  z-index: 1001; }
   .shadow-content-container .inner-shadow {
     position: relative;
     top: 0;
@@ -151,7 +153,10 @@ button, .button .btn {
     padding: 20px; }
     .shadow-content-container .inner-shadow .bubble-border {
       width: 100%;
-      height: auto; }
+      height: auto;
+      background-color: #F4F7D9;
+      border: 11px solid #051c37;
+      color: #051c37; }
 
 .taunt-bubble {
   position: absolute;
@@ -253,9 +258,9 @@ body {
     left: -110px;
     width: 0;
     height: 0;
-    border-left: 63px solid transparent;
-    border-right: 63px solid transparent;
-    border-bottom: 63px solid #051c37;
+    border-left: 65px solid transparent;
+    border-right: 65px solid transparent;
+    border-bottom: 65px solid #051c37;
     transform: rotate(135deg); }
   .header .har2 {
     position: absolute;
@@ -293,8 +298,8 @@ body {
     left: -89px;
     width: 0;
     height: 0;
-    border-left: 0px solid #0000;
-    border-right: 69px solid #0000;
+    border-left: 0px solid transparent;
+    border-right: 69px solid transparent;
     border-bottom: 24px solid white;
     transform: rotate(180deg); }
   .header .war2 {
@@ -303,8 +308,8 @@ body {
     right: -89px;
     width: 0;
     height: 0;
-    border-right: 0px solid #0000;
-    border-left: 69px solid #0000;
+    border-right: 0px solid transparent;
+    border-left: 69px solid transparent;
     border-bottom: 24px solid white;
     transform: rotate(-180deg); }
   .header .base-bar {
