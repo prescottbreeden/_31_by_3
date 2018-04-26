@@ -22,6 +22,7 @@ namespace _31_by_3
             // set highest hand to winner
             foreach(Player player in gameMaster.players)
             {
+                player.loser = "";
                 if(player.hand_value > Winner.hand_value)
                 {
                     this.Winner = player;
@@ -85,6 +86,7 @@ namespace _31_by_3
                     if(player.knocked)
                     {
                         player.chips--;
+                        player.loser = "-1 chip";
                     }
                 }
             }
@@ -98,6 +100,7 @@ namespace _31_by_3
                         Loser = player;
                     }
                 }
+                Loser.loser = "-1 chip";
                 Loser.chips--;
             }
         }
@@ -107,9 +110,11 @@ namespace _31_by_3
 
             foreach(Player player in gameMaster.players)
             {
+                player.loser = "";
                 if(player != this.Winner)
                 {
                     player.chips--;
+                    player.loser = "-1 chip";
                     Pot++;
                 }
             }

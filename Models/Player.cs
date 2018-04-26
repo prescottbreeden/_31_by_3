@@ -8,11 +8,12 @@ namespace _31_by_3
     {
         public string name { get; set; }
         public bool isHuman { get; set; }
-        public int chips { get; set; }
-        public bool knocked { get; set; }
         public int player_seat { get; set; }
-        public int hand_value { get; set; }
+        public int chips { get; set; }
         public List<Card> hand = new List<Card>();
+        public int hand_value { get; set; }
+        public bool knocked { get; set; }
+        public string loser { get; set; }
 
         public Player()
         {

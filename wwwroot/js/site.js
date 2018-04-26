@@ -346,6 +346,7 @@
             "hearts" : "♡",
             "diamonds" : "♢",
         }
+        
         var htmlResults = ""
         for(var idx = 0; idx < GameMaster.players.length; idx++)
         {
@@ -355,7 +356,7 @@
                 handString += `${cardDict[GameMaster.players[idx].hand[i].face]}${suitDict[GameMaster.players[idx].hand[i].suit]} `
             }
             htmlResults += `<div class="row">
-                                <div class="col-4">${GameMaster.players[idx].name}</div><div class="col-4">${GameMaster.players[idx].hand_value} points</div> <div class="col-4">[ ${handString}]</div>
+                                <div class="col-3">${GameMaster.players[idx].name}</div><div class="col-3">${GameMaster.players[idx].hand_value} points</div> <div class="col-4">[ ${handString}]</div><div class="col-2">${GameMaster.players[idx].loser}</div>
                             </div>`
         }
 
