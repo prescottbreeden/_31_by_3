@@ -234,7 +234,7 @@
             document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/transparent1")
         }
     }
-    function HumanTurnChange(nextplayer)
+    function HumanTurnChange(nextplayerName)
     {
         document.getElementById("change_turn").innerHTML = "";
         $("#change_turn").append(`
@@ -242,11 +242,31 @@
             <div class="bubble-border">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="tac">${nextplayer}'s turn is next:</h2>
+                        <h2 class="tac">${nextplayerName}'s turn is next:</h2>
                         <ul>
                             <li>Click "Ready!" to show your cards and begin your turn.</li>
                         </ul>
                         <button id="shadowbox_confirm">Ready!</button>
+                    </div>
+                </div>
+            </div>
+        </div>`)
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
+    }
+    function HumanTurnStart(nextplayerName)
+    {
+        document.getElementById("change_turn").innerHTML = "";
+        $("#change_turn").append(`
+        <div class="inner-shadow">
+            <div class="bubble-border">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tac">${nextplayerName}'s turn is next:</h2>
+                        <ul>
+                            <li>Click "Ready!" to show your cards and begin your turn.</li>
+                        </ul>
+                        <button id="shadowbox_close">Ready!</button>
                     </div>
                 </div>
             </div>
@@ -272,7 +292,7 @@
                         <ul>
                             ${htmlResults}
                         </ul>
-                        <button id="shadowbox_end_round">See Hands</button>
+                        <button id="shadowbox_end_round">Next Round</button>
                     </div>
                 </div>
             </div>
@@ -298,6 +318,11 @@
                     if(!GameMaster.players[GameMaster.turn].isHuman)
                     {
                         CompDraw();
+                    }
+                    else if(GameMaster.players[GameMaster.turn].isHuman && !GameMaster.singlePlayer)
+                    {
+                        hidePlayerHands();
+                        HumanTurnStart(GameMaster.players[GameMaster.turn].name);
                     }
                 }
             })
@@ -417,18 +442,46 @@
             {
                 CompDraw();
             }
+            else if(GameMaster.players[GameMaster.turn].isHuman && !GameMaster.singlePlayer)
+            {
+                hidePlayerHands();
+                HumanTurnStart(GameMaster.players[GameMaster.turn].name);
+            }
         });
     })
-
-    // Toggle shadowbox off
-    $(document).on("click", "#shadowbox_end_round", function(){
+    
+    $(document).on("click", "#Close_Rules", function(){
+        $("#game_rules").toggle();
+        $("#game_rules_shadow_box").toggle();
+        $.get("/start",function(res)
+        {
+            GameMaster = res;
+            console.log(GameMaster);
+            ShowDiscardPile()
+            createPlayerSlots();
+            if(!GameMaster.players[GameMaster.turn].isHuman)
+            {
+                CompDraw();
+            }
+            else if(GameMaster.players[GameMaster.turn].isHuman && !GameMaster.singlePlayer)
+            {
+                hidePlayerHands();
+                HumanTurnStart(GameMaster.players[GameMaster.turn].name);
+            }
+        });    
+    })
+    // Next human player ready
+    $(document).on("click", "#shadowbox_confirm", function()
+    {
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
+        NextTurn();
     })
 
     // Next Round
-    $("#NextRound").click(function()
-    {
+    $(document).on("click", "#shadowbox_end_round", function(){
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
     //--------------------------//
@@ -437,6 +490,14 @@
 
     $("#music").mouseenter(function(){
         $(".music").toggle()
+    })
+
+
+    // hide shadowbox
+    $(document).on("click", "#shadowbox_close", function(){
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
+        replacePlayerHands();
     })
 
     $(".music").mouseleave(function(){
@@ -641,13 +702,7 @@
         }
         return;
     });
-    // Next human player ready
-    $(document).on("click", "#shadowbox_confirm", function()
-    {
-        $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
-        NextTurn();
-    })
+
 
     // Human Knock
     $(document).on("click", ".knock-btn", function()
