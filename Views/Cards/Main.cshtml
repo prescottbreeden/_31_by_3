@@ -33,8 +33,9 @@
                     <div class="main-menu" id="taunt">Chat</div>
                     <div class="submenu clearfix taunt">
                         <div class="sub-item" id="taunt-off">None</div>
-                        <div class="sub-item" id="taunt-shakespear">Shakespear</div>
+                        <div class="sub-item" id="taunt-shakespeare">Shakespeare</div>
                         <div class="sub-item" id="taunt-mp">Monty Python</div>
+                        <div class="sub-item" id="taunt-tt">Trash Talk</div>
                     </div>
                     <div class="main-menu">New Game</div>
                 </nav>
@@ -190,7 +191,7 @@ I've positioned the first one relative to the first hand.
 we'll have to use jquery positioning to build one of these and set it to be the proper position when it is added to the page.
 most likely it will be positioning with a left of +40ish from where it calls it.
  -->
-<div class="taunt-bubble">
+<div class="taunt-bubble" id="taunt-bubble">
     <div class="bdr-arrow"></div>
     <div class="bubble-arrow"></div>
     <div class="text" id="taunt-text">text from taunt here</div>
@@ -198,8 +199,8 @@ most likely it will be positioning with a left of +40ish from where it calls it.
 
 
 <!-- JUSTIN MAKE THIS AN ERROR WINDOW! *please -->
-<!-- <div class="taunt-bubble">
+<div class="taunt-bubble red-text" id="error">
     <div class="bdr-arrow"></div>
     <div class="bubble-arrow"></div>
-    <div class="text" id="taunt-text">text from taunt here</div>
-</div> -->
+    <div class="text" id="error-text">text from error here</div>
+</div>
