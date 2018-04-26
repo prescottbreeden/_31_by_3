@@ -8,7 +8,7 @@
   background-color: #04518C; }
 
 .red-bg {
-  background-color: red; }
+  background-color: #c00; }
 
 .yellow-bg {
   background-color: yellow; }
@@ -39,6 +39,9 @@
 
 .tar {
   text-align: right; }
+
+.red-text {
+  color: #c00; }
 
 .tl-arrow {
   position: absolute;
@@ -387,9 +390,11 @@ nav.menu {
 
 .player-select .player-change {
   margin: 10px 0;
-  cursor: pointer; }
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1em; }
   .player-select .player-change:hover {
-    text-shadow: 1px 1px 3px #3E423A; }
+    text-shadow: 2px 2px 2px #999; }
   .player-select .player-change:active {
     text-shadow: 1px 1px 3px black; }
 .player-select .remove {
@@ -499,7 +504,8 @@ nav.menu {
         margin-bottom: 25px;
         background-image: url("/img/bg-tile-tan.png");
         min-height: 200px;
-        position: relative; }
+        position: relative;
+        overflow: hidden; }
         .container .game-area .hand-container .hand .hand-labels h3 {
           font-size: 1.3em; }
         .container .game-area .hand-container .hand .hand-buttons .turn-indicator {
@@ -514,20 +520,53 @@ nav.menu {
         .container .game-area .hand-container .hand .hand-buttons button {
           width: 100%;
           text-align: center; }
-        .container .game-area .hand-container .hand .player-card {
-          padding: 10px 0 0 0; }
-          .container .game-area .hand-container .hand .player-card .w100 {
-            width: 71px; }
-          .container .game-area .hand-container .hand .player-card .check {
-            margin-left: 30px; }
-          .container .game-area .hand-container .hand .player-card .card-anchor {
-            margin: 0 auto; }
-            .container .game-area .hand-container .hand .player-card .card-anchor img {
-              max-height: 100px;
-              height: auto;
-              width: auto;
-              margin: 0 auto; }
-            .container .game-area .hand-container .hand .player-card .card-anchor .player-selected {
-              border: 2px dotted green; }
+        .container .game-area .hand-container .hand .player-card .check {
+          margin-left: 30px; }
+        .container .game-area .hand-container .hand .player-card .card-anchor {
+          margin: 0 auto;
+          max-width: 226px; }
+          .container .game-area .hand-container .hand .player-card .card-anchor img {
+            box-shadow: 0 0 2px #555;
+            border-radius: 8px;
+            max-height: 200px;
+            height: auto;
+            width: auto;
+            margin: 0 auto;
+            cursor: pointer; }
+            .container .game-area .hand-container .hand .player-card .card-anchor img:hover {
+              max-height: calc(60% + 2px);
+              max-width: calc(60% + 2px); }
+          .container .game-area .hand-container .hand .player-card .card-anchor .player-selected {
+            border: 2px dotted green; }
+        .container .game-area .hand-container .hand .player-card:nth-child(1) {
+          position: absolute;
+          top: 50px;
+          left: 40px;
+          transform: rotate(-15deg); }
+          .container .game-area .hand-container .hand .player-card:nth-child(1):hover {
+            top: 32px;
+            left: 34px; }
+        .container .game-area .hand-container .hand .player-card:nth-child(2) {
+          position: absolute;
+          top: 30px;
+          left: 150px; }
+          .container .game-area .hand-container .hand .player-card:nth-child(2):hover {
+            top: 26px; }
+        .container .game-area .hand-container .hand .player-card:nth-child(3) {
+          position: absolute;
+          top: 50px;
+          left: 255px;
+          transform: rotate(15deg); }
+          .container .game-area .hand-container .hand .player-card:nth-child(3):hover {
+            left: 257px; }
+        .container .game-area .hand-container .hand .player-card:nth-child(4) {
+          position: absolute;
+          top: -30px;
+          left: 500px;
+          max-width: 110px; }
+          .container .game-area .hand-container .hand .player-card:nth-child(4) .card-anchor img {
+            max-width: 110px; }
+            .container .game-area .hand-container .hand .player-card:nth-child(4) .card-anchor img:hover {
+              transform: rotate(2deg); }
 
 /*# sourceMappingURL=base.css.map */

@@ -100,19 +100,16 @@
             for(card in GameMaster.players[i].hand)
             {
                 $(".HandTarget" + i).append(
-                `<div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card-anchor">
-                                <div class="m0a w100">
-                                    <img alt="WHY" id="player_card${i}${card}" class="clickable">
-                                    <input type="hidden" class="value" value="${card}">
-                                </div>
-                                <!-- a card should go here -->
+                `   <div class="player-card cardNumber${card}">
+                        <div class="card-anchor">
+                            <div class="">
+                                <img alt="WHY" id="player_card${i}${card}" class="clickable">
+                                <input type="hidden" class="value" value="${card}">
                             </div>
+                            <!-- a card should go here -->
                         </div>
                     </div>
-                </div>`)
+                `)
                 if(GameMaster.players[i].isHuman && GameMaster.players[i].player_seat == GameMaster.turn)
                 {
                     document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[i].hand[card]["suit"][0] + GameMaster.players[i].hand[card]["face"] )
@@ -170,19 +167,15 @@
             for(card in GameMaster.players[idx].hand)
             {
                 $(".HandTarget" + idx).append(
-                    `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card-anchor">
-                                        <div class="m0a w100">
-                                            <img alt="WHY" id="player_card${idx}${card}" class="clickable">
-                                            <input type="hidden" class="value" value="${card}">
-                                            </div>
-                                        <!-- a card should go here -->
-                                        </div>
-                                    </div>
+                    `   <div class="player-card cardNumber${card}">
+                            <div class="card-anchor">
+                                <div class="">
+                                    <img alt="WHY" id="player_card${idx}${card}" class="clickable">
+                                    <input type="hidden" class="value" value="${card}">
                                 </div>
+                                <!-- a card should go here -->
                             </div>
+                        </div>
                     `)
                     if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endRound != null || GameMaster.allAI == true)
                     {
@@ -204,19 +197,15 @@
             for(card in GameMaster.players[idx].hand)
             {
                 $(".HandTarget" + idx).append(
-                    `    <div class="player-card cardNumber${card} col-12 col-md-6 col-lg-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card-anchor">
-                                        <div class="m0a w100">
-                                            <img alt="WHY" id="player_card${idx}${card}" class="clickable">
-                                            <input type="hidden" class="value" value="${card}">
-                                            </div>
-                                        <!-- a card should go here -->
-                                        </div>
-                                    </div>
+                    `   <div class="player-card cardNumber${card}">
+                            <div class="card-anchor">
+                                <div class="">
+                                    <img alt="WHY" id="player_card${idx}${card}" class="clickable">
+                                    <input type="hidden" class="value" value="${card}">
                                 </div>
+                                <!-- a card should go here -->
                             </div>
+                        </div>
                     `)
                 document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
             }
