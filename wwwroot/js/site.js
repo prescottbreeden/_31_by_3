@@ -61,13 +61,14 @@
                 </div>
                 <div class="col-2 hand-buttons">
                     <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4">
+                        <div class="col-6">
+                            <i class="fas fa-hand-rock"></i>
+                        </div>
+                        <div class="col-6">
                             <div class="turn-indicator">
                                 <i class="fas fa-child"></i>
                             </div>
                         </div>
-                        <div class="col-4"></div>
                         <div id="buttons${player}"></div>
                     </div>
                 </div>
