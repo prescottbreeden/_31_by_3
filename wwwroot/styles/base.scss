@@ -26,8 +26,10 @@ body{
     .player-change{
         margin: 10px 0;
         cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1em;
         &:hover{
-            text-shadow: 1px 1px 3px $t-stone;
+            text-shadow: 2px 2px 2px #999;
         }
         &:active{
             text-shadow: 1px 1px 3px $black;
@@ -41,6 +43,9 @@ body{
         padding: 0 0 0 27px;
     }
 }
+
+$hun: 226;
+$dun: 112;
 
 
 // Main Play Page
@@ -171,6 +176,7 @@ body{
                 background-image: url("/img/bg-tile-tan.png");
                 min-height: 200px;
                 position: relative;
+                overflow: hidden;
                 .hand-labels{
                     h3{
                         font-size: 1.3em;
@@ -196,23 +202,70 @@ body{
                     }
                 }
                 .player-card{
-                    padding: 10px 0 0 0;
-                    .w100{
-                        width: 71px;
-                    }
+                    // padding: 10px 0 0 0;
                     .check{
                         margin-left: 30px;
                     }
                     .card-anchor{
                         margin: 0 auto;
+                        max-width: 226px;
                         img{
-                            max-height: 100px;
+                            box-shadow: 0 0 2px #555;
+                            border-radius: 8px;
+                            max-height: 200px;
                             height: auto;
                             width: auto;
                             margin: 0 auto;
+                            cursor: pointer;
+                            &:hover{
+                                max-height: calc(60% + 2px);
+                                max-width: calc(60% + 2px);
+                            }
+
                         }
                         .player-selected {
                             border: 2px dotted green;
+                        }
+                    }
+                }
+                .player-card:nth-child(1){
+                    position: absolute;
+                    top: 50px;
+                    left: 40px;
+                    transform: rotate(-15deg);
+                    &:hover{
+                        top: 32px;
+                        left: 34px;
+                    }
+                }
+                .player-card:nth-child(2){
+                    position: absolute;
+                    top: 30px;
+                    left: 150px;
+                    &:hover{
+                        top: 26px;
+                    }
+                }
+                .player-card:nth-child(3){
+                    position: absolute;
+                    top: 50px;
+                    left: 255px;
+                    transform: rotate(15deg);
+                    &:hover{
+                        left: 257px;
+                    }
+                }
+                .player-card:nth-child(4){
+                    position: absolute;
+                    top: -30px;
+                    left: 500px;
+                    max-width: 110px;
+                    .card-anchor{
+                        img{
+                            max-width: 110px;
+                            &:hover{
+                                transform: rotate(2deg);
+                            }
                         }
                     }
                 }
