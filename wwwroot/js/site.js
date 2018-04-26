@@ -3,12 +3,16 @@
     // Game Master Data
     var GameMaster;
 
-    var TrashTalk = [];
+    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals", "You should get back to work."];
+
     var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!", "Thou art a slothful commoner!"];
 
     var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "I'll turn you into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Quit or I'll taunt you a second time!"];
 
     $(".taunt-bubble").hide()
+
+    var music = new Audio("../MidnightPianoBar.mp3")
+    music.volume = .38
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
@@ -128,18 +132,34 @@
             $("#taunt-text").empty();
             $("#taunt-text").append(MontyPython[Math.floor(Math.random() * MontyPython.length)]);
 
-            $(".taunt-bubble").fadeIn(500);
-            $(".taunt-bubble").position({
+            $("#taunt-bubble").fadeIn(500);
+            $("#taunt-bubble").position({
                 my: "left",
                 at: "right+28",
                 of: ".hand" + GameMaster.turn
             });
             setTimeout(function(){
-                $(".taunt-bubble").fadeOut(800)
+                $("#taunt-bubble").fadeOut(800)
             }, 3000);
 
         }
-        // $(".taunt-bubble")
+    }
+
+    function ErrorBubble(message)
+    {
+        $("#error-text").empty();
+        $("#error-text").append(message);
+
+        $("#error").fadeIn(500);
+            $("#error").position({
+                my: "left",
+                at: "right+28",
+                of: ".hand" + GameMaster.turn
+            });
+            setTimeout(function(){
+                $("#error").fadeOut(800)
+            }, 3000);
+
     }
 
     function replacePlayerHands()
@@ -394,12 +414,12 @@
 
     function PlayMusic()
     {
-        new Audio("../MidnightPianoBar.mp3").play();
+        music.play();
     }
 
     function PauseMusic()
     {
-        new Audio("../MidnightPianoBar.mp3").pause();
+        music.pause();
     }
 
     // ------------------------ //
@@ -411,6 +431,7 @@
     {
         $("#game_rules").toggle();
         $("#game_rules_shadow_box").toggle();
+
         $.get("/start",function(res)
         {
             GameMaster = res;
@@ -463,12 +484,58 @@
         $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
+    //--------------------------//
+    //--nav menu functionality--//
+    //--------------------------//
+
+    $("#music").mouseenter(function(){
+        $(".music").toggle()
+    })
+
 
     // hide shadowbox
     $(document).on("click", "#shadowbox_close", function(){
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
         replacePlayerHands();
+    })
+
+    $(".music").mouseleave(function(){
+        $(".music").toggle();
+    })
+    $("#game-speed").mouseenter(function(){
+        $(".game-speed").toggle()
+    })
+
+    $(".game-speed").mouseleave(function(){
+        $(".game-speed").toggle();
+    })
+    $("#taunt").mouseenter(function(){
+        $(".taunt").toggle()
+    })
+
+    $(".taunt").mouseleave(function(){
+        $(".taunt").toggle();
+    })
+
+    $("#music-on").click(function(){
+        PlayMusic();
+    })
+
+    $("#music-off").click(function(){
+        PauseMusic();
+    })
+
+    $("#speed-slow").click(function(){
+        GameMaster.gameSpeed = 1;
+    })
+
+    $("#speed-normal").click(function(){
+        GameMaster.gameSpeed = 2;
+    })
+
+    $("#speed-fast").click(function(){
+        GameMaster.gameSpeed = 3;
     })
 
     // Select a Card

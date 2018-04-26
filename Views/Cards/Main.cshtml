@@ -20,22 +20,23 @@
             <div class="col-8">
                 <nav class="menu">
                     <div class="main-menu">Show Rules</div>
-                    <div class="main-menu">Music</div>
+                    <div class="main-menu" id="music">Music</div>
                     <div class="submenu clearfix music">
-                        <div class="sub-item">On</div>
-                        <div class="sub-item">Off</div>
+                        <div class="sub-item" id="music-on">On</div>
+                        <div class="sub-item" id="music-off">Off</div>
                     </div>
-                    <div class="main-menu">Game Speed</div>
+                    <div class="main-menu" id="game-speed">Game Speed</div>
                     <div class="submenu clearfix game-speed">
-                        <div class="sub-item">Slow</div>
-                        <div class="sub-item">Normal</div>
-                        <div class="sub-item">Fast</div>
+                        <div class="sub-item" id="speed-slow">Slow</div>
+                        <div class="sub-item" id="speed-normal">Normal</div>
+                        <div class="sub-item" id="speed-fast">Fast</div>
                     </div>
-                    <div class="main-menu">Chat</div>
+                    <div class="main-menu" id="taunt">Chat</div>
                     <div class="submenu clearfix taunt">
-                        <div class="sub-item">None</div>
-                        <div class="sub-item">Shakespear</div>
-                        <div class="sub-item">Monty Python</div>
+                        <div class="sub-item" id="taunt-off">None</div>
+                        <div class="sub-item" id="taunt-shakespeare">Shakespeare</div>
+                        <div class="sub-item" id="taunt-mp">Monty Python</div>
+                        <div class="sub-item" id="taunt-tt">Trash Talk</div>
                     </div>
                     <div class="main-menu">New Game</div>
                 </nav>
@@ -152,10 +153,19 @@
         </div>
     </div>
 </div>
+<div class="taunt-bubble" id="taunt-bubble">
 <div class="shadowbox" id="change_turn_shadow_box"></div>
 <div class="shadow-content-container" id="change_turn"></div>
 <div class="taunt-bubble">
     <div class="bdr-arrow"></div>
     <div class="bubble-arrow"></div>
     <div class="text" id="taunt-text">text from taunt here</div>
+</div>
+
+
+
+<div class="taunt-bubble red-text" id="error">
+    <div class="bdr-arrow"></div>
+    <div class="bubble-arrow"></div>
+    <div class="text" id="error-text">text from error here</div>
 </div>
