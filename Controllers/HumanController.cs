@@ -164,10 +164,10 @@ namespace _31_by_3.Controllers
                         Card temp = player.hand[idx];
                         player.hand[idx] = player.hand[player.hand.Count - 1];
                         player.hand[player.hand.Count - 1] = temp;
-                        player.hand[player.hand.Count -1].selected = true;
                     }
                 }
-                HandValue.PartialSort(player, 2);
+                HandValue.PartialSort(player.hand, 2);
+                player.hand[player.hand.Count -1].selected = true;
             }
             else if(cardHelper.hand.Count == 3)
             {
