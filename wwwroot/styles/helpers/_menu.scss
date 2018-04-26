@@ -10,6 +10,7 @@ nav.menu{
         line-height: 1em;
         display: inline-block;
         font-size: 1em;
+        cursor: pointer;
         &:hover{
             color: $b-blue-8;
             background-color: white;
