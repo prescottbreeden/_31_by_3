@@ -676,25 +676,28 @@
     })
 
     $("#music").mouseenter(function(){
-        $(".music").toggle()
+        $(".music").show();
+        $("#music").addClass("active");
     })
 
     $(".music").mouseleave(function(){
-        $(".music").toggle();
+        $(".music").fadeOut(100);
     })
+
     $("#game-speed").mouseenter(function(){
-        $(".game-speed").toggle()
+        $(".game-speed").show();
     })
 
     $(".game-speed").mouseleave(function(){
-        $(".game-speed").toggle();
+        $(".game-speed").fadeOut(100);
     })
+
     $("#taunt").mouseenter(function(){
-        $(".taunt").toggle()
+        $(".taunt").show();
     })
 
     $(".taunt").mouseleave(function(){
-        $(".taunt").toggle();
+        $(".taunt").fadeOut(100);
     })
 
     $("#music-on").click(function(){
@@ -703,6 +706,10 @@
 
     $("#music-off").click(function(){
         PauseMusic();
+    })
+
+    $(".music").click(function(){
+        $(".music").attr("style", "display: none");
     })
 
     $("#speed-slow").click(function(){
@@ -715,6 +722,10 @@
 
     $("#speed-fast").click(function(){
         GameMaster.gameSpeed = 1;
+    })
+
+    $(".game-speed").click(function(){
+        $(".game-speed").attr("style", "display: none");
     })
 
     $("#taunt-off").click(function(){
@@ -731,6 +742,10 @@
 
     $("#taunt-tt").click(function(){
         GameMaster.taunts = "tt";
+    })
+
+    $(".taunt").click(function(){
+        $(".taunt").attr("style", "display: none");
     })
 
     //---------------------------------//
