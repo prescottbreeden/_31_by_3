@@ -3,7 +3,7 @@
     // Game Master Data
     var GameMaster;
 
-    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals"];
+    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals", "You should get back to work."];
 
     var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!", "Thou art a slothful commoner!"];
 
@@ -132,18 +132,34 @@
             $("#taunt-text").empty();
             $("#taunt-text").append(MontyPython[Math.floor(Math.random() * MontyPython.length)]);
 
-            $(".taunt-bubble").fadeIn(500);
-            $(".taunt-bubble").position({
+            $("#taunt-bubble").fadeIn(500);
+            $("#taunt-bubble").position({
                 my: "left",
                 at: "right+28",
                 of: ".hand" + GameMaster.turn
             });
             setTimeout(function(){
-                $(".taunt-bubble").fadeOut(800)
+                $("#taunt-bubble").fadeOut(800)
             }, 3000);
 
         }
-        // $(".taunt-bubble")
+    }
+
+    function ErrorBubble(message)
+    {
+        $("#error-text").empty();
+        $("#error-text").append(message);
+
+        $("#error").fadeIn(500);
+            $("#error").position({
+                my: "left",
+                at: "right+28",
+                of: ".hand" + GameMaster.turn
+            });
+            setTimeout(function(){
+                $("#error").fadeOut(800)
+            }, 3000);
+
     }
 
     function replacePlayerHands()
