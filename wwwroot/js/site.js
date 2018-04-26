@@ -191,14 +191,14 @@
                             </div>
                         </div>
                     `)
-                    if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endRound != null || GameMaster.allAI == true)
-                    {
-                        document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
-                    }
-                    else
-                    {
-                        document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
-                    }
+                if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endRound != null || GameMaster.allAI == true)
+                {
+                    document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
+                }
+                else
+                {
+                    document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+                }
             }
         }
     }
@@ -310,9 +310,9 @@
             {
                 handString += `${cardDict[GameMaster.players[idx].hand[i].face]}${suitDict[GameMaster.players[idx].hand[i].suit]} `
             }
-            htmlResults += `<tr>
-                                <td>${GameMaster.players[idx].name}</td><td>${GameMaster.players[idx].hand_value} points</td> <td>[ ${handString}]</td>
-                            </tr>`
+            htmlResults += `<div class="row">
+                                <div class="col-4">${GameMaster.players[idx].name}</div><div class="col-4">${GameMaster.players[idx].hand_value} points</div> <div class="col-4">[ ${handString}]</div>
+                            </div>`
         }
 
         document.getElementById("change_turn").innerHTML = "";
@@ -322,10 +322,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
-                        <table>
                             ${htmlResults}
-                        </table>
-                        </ul>
                         <button id="shadowbox_end_round">Next Round</button>
                     </div>
                 </div>
@@ -686,13 +683,21 @@
                         }
                         else if(GameMaster.players[player].hand.length == 3)
                         {
-                            if(GameMaster.discardEvaluation)
+                            if(GameMaster.players[player].hand_value > 27 && !GameMaster.discardEvaluation)
+                            {
+                                ErrorBubble(`Your hand value is ${GameMaster.players[player].hand_value}, try knocking`)
+                            }
+                            else if(GameMaster.players[player].hand_value > 27 && GameMaster.discardEvaluation)
+                            {
+                                ErrorBubble("Your hand is strong; either knock or take the card in the discard pile for a stronger hand")
+                            }
+                            else if(GameMaster.discardEvaluation)
                             {
                                 ErrorBubble("The card in the discard pile would help your current hand")
                             }
                             else
                             {
-                                ErrorBubble("You should draw from the deck")
+                                ErrorBubble("You should probably draw from the deck")
                             }
                         }
                     }
@@ -766,6 +771,7 @@
     {
         var player = GameMaster.turn;
         var nextplayer = GameMaster.turn+1;
+        var counter = 0;
         if(nextplayer == GameMaster.players.length)
         {
             nextplayer = 0;
@@ -777,7 +783,7 @@
                 //flag that card with a selected property
                 for(let i = 0; i < GameMaster.players[player].hand.length; i ++)
                 {
-                    var isSelected = $(".cardNumber" + i).find(".player-selected");
+                    isSelected = $(".cardNumber" + i).find(".player-selected");
                     if(isSelected.length)
                     {
                         GameMaster.players[player].hand[i].selected = true
@@ -807,10 +813,14 @@
                             }
                         }) // end of discard ajax
                     }
-                }
-                if(!isSelected.length)
-                {
-                    ErrorBubble("Plese choose a discard or click assist for suggested discard.")
+                    else
+                    {
+                        counter++
+                        if(counter == GameMaster.players[player].hand.length)
+                        {
+                            ErrorBubble("Plese choose a discard or click assist for suggested discard.")
+                        }
+                    }
                 }
             }
             else
@@ -855,7 +865,10 @@
                 }
             }
         }
-        ErrorBubble("You can only knock at the beginning of your turn.")
+        else
+        {
+            ErrorBubble("You can only knock at the beginning of your turn.")
+        }
     })
 
 }) // document ready

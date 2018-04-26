@@ -167,6 +167,24 @@ namespace _31_by_3
                     }
                 }
             }
+            int counter = 0;
+            List<Card> minList = new List<Card>();
+            foreach(Card c in player.hand)
+            {
+                if(c == min)
+                {
+                    counter++;
+                }
+            }
+            if(counter > 1)
+            {
+                foreach(Card c in player.hand)
+                {
+                    minList.Add(c);
+                }
+            HandValue.PartialSort(minList, minList.Count-1);
+            min = minList[minList.Count-1];
+            }
 
             return min;
         }
