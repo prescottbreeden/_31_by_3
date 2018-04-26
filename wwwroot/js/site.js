@@ -305,17 +305,17 @@
 
     function CallNextRound()
     {
-        if(!GameMaster.endGame)
-        {
-            $.ajax({
-                type: "POST",
-                data: {"GM" :JSON.stringify(GameMaster)},
-                url: "/NextRound",
-                dataType: "json",
-                success: function(res)
+        $.ajax({
+            type: "POST",
+            data: {"GM" :JSON.stringify(GameMaster)},
+            url: "/NextRound",
+            dataType: "json",
+            success: function(res)
+            {
+                console.log(res);
+                GameMaster = res;
+                if(!GameMaster.endGame)
                 {
-                    console.log(res);
-                    GameMaster = res;
                     ShowDiscardPile()
                     createPlayerSlots();
                     if(!GameMaster.players[GameMaster.turn].isHuman)
@@ -328,8 +328,32 @@
                         HumanTurnStart(GameMaster.players[GameMaster.turn].name);
                     }
                 }
-            })
-        }
+                else
+                {
+                    EndGame();
+                }
+            }
+        })
+    }
+
+    function EndGame()
+    {
+        document.getElementById("change_turn").innerHTML = "";
+        $("#change_turn").append(`
+        <div class="inner-shadow">
+            <div class="bubble-border">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tac">${GameMaster.players[0].name} won the game!</h2>
+                        <h4>Would you like to play again?</h4>
+                        <button id="PlayGame"></button>
+                        <button id="Home">Return to Home Screen</button>
+                    </div>
+                </div>
+            </div>
+        </div>`)
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
     }
 
     function NextTurn()
@@ -452,6 +476,12 @@
                 console.log("Reached end of else-if")
             }
         });
+    })
+
+    $("#Home").click(function()
+    {
+        $("#game_rules").toggle();
+        $("#game_rules_shadow_box").toggle();
     })
     
     $(document).on("click", "#Close_Rules", function(){

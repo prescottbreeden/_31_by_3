@@ -61,6 +61,10 @@ namespace _31_by_3
                     player.knocked = false;
                 }
             }
+            if(NextGame.Count == 1)
+            {
+                this.endGame = true;
+            }
             this.players = NextGame;
             this.dealer = PreviousGame.dealer;
             this.GameSpeed = PreviousGame.GameSpeed;
