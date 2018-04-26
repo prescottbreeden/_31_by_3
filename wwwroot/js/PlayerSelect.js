@@ -18,11 +18,11 @@ $(document).ready(function(){
         $("#AddPlayer").click(function(){
             if(playerNumber < 6)
             {
-                document.getElementById("PlayerForm").innerHTML += 
-                `<div class="form-group" id="player${playerNumber + 1}">
-                <p>Player ${playerNumber + 1} Name:</p>
-                <input type="text" class="form-control ml-2" name="player${playerNumber + 1}"  placeholder="..">
-                </div>`
+                $("#PlayerForm").append( 
+                    `<div class="form-group" id="player${playerNumber + 1}">
+                        <p>Player ${playerNumber + 1} Name:</p>
+                            <input type="text" class="form-control ml-2" name="player${playerNumber + 1}" value="" placeholder="..">
+                    </div>`)
                 playerNumber ++;
                 $("#PlayerCounter").remove();
                 $("#PlayerForm").append(`<input type="hidden" id="PlayerCounter" name="PlayerCounter" value="${playerNumber}">`);
