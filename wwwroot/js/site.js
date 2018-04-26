@@ -9,12 +9,13 @@
 
     var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "She turned me into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Go away before I taunt you a second time!", "What is the average airspeed velocity of an unlaiden swallow?", "Where'd you get the coconuts?!"];
 
-    $(".taunt-bubble").hide()
+    $(".taunt-bubble").hide();
 
     // var music = new Audio("../MidnightPianoBar.mp3")
-    var music = new Audio("../TakeFive.mp3")
+    var music = new Audio("../TakeFive.mp3");
     // var music = new Audio("../KindOfBlue.mp3")
-    music.volume = .38
+    music.volume = 0.38;
+
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
@@ -44,7 +45,8 @@
                                     <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <h3 class="player_tokens">Chips: ${GameMaster.players[player].chips}</h3>
+
+                                    <div class="chip-box" id="chip_box${player}"></div>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +97,21 @@
         <!-- END OF HAND  -->
             `)
         }
+        var chipBox = document.getElementById("chip_box");
+        for(let i = 0; i < GameMaster.players.length; i ++)
+        {
+            console.log("inside chip distribution");
+
+            for(let c = 0; c < GameMaster.players[i].chips; c++)
+            {
+                console.log("inside player chip");
+                $("#chip_box" + i).append(
+                `
+                    <div class="chip"></div>
+                `)
+            }
+        }
+
         for(let i = 0; i < GameMaster.players.length; i ++)
         {
             for(card in GameMaster.players[i].hand)
@@ -130,7 +147,7 @@
             switch(GameMaster.taunts)
             {
                 case "off":
-                    return;   
+                    return;
                 case "shakespeare":
                     $("#taunt-text").append(Shakespearian[Math.floor(Math.random() * Shakespearian.length)]);
                     break;
@@ -284,17 +301,17 @@
         var cardDict = {
             "1" : "A",
             "2" : "2",
-            "3" : "3", 
-            "4" : "4", 
-            "5" : "5", 
-            "6" : "6", 
-            "7" : "7", 
-            "8" : "8", 
-            "9" : "9", 
+            "3" : "3",
+            "4" : "4",
+            "5" : "5",
+            "6" : "6",
+            "7" : "7",
+            "8" : "8",
+            "9" : "9",
             "10" : "10",
             "11" : "J",
-            "12" : "Q",    
-            "13" : "K"    
+            "12" : "Q",
+            "13" : "K"
         }
         var suitDict = {
             "spades" : "♤",
@@ -512,7 +529,7 @@
         // $("#game_rules").toggle();
         // $("#game_rules_shadow_box").toggle();
     })
-    
+
     $(document).on("click", "#Close_Rules", function(){
         $("#game_rules").toggle();
         $("#game_rules_shadow_box").toggle();
@@ -531,7 +548,7 @@
                 hidePlayerHands();
                 HumanTurnStart(GameMaster.players[GameMaster.turn].name);
             }
-        });    
+        });
     })
 
     // hide menu rules
@@ -560,7 +577,7 @@
         $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
-    
+
     // hide shadowbox
     $(document).on("click", "#shadowbox_close", function(){
         $("#change_turn").toggle();
@@ -660,7 +677,7 @@
         if(GameMaster.players[player].isHuman)
         {
             $(".hand").find(".player-selected").removeClass("player-selected");
-            
+
             {
                 $.ajax({
                     type: "POST",

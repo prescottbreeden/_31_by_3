@@ -385,27 +385,31 @@ nav.menu {
     left: 146px;
     display: none; }
   nav.menu div.taunt {
-    left: 169px;
+    left: 49px;
     display: none; }
 
-.player-select .player-change {
-  margin: 10px 0;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1.1em; }
-  .player-select .player-change:hover {
-    text-shadow: 2px 2px 2px #999; }
-  .player-select .player-change:active {
-    text-shadow: 1px 1px 3px black; }
-.player-select .remove {
-  text-align: right; }
-.player-select .specific-spacer {
-  margin-top: 15px;
-  padding: 0 0 0 27px; }
+.player-select .f-wrap {
+  padding: 30px 50px 50px 50px; }
+  .player-select .f-wrap .player-change {
+    margin: 10px 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em; }
+    .player-select .f-wrap .player-change:hover {
+      text-shadow: 2px 2px 2px #999; }
+    .player-select .f-wrap .player-change:active {
+      text-shadow: 1px 1px 3px black; }
+  .player-select .f-wrap p.sm-fz {
+    font-size: 0.7em; }
+  .player-select .f-wrap .remove {
+    text-align: right; }
+  .player-select .f-wrap .specific-spacer {
+    margin-top: 15px;
+    padding: 0 0 0 27px; }
 
 .container {
   background-color: #657a64;
-  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+  background-image: url("/img/bg-fabric.png");
   padding: 0 20px 20px 20px;
   color: white;
   border: 5px solid #051c37;
@@ -443,6 +447,7 @@ nav.menu {
       height: 82px;
       width: 58px;
       border: 2px dotted #051c37;
+      box-shadow: 2px 2px 5px #777;
       z-index: 50; }
     .container .sidebar .deck-area .discard-x {
       position: absolute;
@@ -466,6 +471,9 @@ nav.menu {
       left: 0px;
       z-index: 55;
       transform: rotate(-5deg); }
+      .container .sidebar .deck-area .core:hover {
+        transform: rotate(-2deg);
+        left: -1px; }
     .container .sidebar .deck-area .shift1 {
       position: absolute;
       top: 0px;
@@ -506,8 +514,45 @@ nav.menu {
         min-height: 200px;
         position: relative;
         overflow: hidden; }
-        .container .game-area .hand-container .hand .hand-labels h3 {
-          font-size: 1.3em; }
+        .container .game-area .hand-container .hand .hand-labels {
+          position: relative; }
+          .container .game-area .hand-container .hand .hand-labels h3 {
+            font-size: 1.3em; }
+          .container .game-area .hand-container .hand .hand-labels .chip-box {
+            position: absolute;
+            top: 140px;
+            left: 68px; }
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+@keyframes flip {
+  from {
+    transform: rotatey(0deg); }
+  to {
+    transform: rotatey(360deg); } }
+            .container .game-area .hand-container .hand .hand-labels .chip-box .chip {
+              background-image: url("/img/blue-chip.png");
+              background-size: 35px 35px;
+              max-width: 35px;
+              width: 35px;
+              max-height: 35px;
+              height: 35px;
+              position: absolute;
+              top: 0px;
+              left: 25px; }
+              .container .game-area .hand-container .hand .hand-labels .chip-box .chip:hover {
+                animation-name: spin;
+                animation-duration: 3000ms;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear; }
+            .container .game-area .hand-container .hand .hand-labels .chip-box .chip:nth-child(2) {
+              left: 45px;
+              background-image: url("/img/green-chip.png"); }
+            .container .game-area .hand-container .hand .hand-labels .chip-box .chip:nth-child(3) {
+              left: 65px;
+              background-image: url("/img/red-chip.png"); }
         .container .game-area .hand-container .hand .hand-buttons .turn-indicator {
           font-size: 1.5em;
           min-height: 40px; }
