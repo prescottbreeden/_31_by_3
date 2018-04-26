@@ -484,6 +484,14 @@
         $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
+    
+    // hide shadowbox
+    $(document).on("click", "#shadowbox_close", function(){
+        $("#change_turn").toggle();
+        $("#change_turn_shadow_box").toggle();
+        replacePlayerHands();
+    })
+
     //--------------------------//
     //--nav menu functionality--//
     //--------------------------//
@@ -493,12 +501,6 @@
     })
 
 
-    // hide shadowbox
-    $(document).on("click", "#shadowbox_close", function(){
-        $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
-        replacePlayerHands();
-    })
 
     $(".music").mouseleave(function(){
         $(".music").toggle();
