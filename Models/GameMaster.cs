@@ -15,6 +15,7 @@ namespace _31_by_3
         public bool endGame;
         public bool AllAI { get; set;}
         public bool SinglePlayer { get; set; }
+        public bool DiscardEvaluation { get; set; }
         public GameMaster()
         {
         
@@ -32,10 +33,15 @@ namespace _31_by_3
             this.taunts = "off";
 
             GamePlay.Deal(this.players, this.deck);
+            bool winningHand = false;
             int HumanCount = 0;
             foreach(Player player in players)
             {
                 player.hand_value = HandValue.Calculate(player);
+                if(player.hand_value == 31 || player.hand_value == 32)
+                {
+                    winningHand = true;
+                }
                 if(player.isHuman)
                 {
                     this.AllAI = false;
@@ -45,6 +51,11 @@ namespace _31_by_3
             if(HumanCount == 1)
             {
                 this.SinglePlayer = true;
+            }
+            if(winningHand)
+            {
+                GameOver endRound = new GameOver(this);
+                this.endRound = endRound;
             }
         }
 
@@ -80,10 +91,15 @@ namespace _31_by_3
             this.turn = this.dealer;
 
             GamePlay.Deal(this.players, this.deck);
+            bool winningHand = false;
             int HumanCount = 0;
             foreach(Player player in players)
             {
                 player.hand_value = HandValue.Calculate(player);
+                if(player.hand_value == 31 || player.hand_value == 32)
+                {
+                    winningHand = true;
+                }
                 if(player.isHuman)
                 {
                     this.AllAI = false;
@@ -94,7 +110,11 @@ namespace _31_by_3
             {
                 this.SinglePlayer = true;
             }
-
+            if(winningHand)
+            {
+                GameOver endRound = new GameOver(this);
+                this.endRound = endRound;
+            }
         }
     }
 }

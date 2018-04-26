@@ -3,22 +3,22 @@
     // Game Master Data
     var GameMaster;
 
-    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals", "You should get back to work.", "You look like a D"];
+    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "You're like a monkey with cymbals", "You should get back to work.", "You look like a D"];
 
     var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!", "Thou art a slothful commoner!"];
 
-    var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "I'll turn you into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Quit or I'll taunt you a second time!"];
+    var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "She turned me into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Go away before I taunt you a second time!", "What is the average airspeed velocity of an unlaiden swallow?", "Where'd you get the coconuts?!"];
 
     $(".taunt-bubble").hide()
 
-    var music = new Audio("../MidnightPianoBar.mp3")
+    // var music = new Audio("../MidnightPianoBar.mp3")
+    var music = new Audio("../TakeFive.mp3")
+    // var music = new Audio("../KindOfBlue.mp3")
     music.volume = .38
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
     // ----------------------- //
-
-
 
     function createPlayerSlots()
     {
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-12">
                             <!-- Show Hide Hand button -->
-                            <button class="assist-btn">Help</button>
+                            <button class="assist-btn">Assist</button>
                         </div>
                     </div>
                 </div>
@@ -281,10 +281,38 @@
 
     function EndRoundResults()
     {
+        var cardDict = {
+            "1" : "A",
+            "2" : "2",
+            "3" : "3", 
+            "4" : "4", 
+            "5" : "5", 
+            "6" : "6", 
+            "7" : "7", 
+            "8" : "8", 
+            "9" : "9", 
+            "10" : "10",
+            "11" : "J",
+            "12" : "Q",    
+            "13" : "K"    
+        }
+        var suitDict = {
+            "spades" : "♤",
+            "clubs" : "♧",
+            "hearts" : "♡",
+            "diamonds" : "♢",
+        }
         var htmlResults = ""
         for(var idx = 0; idx < GameMaster.players.length; idx++)
         {
-            htmlResults += `<li>${GameMaster.players[idx].name}: ${GameMaster.players[idx].hand_value} points</li>`
+            var handString = ""
+            for(var i = 0; i < GameMaster.players[idx].hand.length; i++)
+            {
+                handString += `${cardDict[GameMaster.players[idx].hand[i].face]}${suitDict[GameMaster.players[idx].hand[i].suit]} `
+            }
+            htmlResults += `<tr>
+                                <td>${GameMaster.players[idx].name}</td><td>${GameMaster.players[idx].hand_value} points</td> <td>[ ${handString}]</td>
+                            </tr>`
         }
 
         document.getElementById("change_turn").innerHTML = "";
@@ -294,8 +322,9 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
-                        <ul>
+                        <table>
                             ${htmlResults}
+                        </table>
                         </ul>
                         <button id="shadowbox_end_round">Next Round</button>
                     </div>
@@ -483,8 +512,8 @@
 
     $("#Home").click(function()
     {
-        $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle();
+        // $("#game_rules").toggle();
+        // $("#game_rules_shadow_box").toggle();
     })
     
     $(document).on("click", "#Close_Rules", function(){
@@ -507,6 +536,19 @@
             }
         });    
     })
+
+    // hide menu rules
+    $("#big_close_menu_rules").click(function(){
+        $("#menu_rules").toggle();
+        $("#menu_rules_shadow_box").toggle();
+    })
+    // hide menu rules
+    $("#close_menu_rules").click(function(){
+        $("#menu_rules").toggle();
+        $("#menu_rules_shadow_box").toggle();
+    })
+
+
     // Next human player ready
     $(document).on("click", "#shadowbox_confirm", function()
     {
@@ -532,6 +574,11 @@
     //--------------------------//
     //--nav menu functionality--//
     //--------------------------//
+
+    $("#show_rules_menu").click(function(){
+        $("#menu_rules").toggle();
+        $("#menu_rules_shadow_box").toggle();
+    })
 
     $("#music").mouseenter(function(){
         $(".music").toggle()
@@ -616,7 +663,7 @@
         if(GameMaster.players[player].isHuman)
         {
             $(".hand").find(".player-selected").removeClass("player-selected");
-            if(GameMaster.players[player].hand.length ==4)
+            
             {
                 $.ajax({
                     type: "POST",
@@ -629,7 +676,7 @@
                         console.log(res);
                         GameMaster = res;
                         replacePlayerHands();
-
+                        if(GameMaster.players[player].hand.length == 4)
                         for(var i = 0; i < GameMaster.players[player].hand.length; i++)
                         {
                             if(GameMaster.players[player].hand[i].selected == true)
@@ -637,13 +684,24 @@
                                 $("#player_card"+player+i).addClass("player-selected")
                             }
                         }
+                        else if(GameMaster.players[player].hand.length == 3)
+                        {
+                            if(GameMaster.discardEvaluation)
+                            {
+                                ErrorBubble("The card in the discard pile would help your current hand")
+                            }
+                            else
+                            {
+                                ErrorBubble("You should draw from the deck")
+                            }
+                        }
                     }
                 })
             }
-        }
-        else
-        {
-            console.log("First tip: Draw a Card you dingus...")
+            // else
+            // {
+            //     ErrorBubble("Please draw a card first.")
+            // }
         }
     })
 
@@ -671,12 +729,12 @@
             }
             else
             {
-                console.log("You may only draw once per turn");
+                ErrorBubble("You may only draw once per turn.");
             }
         }
         else
         {
-            console.log("You cannot draw at this time");
+            ErrorBubble("You cannot draw at this time.");
         }
     });
 
@@ -699,7 +757,7 @@
         }
         else
         {
-            console.log("You may only draw once per turn")
+            ErrorBubble("You may only draw once per turn.")
         }
     });
 
@@ -750,10 +808,14 @@
                         }) // end of discard ajax
                     }
                 }
+                if(!isSelected.length)
+                {
+                    ErrorBubble("Plese choose a discard or click assist for suggested discard.")
+                }
             }
             else
             {
-                console.log("Please draw a card first")
+                ErrorBubble("Please draw a card first.")
                 return;
             }
         }
@@ -793,6 +855,7 @@
                 }
             }
         }
+        ErrorBubble("You can only knock at the beginning of your turn.")
     })
 
 }) // document ready

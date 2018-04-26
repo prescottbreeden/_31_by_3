@@ -27,10 +27,9 @@ namespace _31_by_3
                     deck.DrawFromDeck(player);
                 }
             }
-            foreach(Player bobos in players)
+            foreach(Player person in players)
             {
-                System.Console.WriteLine("bobo ************************");
-                HandValue.SortHand(bobos);
+                HandValue.SortHand(person);
             }
             deck.MoveTopCardToDiscardPile();
         }

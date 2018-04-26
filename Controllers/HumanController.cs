@@ -153,13 +153,31 @@ namespace _31_by_3.Controllers
             Player player = GameMaster.players[GameMaster.turn];
             HandValue.SortHand(player);
             AI cardHelper = new AI(player);
-            Card min = cardHelper.ChooseDiscard(cardHelper);
-
-            for(int i = 0; i < player.hand.Count; i ++)
+            if(cardHelper.hand.Count == 4)
             {
-                if(player.hand[i] == min)
-                {  
-                    player.hand[i].selected = true; // add discard selector
+                Card min = cardHelper.ChooseDiscard(cardHelper);
+
+                for(int idx = 0; idx < player.hand.Count; idx++)
+                {
+                    if(player.hand[idx] == min)
+                    {
+                        Card temp = player.hand[idx];
+                        player.hand[idx] = player.hand[player.hand.Count - 1];
+                        player.hand[player.hand.Count - 1] = temp;
+                        player.hand[player.hand.Count -1].selected = true;
+                    }
+                }
+                HandValue.PartialSort(player, 2);
+            }
+            else if(cardHelper.hand.Count == 3)
+            {
+                if(cardHelper.EvaluateDiscardCard(cardHelper, GameMaster.deck.DiscardPile[0], GameMaster))
+                {
+                    GameMaster.DiscardEvaluation = true;
+                }
+                else
+                {
+                    GameMaster.DiscardEvaluation = false;
                 }
             }
 

@@ -134,5 +134,58 @@ namespace _31_by_3
                 }
             }
         }
+        public static void PartialSort(Player player, int cardIdx)
+        {
+            bool sorted = false;
+            bool madeChanges = false;
+            var runner = 0;
+            while(!sorted)
+            {
+                if(runner == cardIdx)
+                {
+                    System.Console.WriteLine("if runner is at the end");
+                    if(!madeChanges)
+                    {
+                        System.Console.WriteLine("if not made changes");
+                        sorted = true;
+                    }
+                    else
+                    {
+                        madeChanges = false;
+                        runner = 0;
+                    }
+                }
+                else
+                {
+                    if(player.hand[runner].value < player.hand[runner + 1].value)
+                    {
+                        madeChanges = true;
+                        var temp = player.hand[runner + 1];
+                        player.hand[runner + 1] = player.hand[runner];
+                        player.hand[runner] = temp;
+                    }
+                    if(player.hand[runner].value == player.hand[runner+1].value)
+                    {
+                        int face0 = Int32.Parse(player.hand[runner].face);
+                        if(face0 == 1)
+                        {
+                            face0 = 14;
+                        }
+                        int face1 = Int32.Parse(player.hand[runner + 1].face);
+                        if(face1 == 1)
+                        {
+                            face1 = 14;
+                        }
+                        if(face0 < face1)
+                        {
+                            var temp = player.hand[runner + 1];
+                            player.hand[runner + 1] = player.hand[runner];
+                            player.hand[runner] = temp;
+                        }
+                    }
+                    runner++;
+                }
+            }
+        }
     }
 }
