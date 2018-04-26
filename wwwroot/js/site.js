@@ -3,7 +3,7 @@
     // Game Master Data
     var GameMaster;
 
-    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals", "You should get back to work."];
+    var TrashTalk = ["It's like seabiscuit in the third race.", "Gross!", "Don't try too hard.", "Justin is my css-wife.", "What's wrong with you?", "You're a very large child.", "Your like a monkey with cymbals", "You should get back to work.", "You look like a D"];
 
     var Shakespearian = ["Thou art a crooked bog!", "Thou art a thin faced plague!", "Thou art a slothful dog!", "Thou art a deformed coward!", "Thou art a foolish ape!", "Thou art an ordinary double villain!", "Thou art an unnecessary carbuncle!", "Thou art a crusty nit!", "Thou art a whining maltworm!", "Thou art a slothful commoner!"];
 
@@ -127,15 +127,29 @@
 
     function ComputerTaunt()
     {
-        if(Math.floor(Math.random() * 4) + 1 == 4)
+        if(Math.floor(Math.random() * 1) + 1 == 1)
         {
             $("#taunt-text").empty();
+            switch(GameMaster.taunts)
+            {
+                case "off":
+                    return;   
+                case "shakespeare":
+                    $("#taunt-text").append(Shakespearian[Math.floor(Math.random() * Shakespearian.length)]);
+                    break;
+                case "mp":
+                    $("#taunt-text").append(MontyPython[Math.floor(Math.random() * MontyPython.length)]);
+                    break;
+                case "tt":
+                    $("#taunt-text").append(TrashTalk[Math.floor(Math.random() * TrashTalk.length)]);
+                    break;
+            }
             $("#taunt-text").append(MontyPython[Math.floor(Math.random() * MontyPython.length)]);
 
             $("#taunt-bubble").fadeIn(500);
             $("#taunt-bubble").position({
                 my: "left",
-                at: "right+28",
+                at: "right+15",
                 of: ".hand" + GameMaster.turn
             });
             setTimeout(function(){
@@ -504,8 +518,6 @@
         $(".music").toggle()
     })
 
-
-
     $(".music").mouseleave(function(){
         $(".music").toggle();
     })
@@ -533,7 +545,7 @@
     })
 
     $("#speed-slow").click(function(){
-        GameMaster.gameSpeed = 1;
+        GameMaster.gameSpeed = 3;
     })
 
     $("#speed-normal").click(function(){
@@ -541,8 +553,28 @@
     })
 
     $("#speed-fast").click(function(){
-        GameMaster.gameSpeed = 3;
+        GameMaster.gameSpeed = 1;
     })
+
+    $("#taunt-off").click(function(){
+        GameMaster.taunts = "off";
+    })
+
+    $("#taunt-shakespeare").click(function(){
+        GameMaster.taunts = "shakespeare";
+    })
+
+    $("#taunt-mp").click(function(){
+        GameMaster.taunts = "mp";
+    })
+
+    $("#taunt-tt").click(function(){
+        GameMaster.taunts = "tt";
+    })
+
+    //---------------------------------//
+    //---- End of nav jquery stuff ----//
+    //---------------------------------//
 
     // Select a Card
     $(document).on("click", ".clickable", function()

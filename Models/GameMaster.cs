@@ -6,11 +6,12 @@ namespace _31_by_3
     {
         public int dealer { get; set; }
         public int turn { get; set; }
-        public int GameSpeed {get; set;}
+        public int gameSpeed {get; set;}
         public Deck deck { get; set; }
         public bool knocked { get; set; }
         public List<Player> players { get; set; }
         public GameOver endRound { get; set; }
+        public string taunts {get;set;}
         public bool endGame;
         public bool AllAI { get; set;}
         public bool SinglePlayer { get; set; }
@@ -27,7 +28,8 @@ namespace _31_by_3
             this.players = Players;
             this.AllAI = true;
             this.knocked = false;
-            this.GameSpeed = 2;
+            this.gameSpeed = 2;
+            this.taunts = "off";
 
             GamePlay.Deal(this.players, this.deck);
             int HumanCount = 0;
@@ -63,7 +65,7 @@ namespace _31_by_3
             }
             this.players = NextGame;
             this.dealer = PreviousGame.dealer;
-            this.GameSpeed = PreviousGame.GameSpeed;
+            this.gameSpeed = PreviousGame.gameSpeed;
             this.knocked = false;
             this.AllAI = true;
             this.dealer++;
