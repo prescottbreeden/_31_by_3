@@ -61,11 +61,12 @@
                 </div>
                 <div class="col-2 hand-buttons">
                     <div class="row">
+
                         <div class="col-6">
                             <i class="fas fa-hand-rock"></i>
                         </div>
                         <div class="col-6">
-                            <div class="turn-indicator">
+                            <div class="turn-indicator" id="turn_indicator${player}">
                                 <i class="fas fa-child"></i>
                             </div>
                         </div>
@@ -120,8 +121,15 @@
         }
     }
 
+    function manGreen()
+    {   
+        $(".turn-indicator").removeClass("man-green");
+        $("#turn_indicator" + GameMaster.turn).addClass("man-green");
+    }
+
     function drawControls()
     {
+        manGreen();
         for(let i = 0; i < GameMaster.players.length; i ++)
         {
             if(GameMaster.players[i].isHuman == true && GameMaster.players[i].player_seat == GameMaster.turn)
@@ -735,11 +743,17 @@
     {
         if(GameMaster.players[GameMaster.turn].isHuman)
         {
-
             if($(this).parents('.HandTarget' + GameMaster.turn).length)
             {
-                $(".hand").find(".player-selected").removeClass("player-selected");
-                $(this).addClass("player-selected");
+                if($(this).hasClass("player-selected"))
+                {
+                    $(this).toggleClass("player-selected");
+                }
+                else
+                {
+                    $(".hand").find(".player-selected").removeClass("player-selected");
+                    $(this).toggleClass("player-selected");
+                }
             }
         }
     });
