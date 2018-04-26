@@ -254,6 +254,7 @@
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
     }
+
     function HumanTurnStart(nextplayerName)
     {
         document.getElementById("change_turn").innerHTML = "";
@@ -274,6 +275,7 @@
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
     }
+
     function EndRoundResults()
     {
         var htmlResults = ""
@@ -300,6 +302,7 @@
         $("#change_turn").toggle();
         $("#change_turn_shadow_box").toggle();
     }
+
     function CallNextRound()
     {
         if(!GameMaster.endGame)
@@ -446,6 +449,7 @@
             {
                 hidePlayerHands();
                 HumanTurnStart(GameMaster.players[GameMaster.turn].name);
+                console.log("Reached end of else-if")
             }
         });
     })
