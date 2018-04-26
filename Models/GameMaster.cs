@@ -30,7 +30,7 @@ namespace _31_by_3
             this.AllAI = true;
             this.knocked = false;
             this.gameSpeed = 2;
-            this.taunts = "mp";
+            this.taunts = "off";
 
             GamePlay.Deal(this.players, this.deck);
             bool winningHand = false;

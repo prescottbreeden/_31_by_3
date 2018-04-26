@@ -68,27 +68,7 @@
                             </div>
                         </div>
                         <div class="col-4"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- feel free to put these inside forms if easier/required. Make sure the form is instantiated inside of the col-12 -->
-                            <!-- discard card button -->
-                            <button class="discard-btn">Discard</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- laydown button -->
-                            <button class ="knock-btn">Knock</button>
-                            <!-- knock button -->
-                            <!-- <button class="hide">Lay Down!</button> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- Show Hide Hand button -->
-                            <button class="assist-btn">Assist</button>
-                        </div>
+                        <div id="buttons${player}"></div>
                     </div>
                 </div>
             </div>
@@ -139,6 +119,43 @@
         }
     }
 
+    function drawControls()
+    {
+        for(let i = 0; i < GameMaster.players.length; i ++)
+        {
+            if(GameMaster.players[i].isHuman == true && GameMaster.players[i].player_seat == GameMaster.turn)
+            {
+                console.log("It's human!!")
+                $("#buttons" + i).append(
+                    `<div class="row">
+                        <div class="col-12">
+                            <!-- feel free to put these inside forms if easier/required. Make sure the form is instantiated inside of the col-12 -->
+                            <!-- discard card button -->
+                            <button class="discard-btn">Discard</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- laydown button -->
+                            <button class ="knock-btn">Knock</button>
+                            <!-- knock button -->
+                            <!-- <button class="hide">Lay Down!</button> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Show Assist button -->
+                            <button class="assist-btn">Assist</button>
+                        </div>
+                    </div>`)
+            }
+            else if($("#buttons" + i).html().length)
+            {
+                $("#buttons" + i).empty();
+            }
+        }
+    }
+
     function fillTaunt(bubble)
     {
         switch(GameMaster.taunts)
@@ -159,7 +176,7 @@
 
     function ComputerTaunt()
     {
-        if(Math.floor(Math.random() * 2) + 1 == 1)
+        if(Math.floor(Math.random() * 4) + 1 == 4)
         {
             if($("#taunt-text").html().length)
             {
@@ -168,7 +185,7 @@
                 $("#taunt-bubble-extra").fadeIn(500);
                 $("#taunt-bubble-extra").position({
                     my: "left",
-                    at: "right+15",
+                    at: "right+20",
                     of: ".hand" + GameMaster.turn
                 });
                 setTimeout(function(){
@@ -208,7 +225,7 @@
         $("#error").fadeIn(500);
             $("#error").position({
                 my: "left",
-                at: "right+28",
+                at: "right+20",
                 of: ".hand" + GameMaster.turn
             });
             setTimeout(function(){
@@ -391,6 +408,7 @@
                 {
                     ShowDiscardPile()
                     createPlayerSlots();
+                    drawControls();
                     if(!GameMaster.players[GameMaster.turn].isHuman)
                     {
                         CompDraw();
@@ -440,6 +458,7 @@
                 console.log(res);
                 GameMaster = res;
                 replacePlayerHands();
+                drawControls();
                 if(GameMaster.endRound != null)
                 {
                     replacePlayerHands();
@@ -538,6 +557,7 @@
             console.log(GameMaster);
             ShowDiscardPile()
             createPlayerSlots();
+            drawControls();
             if(!GameMaster.players[GameMaster.turn].isHuman)
             {
                 CompDraw();
@@ -566,6 +586,7 @@
             console.log(GameMaster);
             ShowDiscardPile()
             createPlayerSlots();
+            drawControls();
             if(!GameMaster.players[GameMaster.turn].isHuman)
             {
                 CompDraw();
