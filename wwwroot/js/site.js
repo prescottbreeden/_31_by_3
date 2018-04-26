@@ -160,8 +160,6 @@
     {
         switch(GameMaster.taunts)
             {
-                case "off":
-                    return;
                 case "shakespeare":
                     $(bubble).append(Shakespearian[Math.floor(Math.random() * Shakespearian.length)]);
                     break;
@@ -176,44 +174,46 @@
 
     function ComputerTaunt()
     {
-        if(Math.floor(Math.random() * 4) + 1 == 4)
+        if(GameMaster.taunts != "off")
         {
-            if($("#taunt-text").html().length)
-            {
-                var bubble2 = $("#taunt-text-extra")
-                fillTaunt(bubble2)
-                $("#taunt-bubble-extra").fadeIn(500);
-                $("#taunt-bubble-extra").position({
-                    my: "left",
-                    at: "right+20",
-                    of: ".hand" + GameMaster.turn
-                });
-                setTimeout(function(){
-                    $("#taunt-bubble-extra").fadeOut(800)
-                }, 3000);
-                setTimeout(function(){
-                    $("#taunt-text-extra").empty()
-                }, 4000)
-            }
-            else
-            {
-                var bubble = $("#taunt-text")
-                fillTaunt(bubble)
-                $("#taunt-bubble").fadeIn(500);
-                $("#taunt-bubble").position({
-                    my: "left",
-                    at: "right+15",
-                    of: ".hand" + GameMaster.turn
-                });
-                setTimeout(function(){
-                    $("#taunt-bubble").fadeOut(800)
-                }, 3000);
-                setTimeout(function(){
-                    $("#taunt-text").empty()
-                }, 4000)
-            }
 
-
+            if(Math.floor(Math.random() * 4) + 1 == 4)
+            {
+                if($("#taunt-text").html().length)
+                {
+                    var bubble2 = $("#taunt-text-extra")
+                    fillTaunt(bubble2)
+                    $("#taunt-bubble-extra").fadeIn(500);
+                    $("#taunt-bubble-extra").position({
+                        my: "left",
+                        at: "right+20",
+                        of: ".hand" + GameMaster.turn
+                    });
+                    setTimeout(function(){
+                        $("#taunt-bubble-extra").fadeOut(800)
+                    }, 3000);
+                    setTimeout(function(){
+                        $("#taunt-text-extra").empty()
+                    }, 4000)
+                }
+                else
+                {
+                    var bubble = $("#taunt-text")
+                    fillTaunt(bubble)
+                    $("#taunt-bubble").fadeIn(500);
+                    $("#taunt-bubble").position({
+                        my: "left",
+                        at: "right+15",
+                        of: ".hand" + GameMaster.turn
+                    });
+                    setTimeout(function(){
+                        $("#taunt-bubble").fadeOut(800)
+                    }, 3000);
+                    setTimeout(function(){
+                        $("#taunt-text").empty()
+                    }, 4000)
+                }
+            }
         }
     }
 
