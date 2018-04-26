@@ -61,7 +61,6 @@
                 </div>
                 <div class="col-2 hand-buttons">
                     <div class="row">
-
                         <div class="col-6">
                             <i class="fas fa-hand-rock"></i>
                         </div>
