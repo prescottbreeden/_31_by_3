@@ -49,7 +49,7 @@ namespace _31_by_3.Controllers
             GameMaster GameMaster = JsonConvert.DeserializeObject<GameMaster>(GM);
 
             Random random = new Random();
-            System.Threading.Thread.Sleep((random.Next(750, 1650) * GameMaster.GameSpeed));
+            System.Threading.Thread.Sleep((random.Next(750, 1650) * GameMaster.gameSpeed));
 
             Player player = GameMaster.players[GameMaster.turn];
             
