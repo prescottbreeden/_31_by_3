@@ -124,7 +124,7 @@
 
     function ComputerTaunt()
     {
-        if(Math.floor(Math.random() * 1) + 1 == 1)
+        if(Math.floor(Math.random() * 4) + 1 == 4)
         {
             $("#taunt-text").empty();
             switch(GameMaster.taunts)
