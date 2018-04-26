@@ -9,10 +9,10 @@
 
     var MontyPython = ["It's only a flesh wound...", "My sister was bit by a moose", "Moose bites can be pretti nasti", "I'll do you for that!", "Bring out the holy hand grenade of Antioch!", "Ni!!", "Help help! I'm being oppressed!", "I'll bite your legs off!", "I fart in your general direction!", "Anyone in the mood for a farcical aquatic ceremony?", "Go and boil your bottoms, you sons of silly persons!", "I'll turn you into a newt!", "Your mother was a hamster and your father smelt of elderberries!", "Quit or I'll taunt you a second time!"];
 
-    $(".taunt-bubble").hide()
+    $(".taunt-bubble").hide();
 
-    var music = new Audio("../MidnightPianoBar.mp3")
-    music.volume = .38
+    var music = new Audio("../MidnightPianoBar.mp3");
+    music.volume = 0.38;
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
@@ -44,7 +44,8 @@
                                     <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <h3 class="player_tokens">Chips: ${GameMaster.players[player].chips}</h3>
+
+                                    <div class="chip-box" id="chip_box${player}"></div>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +96,21 @@
         <!-- END OF HAND  -->
             `)
         }
+        var chipBox = document.getElementById("chip_box");
+        for(let i = 0; i < GameMaster.players.length; i ++)
+        {
+            console.log("inside chip distribution");
+
+            for(let c = 0; c < GameMaster.players[i].chips; c++)
+            {
+                console.log("inside player chip");
+                $("#chip_box" + i).append(
+                `
+                    <div class="chip"></div>
+                `)
+            }
+        }
+
         for(let i = 0; i < GameMaster.players.length; i ++)
         {
             for(card in GameMaster.players[i].hand)
@@ -472,7 +488,7 @@
         $("#game_rules").toggle();
         $("#game_rules_shadow_box").toggle();
     })
-    
+
     $(document).on("click", "#Close_Rules", function(){
         $("#game_rules").toggle();
         $("#game_rules_shadow_box").toggle();
@@ -491,7 +507,7 @@
                 hidePlayerHands();
                 HumanTurnStart(GameMaster.players[GameMaster.turn].name);
             }
-        });    
+        });
     })
     // Next human player ready
     $(document).on("click", "#shadowbox_confirm", function()
@@ -507,7 +523,7 @@
         $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
-    
+
     // hide shadowbox
     $(document).on("click", "#shadowbox_close", function(){
         $("#change_turn").toggle();
