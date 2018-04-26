@@ -43,6 +43,9 @@
 .red-text {
   color: #c00; }
 
+.mh100 {
+  min-height: 100px; }
+
 .tl-arrow {
   position: absolute;
   top: -2px;
@@ -114,19 +117,41 @@ img {
 
 button, .button .btn {
   background-color: #051c37;
-  color: white;
-  padding: 7px 25px;
-  border: silver 2px solid;
-  margin: 1px 1px 1px 1px;
+  padding: 5px 15px;
   cursor: pointer;
-  max-width: 100%; }
+  max-width: 100%;
+  border: none;
+  box-shadow: 0 6px #7d9e7c;
+  position: relative;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  display: inline-block;
+  letter-spacing: 1px;
+  margin: 0 0 15px 0; }
   button:hover, .button .btn:hover {
-    background-color: rgba(5, 28, 55, 0.8);
-    padding: 8px 26px;
-    margin: 0; }
+    top: 2px;
+    transition: top 0.5s ease;
+    box-shadow: 0 3px #7d9e7c;
+    transition: box-shadow 0.5s ease;
+    background-color: rgba(5, 28, 55, 0.9);
+    transition: background-color 0.5s ease; }
+  button:active, .button .btn:active {
+    box-shadow: 0 3px orange; }
+  button:focus, .button .btn:focus {
+    outline: none; }
 
-.gbg-button {
-  border: #657a64; }
+.btn-x {
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 1.5em;
+  margin: 0;
+  color: #3E423A; }
+  .btn-x:hover {
+    color: #051c37;
+    box-shadow: none;
+    background-color: transparent;
+    top: 0; }
 
 .shadowbox {
   width: 100%;
@@ -143,7 +168,7 @@ button, .button .btn {
   position: fixed;
   top: 25%;
   left: 50%;
-  max-width: 500px;
+  max-width: 700px;
   width: 50%;
   max-height: 600px;
   margin: 0 auto;
@@ -170,6 +195,9 @@ button, .button .btn {
     max-height: 500px;
     padding: 25px;
     overflow-x: hidden; }
+
+.shadow-bubble {
+  padding: 20px 20px 20px 20px; }
 
 .taunt-bubble {
   position: absolute;
@@ -348,7 +376,7 @@ nav.menu {
     font-size: 1em;
     cursor: pointer; }
     nav.menu .main-menu:hover {
-      color: rgba(5, 28, 55, 0.8);
+      color: rgba(5, 28, 55, 0.9);
       background-color: white;
       text-decoration: none; }
   nav.menu .submenu {
@@ -375,7 +403,12 @@ nav.menu {
       cursor: pointer; }
       nav.menu .submenu .sub-item:hover {
         background-color: #999 0.8;
-        transition: background-color 0.5s ease; }
+        transition: background-color 0.5s ease;
+        text-shadow: 0px 1px 1px #888;
+        transition: text-shadow 0.5s ease; }
+      nav.menu .submenu .sub-item:active {
+        transition: background-color 0.2s ease;
+        background-color: #A4CFBE; }
     nav.menu .submenu li:last-of-type {
       border: none; }
   nav.menu .music {
@@ -438,16 +471,21 @@ nav.menu {
       padding-left: 18px; }
   .container .sidebar .deck-area {
     position: relative; }
+    .container .sidebar .deck-area .discard-img {
+      min-width: 63px;
+      min-height: 96px; }
+      .container .sidebar .deck-area .discard-img:hover {
+        transform: rotate(3deg); }
     .container .sidebar .deck-area h5.deck-label {
       margin: 30px 0 10px 0; }
     .container .sidebar .deck-area .discard-bg {
       position: absolute;
       top: 3px;
       left: 25px;
-      height: 82px;
+      height: 92px;
       width: 58px;
       border: 2px dotted #051c37;
-      box-shadow: 2px 2px 5px #777;
+      box-shadow: 0px 0px 12px #777;
       z-index: 50; }
     .container .sidebar .deck-area .discard-x {
       position: absolute;
@@ -472,18 +510,20 @@ nav.menu {
       z-index: 55;
       transform: rotate(-5deg); }
       .container .sidebar .deck-area .core:hover {
-        transform: rotate(-2deg);
+        transform: rotate(0deg);
         left: -1px; }
     .container .sidebar .deck-area .shift1 {
       position: absolute;
       top: 0px;
       left: 11px;
-      z-index: 50; }
+      z-index: 50;
+      cursor: auto; }
     .container .sidebar .deck-area .shift2 {
       position: absolute;
       top: 0px;
       left: 5px;
-      z-index: 51; }
+      z-index: 51;
+      cursor: auto; }
     .container .sidebar .deck-area .b-wrap {
       text-align: center;
       width: 171px;
@@ -558,10 +598,6 @@ nav.menu {
           min-height: 40px; }
           .container .game-area .hand-container .hand .hand-buttons .turn-indicator i {
             width: 100%; }
-        .container .game-area .hand-container .hand .hand-buttons .discard-btn {
-          padding: 7px 20px; }
-          .container .game-area .hand-container .hand .hand-buttons .discard-btn:hover {
-            padding: 8px 21px; }
         .container .game-area .hand-container .hand .hand-buttons button {
           width: 100%;
           text-align: center; }

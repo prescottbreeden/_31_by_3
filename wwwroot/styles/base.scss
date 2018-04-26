@@ -94,6 +94,11 @@ body{
         .deck-area{
             position: relative;
             .discard-img{
+                min-width: 63px;
+                min-height: 96px;
+                &:hover{
+                    transform: rotate(3deg);
+                }
             }
             h5.deck-label{
                 margin: 30px 0 10px 0;
@@ -102,10 +107,10 @@ body{
                 position: absolute;
                 top: 3px;
                 left: 25px;
-                height: 82px;
+                height: 92px;
                 width: 58px;
                 border: 2px dotted $b-blue;
-                box-shadow: 2px 2px 5px #777;
+                box-shadow: 0px 0px 12px #777;
                 z-index: 50;
 
             }
@@ -134,7 +139,7 @@ body{
                 z-index: 55;
                 transform: rotate(-5deg);
                 &:hover{
-                    transform: rotate(-2deg);
+                    transform: rotate(0deg);
                     left: -1px;
                 }
             }
@@ -143,12 +148,14 @@ body{
                 top: 0px;
                 left: 11px;
                 z-index: 50;
+                cursor: auto;
             }
             .shift2{
                 position: absolute;
                 top: 0px;
                 left: 5px;
                 z-index: 51;
+                cursor: auto;
             }
             .b-wrap{
                 text-align: center;
@@ -168,6 +175,7 @@ body{
                 z-index: 51;
                 position: relative;
                 img{
+                    // box-shadow: 0px 0px 5px #777;
                     max-width: 100%;;
                     width: 100%;
                     height: auto;
@@ -280,12 +288,6 @@ body{
                         min-height: 40px;
                         i{
                             width: 100%;
-                        }
-                    }
-                    .discard-btn{
-                        padding: 7px 20px;
-                        &:hover{
-                            padding: 8px 21px;
                         }
                     }
                     button{

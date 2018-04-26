@@ -259,14 +259,16 @@
         document.getElementById("change_turn").innerHTML = "";
         $("#change_turn").append(`
         <div class="inner-shadow">
-            <div class="bubble-border">
+            <div class="bubble-border shadow-bubble">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${nextplayerName}'s turn is next:</h2>
-                        <ul>
-                            <li>Click "Ready!" to show your cards and begin your turn.</li>
-                        </ul>
-                        <button id="shadowbox_confirm">Ready!</button>
+                        <p>Click "Ready!" to show your cards and begin your turn.</p>
+                        <div class="row">
+                            <div class="col-12 clearfix">
+                                <button class="float-right" id="shadowbox_confirm">Ready!</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -280,14 +282,16 @@
         document.getElementById("change_turn").innerHTML = "";
         $("#change_turn").append(`
         <div class="inner-shadow">
-            <div class="bubble-border">
+            <div class="bubble-border shadow-bubble">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${nextplayerName}'s turn is next:</h2>
-                        <ul>
-                            <li>Click "Ready!" to show your cards and begin your turn.</li>
-                        </ul>
-                        <button id="shadowbox_close">Ready!</button>
+                        <p>Click "Ready!" to show your cards and begin your turn.</p>
+                        <div class="row">
+                            <div class="col-12 clearfix">
+                                <button class="float-right" id="shadowbox_close">Ready!</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -328,19 +332,30 @@
                 handString += `${cardDict[GameMaster.players[idx].hand[i].face]}${suitDict[GameMaster.players[idx].hand[i].suit]} `
             }
             htmlResults += `<div class="row">
-                                <div class="col-4">${GameMaster.players[idx].name}</div><div class="col-4">${GameMaster.players[idx].hand_value} points</div> <div class="col-4">[ ${handString}]</div>
+                                <div class="col-4">
+                                    <p>${GameMaster.players[idx].name}</p>
+                                </div><div class="col-4">
+                                    <p>${GameMaster.players[idx].hand_value} points</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>[ ${handString}]</p>
+                                </div>
                             </div>`
         }
 
         document.getElementById("change_turn").innerHTML = "";
         $("#change_turn").append(`
         <div class="inner-shadow">
-            <div class="bubble-border">
+            <div class="bubble-border shadow-bubble">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
                             ${htmlResults}
-                        <button id="shadowbox_end_round">Next Round</button>
+                        <div class="row">
+                            <div class="col-12 clearfix">
+                                <button class="m0a float-right" id="shadowbox_end_round">Next Round</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -387,13 +402,18 @@
         document.getElementById("change_turn").innerHTML = "";
         $("#change_turn").append(`
         <div class="inner-shadow">
-            <div class="bubble-border">
+            <div class="bubble-border shadow-bubble">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.players[0].name} won the game!</h2>
                         <h4>Would you like to play again?</h4>
                         <button id="PlayGame"></button>
-                        <button id="Home">Return to Home Screen</button>
+                        <div class="row">
+                            <div class="col-12 clearfix">
+                                <button class="m0a float-right" id="Home">Return to Home Screen</button>
+                            </div>
+                        </div>
+                        // <button id="Home">Return to Home Screen</button>
                     </div>
                 </div>
             </div>

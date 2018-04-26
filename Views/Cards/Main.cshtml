@@ -55,7 +55,7 @@
                         </div>
                         <div class="row draw">
                             <div class="col-12">
-                                <div class="row">
+                                <div class="row mh100">
                                     <div class="col-6">
                                         <div class="draw-deck" id="DrawCard">
                                             <img class="core" src="~/img/cardback.png" alt="">
@@ -100,8 +100,7 @@
     </div>
 
 </div>
-<div class="shadowbox">
-</div>
+<div class="shadowbox"></div>
 <div class="shadow-content-container ">
     <div class="inner-shadow">
         <div class="bubble-border">
@@ -127,14 +126,20 @@
 <div class="shadowbox" id="game_rules_shadow_box">
 </div>
 <div class="shadow-content-container game-rules" id="game_rules">
-    <button class="button" id="Close_Rules">X</button>
     <div class="inner-shadow">
         <div class="row">
             <div class="col-12">
                 <div class="rules bubble-border">
                     <div class="row">
                         <div class="col-12">
-                            <h2>Objective:</h2>
+                            <div class="row">
+                                <div class="col-11">
+                                    <h2>Objective:</h2>
+                                </div>
+                                <div class="col-1">
+                                    <button class="button btn-x" id="Close_Rules">X</button>
+                                </div>
+                            </div>
                             <p>The goal is to obtain a suited-hand that totals 31 points, or to have a hand of higher value than all other players at the showdown.</p>
                             <h2>Play:</h2>
                             <p>All players begin with 3 chips. On each turn, players take one card from either the top of the deck or from the discard pile. A turn ends by discarding a card.</p>
@@ -170,7 +175,14 @@
                 <div class="rules bubble-border">
                     <div class="row">
                         <div class="col-12">
-                            <h2>Objective:</h2>
+                            <div class="row">
+                                <div class="col-11">
+                                    <h2>Objective:</h2>
+                                </div>
+                                <div class="col-1">
+                                    <button class="button btn-x" id="Close_Rules">X</button>
+                                </div>
+                            </div>
                             <p>The goal is to obtain a suited-hand that totals 31 points, or to have a hand of higher value than all other players at the showdown.</p>
                             <h2>Play:</h2>
                             <p>All players begin with 3 chips. On each turn, players take one card from either the top of the deck or from the discard pile. A turn ends by discarding a card.</p>
@@ -211,3 +223,4 @@
     <div class="bubble-arrow"></div>
     <div class="text" id="error-text">text from error here</div>
 </div>
+
