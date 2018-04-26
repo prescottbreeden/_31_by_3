@@ -1,3 +1,4 @@
 $(document).ready(function(){
-    //lay shadowbox down with listener for site.js
+    $("#game_rules").toggle();
+    $("#game_rules_shadow_box").toggle();
 })

@@ -158,6 +158,16 @@ button, .button .btn {
       border: 11px solid #051c37;
       color: #051c37; }
 
+.game-rules {
+  max-width: 1130px;
+  width: 75%;
+  top: 94px; }
+  .game-rules .inner-shadow .bubble-border {
+    overflow: scroll;
+    max-height: 500px;
+    padding: 25px;
+    overflow-x: hidden; }
+
 .taunt-bubble {
   position: absolute;
   top: 173px;
@@ -332,7 +342,8 @@ nav.menu {
     margin-right: 5px;
     line-height: 1em;
     display: inline-block;
-    font-size: 1em; }
+    font-size: 1em;
+    cursor: pointer; }
     nav.menu .main-menu:hover {
       color: rgba(5, 28, 55, 0.8);
       background-color: white;
@@ -373,6 +384,19 @@ nav.menu {
   nav.menu div.taunt {
     left: 169px;
     display: none; }
+
+.player-select .player-change {
+  margin: 10px 0;
+  cursor: pointer; }
+  .player-select .player-change:hover {
+    text-shadow: 1px 1px 3px #3E423A; }
+  .player-select .player-change:active {
+    text-shadow: 1px 1px 3px black; }
+.player-select .remove {
+  text-align: right; }
+.player-select .specific-spacer {
+  margin-top: 15px;
+  padding: 0 0 0 27px; }
 
 .container {
   background-color: #657a64;

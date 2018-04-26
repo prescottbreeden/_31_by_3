@@ -20,6 +20,30 @@ body{
 @import "helpers/header";
 @import "helpers/menu";
 
+// Player Select Page
+.player-select{
+
+    .player-change{
+        margin: 10px 0;
+        cursor: pointer;
+        &:hover{
+            text-shadow: 1px 1px 3px $t-stone;
+        }
+        &:active{
+            text-shadow: 1px 1px 3px $black;
+        }
+    }
+    .remove{
+        text-align: right;
+    }
+    .specific-spacer{
+        margin-top: 15px;
+        padding: 0 0 0 27px;
+    }
+}
+
+
+// Main Play Page
 .container{
     background-color: $t-green;
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
