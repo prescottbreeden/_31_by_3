@@ -99,9 +99,7 @@ namespace _31_by_3
                     }
                 }
                 Loser.chips--;
-            System.Console.WriteLine(Loser);
             }
-            System.Console.WriteLine(Winner);
         }
         public GameOver(Player winner, GameMaster gameMaster)
         {
