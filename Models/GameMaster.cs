@@ -83,6 +83,7 @@ namespace _31_by_3
             this.gameSpeed = PreviousGame.gameSpeed;
             this.knocked = false;
             this.AllAI = true;
+            this.taunts = PreviousGame.taunts;
             this.dealer++;
             if(this.dealer >= players.Count)
             {
