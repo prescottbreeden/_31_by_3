@@ -156,17 +156,30 @@ namespace _31_by_3.Controllers
             if(cardHelper.hand.Count == 4)
             {
                 Card min = cardHelper.ChooseDiscard(cardHelper);
-
+                List<Card> minList = new List<Card>();
+                int counter = 0;
                 for(int idx = 0; idx < player.hand.Count; idx++)
-                {
+                {  
+                    player.hand[idx].selected = false;
                     if(player.hand[idx] == min)
                     {
+                        counter++;
                         Card temp = player.hand[idx];
                         player.hand[idx] = player.hand[player.hand.Count - 1];
                         player.hand[player.hand.Count - 1] = temp;
                     }
                 }
+                // player.hand[player.hand.Count -1].selected = true;
                 HandValue.PartialSort(player.hand, 2);
+                if(counter > 1)
+                {
+                    foreach(Card c in player.hand)
+                    {
+                        minList.Add(c);
+                    }
+                    HandValue.PartialSort(minList, minList.Count-1);
+                    min = minList[minList.Count-1];
+                }
                 player.hand[player.hand.Count -1].selected = true;
             }
             else if(cardHelper.hand.Count == 3)

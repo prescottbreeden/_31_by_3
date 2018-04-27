@@ -11,11 +11,8 @@
 
     $(".taunt-bubble").hide();
 
-    // var music = new Audio("../MidnightPianoBar.mp3")
     var music = new Audio("../TakeFive.mp3");
-    // var music = new Audio("../KindOfBlue.mp3")
     music.volume = 0.38;
-
 
     // ----------------------- //
     // ---- ALL FUNCTIONS ---- //
@@ -23,10 +20,27 @@
 
     function createPlayerSlots()
     {
+                // PRESCOTT LOOK HERE:
+        // change the color of the icon based on who's turn it is
+        // append either the human-icon or computer-icon to this box
+        // here are the divs for you to move:
+        // human:
+        // <div><i class="fas fa-child"></i></div>
+        // computer:
+        // <div><i class="fas fa-desktop"></i></div>
+        var player_type;
         var player_hands = document.getElementById("player_hands");
         player_hands.innerHTML = "";
         for(let player = 0; player < GameMaster.players.length; player ++)
         {
+            if(GameMaster.players[player].isHuman)
+            {
+                player_type = `<div><i class="fas fa-child"></i></div>`;
+            }
+            else
+            {
+                player_type = `<div><i class="fas fa-desktop"></i></div>`;
+            }
             player_hands.innerHTML += (`
 
             <!-- START OF ONE HAND -->
@@ -66,7 +80,7 @@
                         </div>
                         <div class="col-6">
                             <div class="turn-indicator" id="turn_indicator${player}">
-
+                                ${player_type}
                             </div>
                         </div>
                         <div id="buttons${player}"></div>
@@ -78,14 +92,6 @@
         <!-- END OF HAND  -->
             `)
         }
-        // PRESCOTT LOOK HERE:
-        // change the color of the icon based on who's turn it is
-        // append either the human-icon or computer-icon to this box
-        // here are the divs for you to move:
-        // human:
-        // <div><i class="fas fa-child"></i></div>
-        // computer:
-        // <div><i class="fas fa-desktop"></i></div>
 
         var chipBox = document.getElementById("chip_box");
         for(let i = 0; i < GameMaster.players.length; i ++)
@@ -552,7 +558,6 @@
                 if(GameMaster.players[player].knocked)
                 {
                     new Audio("../Knocking2.mp3").play();
-                    // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                 }
                 if(GameMaster.endRound != null)
                 {
@@ -606,17 +611,18 @@
             {
                 hidePlayerHands();
                 HumanTurnStart(GameMaster.players[GameMaster.turn].name);
-                console.log("Reached end of else-if")
             }
         });
     })
 
+    // end of game redirect
     $("#Home").click(function()
     {
-        // $("#game_rules").toggle();
-        // $("#game_rules_shadow_box").toggle();
+        $("#game_rules").toggle();
+        $("#game_rules_shadow_box").toggle();
     })
 
+    // close rules and start game
     $(document).on("click", "#Close_Rules", function(){
         $("#game_rules").toggle();
         $("#game_rules_shadow_box").toggle();
@@ -644,12 +650,12 @@
         $("#menu_rules").toggle();
         $("#menu_rules_shadow_box").toggle();
     })
+
     // hide menu rules
     $("#close_menu_rules").click(function(){
         $("#menu_rules").toggle();
         $("#menu_rules_shadow_box").toggle();
     })
-
 
     // Next human player ready
     $(document).on("click", "#shadowbox_confirm", function()
@@ -926,9 +932,13 @@
                                 if(GameMaster.players[player].knocked)
                                 {
                                     new Audio("../Knocking.mp3").play();
-                                    // alert(GameMaster.players[player].name + " has just knocked! ruh roh!")
                                 }
-                                if((GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
+                                if(GameMaster.endRound != null)
+                                {
+                                    replacePlayerHands();
+                                    EndRoundResults();
+                                }
+                                else if((GameMaster.players[nextplayer].isHuman && !GameMaster.players[nextplayer].knocked) && !GameMaster.singlePlayer)
                                 {
                                     HumanTurnChange(GameMaster.players[nextplayer].name);
                                 }

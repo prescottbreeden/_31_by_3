@@ -76,15 +76,12 @@ namespace _31_by_3
                 this.hand_value = 32;
             }
             
-            
-            this.worst_value = this.hand_value;
-
             this.num_suits[0] = this.hearts.Count;
             this.num_suits[1] = this.diamonds.Count;
             this.num_suits[2] = this.spades.Count;
             this.num_suits[3] = this.clubs.Count;
 
-
+            this.worst_value = this.hand_value;
             for(int i = 0; i < num_suits.Length; i++)
             {
                 if(num_suits[i] != 0)
@@ -144,7 +141,7 @@ namespace _31_by_3
                 }    
             }
             
-            if(player.num_suits.Contains(4))
+            else if(player.num_suits.Contains(4))
             {
                 foreach(Card c in player.hand)
                 {
@@ -185,7 +182,6 @@ namespace _31_by_3
             HandValue.PartialSort(minList, minList.Count-1);
             min = minList[minList.Count-1];
             }
-
             return min;
         }
         public bool EvaluateDiscardCard(AI player, Card DiscardCard, GameMaster gameMaster)

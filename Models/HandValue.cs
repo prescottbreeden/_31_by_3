@@ -144,10 +144,8 @@ namespace _31_by_3
                 // stop the runner at the specified index of the hand
                 if(runner == cardIdx)
                 {
-                    System.Console.WriteLine("if runner is at the end");
                     if(!madeChanges)
                     {
-                        System.Console.WriteLine("if not made changes");
                         sorted = true;
                     }
                     else
