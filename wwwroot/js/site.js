@@ -51,7 +51,6 @@
                                     <h3 class="player_name">${GameMaster.players[player].name}</h3>
                                 </div>
                                 <div class="col-12 col-md-6">
-
                                     <div class="chip-box" id="chip_box${player}"></div>
                                 </div>
                             </div>
@@ -68,14 +67,14 @@
                 <div class="col-2 hand-buttons">
                     <div class="row">
                         <div class="col-6" id="knock_anchor${player}">
-                            
+
                         </div>
                         <div class="col-6">
                             <div class="turn-indicator" id="turn_indicator${player}">
                                 ${player_type}
                             </div>
                         </div>
-                        <div id="buttons${player}"></div>
+                        <div class="button-box" id="buttons${player}"></div>
                     </div>
                 </div>
             </div>
@@ -89,6 +88,12 @@
         for(let i = 0; i < GameMaster.players.length; i ++)
         {
 
+            if (GameMaster.players[i].chips == 0) {
+                $("#chip_box" + i).append(
+                `
+                    <div class="free-ride">Free Ride!</div>
+                `)
+            }
             for(let c = 0; c < GameMaster.players[i].chips; c++)
             {
                 $("#chip_box" + i).append(
@@ -127,7 +132,7 @@
     function appendKnockIcon(player_seat)
     {
         $("#knock_anchor" + player_seat).append(`<i class="fas fa-hand-rock icon-orange"></i>`)
-        
+
     }
 
     function manGreen()
@@ -336,7 +341,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
     }
 
     function HumanTurnStart(nextplayerName)
@@ -359,7 +364,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
     }
 
     function EndRoundResults()
@@ -428,7 +433,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
     }
 
     function CallNextRound()
@@ -475,19 +480,20 @@
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.players[0].name} won the game!</h2>
                         <h4>Would you like to play again?</h4>
-                        <button id="PlayGame"></button>
                         <div class="row">
-                            <div class="col-12 clearfix">
+                            <div class="col-6 clearfix">
+                                <button class="float-left" id="PlayGame">Play Again</button>
+                            </div>
+                            <div class="col-6 clearfix">
                                 <button class="m0a float-right" id="Home">Return to Home Screen</button>
                             </div>
                         </div>
-                        // <button id="Home">Return to Home Screen</button>
                     </div>
                 </div>
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
     }
 
     function NextTurn()
@@ -592,7 +598,7 @@
     $("#PlayGame").click(function()
     {
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle();
+        $("#game_rules_shadow_box").toggle(200);
 
         $.get("/start",function(res)
         {
@@ -617,13 +623,13 @@
     $("#Home").click(function()
     {
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle();
+        $("#game_rules_shadow_box").toggle(200);
     })
 
     // close rules and start game
     $(document).on("click", "#Close_Rules", function(){
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle();
+        $("#game_rules_shadow_box").toggle(200);
         $.get("/start",function(res)
         {
             GameMaster = res;
@@ -646,34 +652,34 @@
     // hide menu rules
     $("#big_close_menu_rules").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle();
+        $("#menu_rules_shadow_box").toggle(200);
     })
 
     // hide menu rules
     $("#close_menu_rules").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle();
+        $("#menu_rules_shadow_box").toggle(200);
     })
 
     // Next human player ready
     $(document).on("click", "#shadowbox_confirm", function()
     {
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
         NextTurn();
     })
 
     // Next Round
     $(document).on("click", "#shadowbox_end_round", function(){
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
         CallNextRound();
     })
 
     // hide shadowbox
     $(document).on("click", "#shadowbox_close", function(){
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle();
+        $("#change_turn_shadow_box").toggle(200);
         replacePlayerHands();
     })
 
@@ -683,7 +689,7 @@
 
     $("#show_rules_menu").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle();
+        $("#menu_rules_shadow_box").toggle(200);
     })
 
     $("#music").mouseenter(function(){

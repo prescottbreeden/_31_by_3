@@ -90,7 +90,7 @@ body{
                 border: 1px solid $b-blue;
                 margin-bottom: 25px;
                 background-image: url("/img/bg-tile-tan.png");
-                min-height: 200px;
+                min-height: 209px;
                 position: relative;
                 overflow: hidden;
                 .hand-labels{
@@ -120,6 +120,12 @@ body{
                             to {
                                 transform:rotatey(360deg);
                             }
+                        }
+                        .free-ride{
+                            position: absolute;
+                            top: 0px;
+                            left: 25px;
+                            width: 80px;
                         }
                         .chip{
                             background-image: url("/img/blue-chip.png") ;
@@ -176,9 +182,12 @@ body{
                     // }
                 }
                 .hand-buttons{
-
+                    min-height: 130px;
+                    // .button-box{
+                    // }
                     .icon-orange{
                         color: $orange;
+                        margin-top: 4px;
                         font-size: 1.3em;
                         text-shadow: 1px 1px 3px #555;
                     }
@@ -230,34 +239,35 @@ body{
                 }
                 .player-card:nth-child(1){
                     position: absolute;
-                    top: 50px;
+                    top: 20px;
                     left: 40px;
                     transform: rotate(-15deg);
                     &:hover{
-                        top: 32px;
+                        top: 0px;
                         left: 34px;
                     }
                 }
                 .player-card:nth-child(2){
                     position: absolute;
-                    top: 30px;
+                    top: 10px;
                     left: 150px;
                     &:hover{
-                        top: 26px;
+                        top: -6px;
                     }
                 }
                 .player-card:nth-child(3){
                     position: absolute;
-                    top: 50px;
+                    top: 20px;
                     left: 255px;
                     transform: rotate(15deg);
                     &:hover{
-                        left: 257px;
+                        top: 18px;
+                        left: 247px;
                     }
                 }
                 .player-card:nth-child(4){
                     position: absolute;
-                    top: -30px;
+                    top: -23px;
                     left: 500px;
                     max-width: 110px;
                     .card-anchor{
