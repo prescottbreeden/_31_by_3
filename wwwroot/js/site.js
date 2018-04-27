@@ -91,7 +91,7 @@
             if (GameMaster.players[i].chips == 0) {
                 $("#chip_box" + i).append(
                 `
-                    <div class="free-ride">Free Ride!</div>
+                    <div class="free-ride"><i class="fas fa-bus"></i></div>
                 `)
             }
             for(let c = 0; c < GameMaster.players[i].chips; c++)
@@ -111,7 +111,7 @@
                 `   <div class="player-card cardNumber${card}">
                         <div class="card-anchor">
                             <div class="">
-                                <img alt="WHY" id="player_card${i}${card}" class="clickable">
+                                <img alt="${card}" id="player_card${i}${card}" class="clickable">
                                 <input type="hidden" class="value" value="${card}">
                             </div>
                             <!-- a card should go here -->
@@ -406,10 +406,10 @@
                                 <div class="col-3">
                                     <p>${GameMaster.players[idx].hand_value} points</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <p>[ ${handString}]</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-3">
                                     <p>${GameMaster.players[idx].loser}</p>
                                 </div>
                             </div>`
@@ -429,10 +429,10 @@
                                 <div class="col-3">
                                     <p>Hand Value:</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <p>Cards In Hand</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-3">
                                     <p>Coin Change</p>
                                 </div>
                             </div>
