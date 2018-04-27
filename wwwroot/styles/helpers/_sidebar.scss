@@ -1,0 +1,107 @@
+.sidebar{
+    // padding-right: 0px;
+   .sidebar-buffer{
+        min-height: 200px;
+        margin: 0 0 30px 0;
+        padding: 10px 20px 0 20px;
+        h2{
+            border-bottom: 1px solid $b-blue;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        ul{
+            padding-left: 18px;
+        }
+    }
+    .deck-area{
+        position: relative;
+        .discard-img{
+            min-width: 63px;
+            min-height: 96px;
+            &:hover{
+                transform: rotate(3deg);
+            }
+        }
+        h5.deck-label{
+            margin: 30px 0 10px 0;
+        }
+        .discard-bg{
+            position: absolute;
+            top: 3px;
+            left: 25px;
+            height: 92px;
+            width: 58px;
+            border: 2px dotted $b-blue;
+            box-shadow: 0px 0px 12px #777;
+            z-index: 50;
+
+        }
+        .discard-x{
+            position: absolute;
+            top: 26px;
+            left: 52px;
+            width: 0;
+            height: 45px;
+            border: 2px dotted $b-blue;
+            transform: rotate(-145deg);
+        }
+        .discard-y{
+            position: absolute;
+            top: 26px;
+            left: 52px;
+            width: 0;
+            height: 45px;
+            border: 2px dotted $b-blue;
+            transform: rotate(-215deg);
+        }
+        .core{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 55;
+            transform: rotate(-5deg);
+            &:hover{
+                transform: rotate(0deg);
+                left: -1px;
+            }
+        }
+        .shift1{
+            position: absolute;
+            top: 0px;
+            left: 11px;
+            z-index: 50;
+            cursor: auto;
+        }
+        .shift2{
+            position: absolute;
+            top: 0px;
+            left: 5px;
+            z-index: 51;
+            cursor: auto;
+        }
+        .b-wrap{
+            text-align: center;
+            width: 171px;
+            margin: 0 auto
+        }
+        .b-wide{
+            width: 191px;
+        }
+        .deck-pusher{
+            margin: 20px 0 20px 0;
+        }
+        .draw-deck{
+            max-width: 80%;
+            margin: 0 auto;
+            cursor: pointer;
+            z-index: 51;
+            position: relative;
+            img{
+                // box-shadow: 0px 0px 5px #777;
+                max-width: 100%;;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

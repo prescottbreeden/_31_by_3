@@ -489,20 +489,20 @@ nav.menu {
       z-index: 50; }
     .container .sidebar .deck-area .discard-x {
       position: absolute;
-      top: 23px;
+      top: 26px;
       left: 52px;
       width: 0;
       height: 45px;
       border: 2px dotted #051c37;
-      transform: rotate(-135deg); }
+      transform: rotate(-145deg); }
     .container .sidebar .deck-area .discard-y {
       position: absolute;
-      top: 23px;
+      top: 26px;
       left: 52px;
       width: 0;
       height: 45px;
       border: 2px dotted #051c37;
-      transform: rotate(-225deg); }
+      transform: rotate(-215deg); }
     .container .sidebar .deck-area .core {
       position: absolute;
       top: 0px;
@@ -557,7 +557,8 @@ nav.menu {
         .container .game-area .hand-container .hand .hand-labels {
           position: relative; }
           .container .game-area .hand-container .hand .hand-labels h3 {
-            font-size: 1.3em; }
+            font-size: 1.4em;
+            margin-left: 10px; }
           .container .game-area .hand-container .hand .hand-labels .chip-box {
             position: absolute;
             top: 140px;
@@ -593,6 +594,13 @@ nav.menu {
             .container .game-area .hand-container .hand .hand-labels .chip-box .chip:nth-child(3) {
               left: 65px;
               background-image: url("/img/red-chip.png"); }
+        .container .game-area .hand-container .hand .hand-buttons .icon-orange {
+          color: orange;
+          font-size: 1.3em;
+          text-shadow: 1px 1px 3px #555; }
+        .container .game-area .hand-container .hand .hand-buttons .icon-green {
+          color: #7d9e7c;
+          font-size: 1.3em; }
         .container .game-area .hand-container .hand .hand-buttons .turn-indicator {
           font-size: 1.5em;
           min-height: 40px; }

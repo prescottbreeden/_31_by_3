@@ -61,12 +61,12 @@
                 </div>
                 <div class="col-2 hand-buttons">
                     <div class="row">
-                        <div class="col-6">
-                            <i class="fas fa-hand-rock"></i>
+                        <div class="col-6" id="knock_anchor">
+                            <i class="fas fa-hand-rock icon-orange"></i>
                         </div>
                         <div class="col-6">
                             <div class="turn-indicator" id="turn_indicator${player}">
-                                <i class="fas fa-child"></i>
+
                             </div>
                         </div>
                         <div id="buttons${player}"></div>
@@ -78,14 +78,21 @@
         <!-- END OF HAND  -->
             `)
         }
+        // PRESCOTT LOOK HERE:
+        // change the color of the icon based on who's turn it is
+        // append either the human-icon or computer-icon to this box
+        // here are the divs for you to move:
+        // human:
+        // <div><i class="fas fa-child"></i></div>
+        // computer:
+        // <div><i class="fas fa-desktop"></i></div>
+
         var chipBox = document.getElementById("chip_box");
         for(let i = 0; i < GameMaster.players.length; i ++)
         {
-            console.log("inside chip distribution");
 
             for(let c = 0; c < GameMaster.players[i].chips; c++)
             {
-                console.log("inside player chip");
                 $("#chip_box" + i).append(
                 `
                     <div class="chip"></div>
@@ -121,7 +128,7 @@
     }
 
     function manGreen()
-    {   
+    {
         $(".turn-indicator").removeClass("man-green");
         $("#turn_indicator" + GameMaster.turn).addClass("man-green");
     }
