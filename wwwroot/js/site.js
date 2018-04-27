@@ -110,11 +110,11 @@
                 `)
                 if(GameMaster.players[i].isHuman && GameMaster.players[i].player_seat == GameMaster.turn)
                 {
-                    document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[i].hand[card]["suit"][0] + GameMaster.players[i].hand[card]["face"] )
+                    document.getElementById("player_card" + i + card).setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/" + GameMaster.players[i].hand[card]["suit"][0] + GameMaster.players[i].hand[card]["face"] )
                 }
                 else
                 {
-                    document.getElementById("player_card" + i + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+                    document.getElementById("player_card" + i + card).setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/cardback" )
                 }
             }
         }
@@ -262,11 +262,11 @@
                     `)
                 if((GameMaster.players[idx].isHuman && (GameMaster.players[idx].player_seat == GameMaster.turn || GameMaster.singlePlayer)) || GameMaster.endRound != null || GameMaster.allAI == true)
                 {
-                    document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
+                    document.getElementById("player_card" + idx + card).setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/" + GameMaster.players[idx].hand[card]["suit"][0] + GameMaster.players[idx].hand[card]["face"] )
                 }
                 else
                 {
-                    document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+                    document.getElementById("player_card" + idx + card).setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/cardback" )
                 }
             }
         }
@@ -290,7 +290,7 @@
                             </div>
                         </div>
                     `)
-                document.getElementById("player_card" + idx + card).setAttribute("src", "http://localhost:8000/img/cardback" )
+                document.getElementById("player_card" + idx + card).setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/cardback" )
             }
         }
     }
@@ -299,11 +299,11 @@
     {
         if(GameMaster.deck.discardPile.length > 0)
         {
-            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
+            document.getElementById("discard_pile_top_card").setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/" + GameMaster.deck.discardPile[0]["suit"][0] + GameMaster.deck.discardPile[0]["face"] )
         }
         else
         {
-            document.getElementById("discard_pile_top_card").setAttribute("src", "http://localhost:8000/img/transparent1")
+            document.getElementById("discard_pile_top_card").setAttribute("src", "https://secure-bastion-71077.herokuapp.com/img/transparent1")
         }
     }
     function HumanTurnChange(nextplayerName)
