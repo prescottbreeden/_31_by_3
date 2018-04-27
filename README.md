@@ -3,11 +3,11 @@
 List of functionality
 
 Modes:
-  2-6 players
-  single player
-  multiplayer
-  all computer
-  (hide/show hands based on mode of play)
+  - 2-6 players
+  - single player
+  - multiplayer
+  - all computer
+  - (hide/show hands based on mode of play)
   
 Computer AI:
   hand value
