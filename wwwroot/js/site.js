@@ -20,14 +20,6 @@
 
     function createPlayerSlots()
     {
-                // PRESCOTT LOOK HERE:
-        // change the color of the icon based on who's turn it is
-        // append either the human-icon or computer-icon to this box
-        // here are the divs for you to move:
-        // human:
-        // <div><i class="fas fa-child"></i></div>
-        // computer:
-        // <div><i class="fas fa-desktop"></i></div>
         var player_type;
         var player_hands = document.getElementById("player_hands");
         player_hands.innerHTML = "";
@@ -75,8 +67,8 @@
                 </div>
                 <div class="col-2 hand-buttons">
                     <div class="row">
-                        <div class="col-6" id="knock_anchor">
-                            <i class="fas fa-hand-rock icon-orange"></i>
+                        <div class="col-6" id="knock_anchor${player}">
+                            
                         </div>
                         <div class="col-6">
                             <div class="turn-indicator" id="turn_indicator${player}">
@@ -131,6 +123,11 @@
                 }
             }
         }
+    }
+    function appendKnockIcon(player_seat)
+    {
+        $("#knock_anchor" + player_seat).append(`<i class="fas fa-hand-rock icon-orange"></i>`)
+        
     }
 
     function manGreen()
@@ -558,6 +555,7 @@
                 if(GameMaster.players[player].knocked)
                 {
                     new Audio("../Knocking2.mp3").play();
+                    appendKnockIcon(player);
                 }
                 if(GameMaster.endRound != null)
                 {
@@ -984,6 +982,7 @@
             GameMaster.players[player].knocked = true;
             GameMaster.knocked = true;
             new Audio("../Knocking2.mp3").play();
+            appendKnockIcon(player);
             //---------------------------------//
             //--- Insert Knock Notification ---//
             //---------------------------------//
