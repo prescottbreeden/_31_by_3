@@ -51,8 +51,14 @@ namespace _31_by_3
             }
             if(Players.Count > 3)
             {
-                Players[Players.Count - 2].name = Player.CreateRandomEarthName();
-                Players[Players.Count - 1].name = Player.CreateRandomFunnyName();
+                if(!Players[Players.Count - 2].isHuman)
+                {
+                    Players[Players.Count - 2].name = Player.CreateRandomEarthName();
+                }
+                if(!Players[Players.Count - 1].isHuman)
+                {
+                    Players[Players.Count - 1].name = Player.CreateRandomFunnyName();
+                }
             }
             
             // Place players at table
