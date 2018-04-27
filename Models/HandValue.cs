@@ -90,10 +90,8 @@ namespace _31_by_3
             {
                 if(runner == player.hand.Count-1)
                 {
-                    System.Console.WriteLine("if runner is at the end");
                     if(!madeChanges)
                     {
-                        System.Console.WriteLine("if not made changes");
                         sorted = true;
                     }
                     else
@@ -125,6 +123,22 @@ namespace _31_by_3
                         }
                         if(face0 < face1)
                         {
+                            var temp = player.hand[runner + 1];
+                            player.hand[runner + 1] = player.hand[runner];
+                            player.hand[runner] = temp;
+                        }
+                    }                    
+                    if(player.hand[runner].face == player.hand[runner+1].face)
+                    {
+                        Dictionary<string, int> suitRanking = new Dictionary<string, int>();
+                        suitRanking.Add("spades", 3);
+                        suitRanking.Add("hearts", 2);
+                        suitRanking.Add("clubs", 1);
+                        suitRanking.Add("diamonds", 0);
+
+                        if(suitRanking[player.hand[runner].suit] > suitRanking[player.hand[runner+1].suit])
+                        {
+                            madeChanges = true;
                             var temp = player.hand[runner + 1];
                             player.hand[runner + 1] = player.hand[runner];
                             player.hand[runner] = temp;
@@ -177,6 +191,23 @@ namespace _31_by_3
                         }
                         if(face0 < face1)
                         {
+                            madeChanges = true;
+                            var temp = playerHand[runner + 1];
+                            playerHand[runner + 1] = playerHand[runner];
+                            playerHand[runner] = temp;
+                        }
+                    }
+                    if(playerHand[runner].face == playerHand[runner+1].face)
+                    {
+                        Dictionary<string, int> suitRanking = new Dictionary<string, int>();
+                        suitRanking.Add("spades", 3);
+                        suitRanking.Add("hearts", 2);
+                        suitRanking.Add("clubs", 1);
+                        suitRanking.Add("diamonds", 0);
+
+                        if(suitRanking[playerHand[runner].suit] > suitRanking[playerHand[runner+1].suit])
+                        {
+                            madeChanges = true;
                             var temp = playerHand[runner + 1];
                             playerHand[runner + 1] = playerHand[runner];
                             playerHand[runner] = temp;
@@ -184,6 +215,7 @@ namespace _31_by_3
                     }
                     runner++;
                 }
+                
             }
         }
     }

@@ -164,13 +164,22 @@ namespace _31_by_3.Controllers
                     if(player.hand[idx] == min)
                     {
                         counter++;
-                        Card temp = player.hand[idx];
-                        player.hand[idx] = player.hand[player.hand.Count - 1];
-                        player.hand[player.hand.Count - 1] = temp;
                     }
                 }
-                // player.hand[player.hand.Count -1].selected = true;
-                HandValue.PartialSort(player.hand, 2);
+                if(counter == 1)
+                {
+                    for(int idx = 0; idx < player.hand.Count; idx++)
+                    {
+                        if(player.hand[idx] == min)
+                        {
+                            Card temp = player.hand[idx];
+                            player.hand[idx] = player.hand[player.hand.Count - 1];
+                            player.hand[player.hand.Count - 1] = temp;
+                        }
+                    }
+                    player.hand[player.hand.Count -1].selected = true;
+                    HandValue.PartialSort(player.hand, 2);
+                }
                 if(counter > 1)
                 {
                     foreach(Card c in player.hand)
@@ -180,6 +189,7 @@ namespace _31_by_3.Controllers
                     HandValue.PartialSort(minList, minList.Count-1);
                     min = minList[minList.Count-1];
                 }
+                HandValue.PartialSort(player.hand, 2);
                 player.hand[player.hand.Count -1].selected = true;
             }
             else if(cardHelper.hand.Count == 3)

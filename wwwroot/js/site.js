@@ -803,7 +803,7 @@
         }
     });
 
-    // Help Player
+    // Assist Player
     $(document).on("click", ".assist-btn", function()
     {
         var player = GameMaster.turn;
