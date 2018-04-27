@@ -341,7 +341,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
     }
 
     function HumanTurnStart(nextplayerName)
@@ -364,7 +364,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
     }
 
     function EndRoundResults()
@@ -422,6 +422,20 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="tac">${GameMaster.endRound.winner.name} won the round!</h2>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Player Name:</p>
+                                </div>
+                                <div class="col-3">
+                                    <p>Hand Value:</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Cards In Hand</p>
+                                </div>
+                                <div class="col-2">
+                                    <p>Coin Change</p>
+                                </div>
+                            </div>
                             ${htmlResults}
                         <div class="row">
                             <div class="col-12 clearfix">
@@ -433,7 +447,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
     }
 
     function CallNextRound()
@@ -493,7 +507,7 @@
             </div>
         </div>`)
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
     }
 
     function NextTurn()
@@ -598,7 +612,7 @@
     $("#PlayGame").click(function()
     {
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle(200);
+        $("#game_rules_shadow_box").toggle();
 
         $.get("/start",function(res)
         {
@@ -623,13 +637,13 @@
     $("#Home").click(function()
     {
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle(200);
+        $("#game_rules_shadow_box").toggle();
     })
 
     // close rules and start game
     $(document).on("click", "#Close_Rules", function(){
         $("#game_rules").toggle();
-        $("#game_rules_shadow_box").toggle(200);
+        $("#game_rules_shadow_box").toggle();
         $.get("/start",function(res)
         {
             GameMaster = res;
@@ -652,34 +666,34 @@
     // hide menu rules
     $("#big_close_menu_rules").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle(200);
+        $("#menu_rules_shadow_box").toggle();
     })
 
     // hide menu rules
     $("#close_menu_rules").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle(200);
+        $("#menu_rules_shadow_box").toggle();
     })
 
     // Next human player ready
     $(document).on("click", "#shadowbox_confirm", function()
     {
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
         NextTurn();
     })
 
     // Next Round
     $(document).on("click", "#shadowbox_end_round", function(){
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
         CallNextRound();
     })
 
     // hide shadowbox
     $(document).on("click", "#shadowbox_close", function(){
         $("#change_turn").toggle();
-        $("#change_turn_shadow_box").toggle(200);
+        $("#change_turn_shadow_box").toggle();
         replacePlayerHands();
     })
 
@@ -689,7 +703,7 @@
 
     $("#show_rules_menu").click(function(){
         $("#menu_rules").toggle();
-        $("#menu_rules_shadow_box").toggle(200);
+        $("#menu_rules_shadow_box").toggle();
     })
 
     $("#music").mouseenter(function(){
