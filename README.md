@@ -1,7 +1,8 @@
 # Casino 31
 
 visit http://18.188.70.127/ to play
-(Our API is on a free server so loading at first can be a little sluggish until the images are cached in the browser)
+
+(our API is on a free server so loading at first can be a little sluggish until the cards are cached in the browser)
 
 List of functionality
 
