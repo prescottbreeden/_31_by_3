@@ -1,4 +1,6 @@
-# TrashTalk is not a function
+# Casino 31
+
+visit http://18.188.70.127/ to play
 
 List of functionality
 
@@ -30,9 +32,8 @@ Misc:
   - desktop only (mobile device check)
  
 Technologies:
-  - dot-net core
-  - node.js/express
-  - custom API for card displays
+  - .net core
+  - node.js/express for API we built to display cards
   - ajax & jquery
   - sass
   - json serialization/deserialization
