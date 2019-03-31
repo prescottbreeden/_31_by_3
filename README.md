@@ -1,10 +1,6 @@
 # Casino 31
 
-visit http://18.188.70.127/ to play
-
-(our API is on a free server so loading at first can be a little sluggish until the cards are cached in the browser)
-
-List of functionality
+##List of functionality
 
 Modes:
   - 2-6 players
@@ -33,12 +29,3 @@ Misc:
   - game-speed options (slow, normal, fast)
   - desktop only (mobile device check)
  
-Technologies:
-  - .net core
-  - node.js/express for API we built to display cards
-  - ajax & jquery
-  - sass
-  - json serialization/deserialization
-  - github
-  - heroku (API deployment)
-  - AWS (project deployment)
