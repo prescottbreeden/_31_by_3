@@ -22,7 +22,11 @@ namespace _31_by_3
             int[] values = {2,3,4,5,6,7,8,9,10,10,10,10,11};
             for(int cardNum = 0; cardNum < DeckSize; cardNum++)
             {
-                deck.Add(new Card(faces[cardNum % 13], suits[cardNum / 13], values[cardNum % 13]));
+                deck.Add(new Card(
+                    faces[cardNum % 13], 
+                    suits[cardNum % 4], 
+                    values[cardNum % 13]
+                ));
             }
             return deck;
         }

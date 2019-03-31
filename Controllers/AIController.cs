@@ -13,7 +13,7 @@ namespace _31_by_3.Controllers
     public class AIController : Controller
     {
         [HttpPost]
-        [RequestSizeLimit(valueCountLimit: 1000000000)]
+        // [RequestSizeLimit(valueCountLimit: 1000000000)]
         [Route("ComputerTurnDraw")]
         public JsonResult ComputerTurnDraw(string GM)
         {
