@@ -1,6 +1,6 @@
 # Casino 31
 
-##List of functionality
+## List of functionality
 
 Modes:
   - 2-6 players
